@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,16 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
-// Route::get('/login', function () {
-//     return view('login.index');
-// });
-// Route::get('/login', ['uses' => 'LoginController@index']);
-Route::get('/login', [LoginController::class,'index']);
-Route::post('/login', [LoginController::class,'Verify']);
-Route::get('/registration', function () {
-    return view('registration.index');
-});
-
-//Route::get('/home', ['as'=>'home.index ','uses'=>'HomeController@index']);
+Route::view('/admin/dashboard', 'admin.dashboard.dashboard')->name('admin-dashboard');
+Route::view('/admin/posts/all', 'admin.dashboard.posts.all')->name('admin-all-posts');
+Route::view('/admin/post/create', 'admin.dashboard.posts.create')->name('admin-create-post');
