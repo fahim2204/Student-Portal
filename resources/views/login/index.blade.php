@@ -17,7 +17,7 @@
 
         <h1 class=" text-secondary text-center fw-bold mb-5 ">login</h1>
 
-        <form action=" " method="GET ">
+        <form action="user/home" method="GET">
             <!-- User name section -->
             <div class="mx-5 my-4 ">
                 <label for="username " class="form-label fw-bold ">User Name:</label>

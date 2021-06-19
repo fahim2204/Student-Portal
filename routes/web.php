@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+Route::get('user/home', function () {
+    return view('home-logged');
+});
 // Route::get('/login', function () {
 //     return view('login.index');
 // });
@@ -25,6 +28,9 @@ Route::get('/login', [LoginController::class,'index']);
 Route::post('/login', [LoginController::class,'Verify']);
 Route::get('/registration', function () {
     return view('registration.index');
+});
+Route::get('/post', function () {
+    return view('single-post');
 });
 
 //Route::get('/home', ['as'=>'home.index ','uses'=>'HomeController@index']);

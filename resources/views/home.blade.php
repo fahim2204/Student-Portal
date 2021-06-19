@@ -14,26 +14,7 @@
 
 <body style="background-color: rgb(216, 219, 221);">
     <!-- Header Part -->
-    <div class="container bg-light rounded-4 p-3">
-
-        <div class="row h-100 align-items-center">
-            <div class="col-1">
-                <span class="fa fa-hamburger fa-2x"></span>
-            </div>
-            <div class="col-3">
-                <span class="fas fa-user-graduate fa-2x"></span>
-                <h6 class="d-inline fw-bolder fs-4"><a class="text-decoration-none text-dark" href="index.html">Student Forum</a></h6>
-            </div>
-            <div class="col-5">
-                <input class="w-100 form-control" type="text" name="search" id="search">
-            </div>
-            <div class="col-3 text-end">
-                <a class="btn btn-outline-primary me-3" href="/login">Login</a>
-                <a class="btn btn-outline-success me-3" href="/registration">Register</a>
-            </div>
-        </div>
-    </div>
-
+    @include('header')
 
     <!-- Main Body Construction -->
     <div class="container mt-2">
@@ -41,21 +22,10 @@
             <!-- Left Main body Section -->
             <div class="col-md-9 col-sm-12">
                 <!-- Quetion Posting section -->
-                <div class="row border bg-light rounded-1">
-                    <div class="row align-items-center g-0">
-                        <div class="col-1 text-center">
-                            <!-- Will change this picture dynamically -->
-                            <a class="text-dark" href="#profile"><span class="fas fa-user-circle fa-2x"></span></a>
-                        </div>
-                        <div class="col-9 pe-5">
-                            <input class="form-control fs-6 my-2" type="text" name="postBox" id="postBox" placeholder="What is your question ?">
-                        </div>
-                        <div class="col-2"></div>
-                    </div>
+                {{-- Not for anynomous user --}}
 
-                </div>
                 <!-- Filter Section -->
-                <div class="row border bg-light rounded-1 mt-2 py-1">
+                <div class="row border bg-light rounded-1 py-1">
                     <div class="col-3 text-center">
                         <button type="button" class="btn-sm btn-outline-dark border-0 rounded-3 active"><i class="far fa-clock me-2"></i>New</button>
                     </div>
@@ -86,7 +56,7 @@
                             <div class="fs-4 fw-bold my-1">Lorem ipsum dolor sit amet consectetur.</div>
                         </div>
                         <div class="ms-3 pe-3 col-12 mb-2">
-                            <div class="lh-sm text-dark text-wrap">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus dignissimos et ipsam dolorem modi nesciunt eius cumque. Maxime natus quas earum magni, modi esse tempore iusto? Nisi, ipsam at? Debitis at, veniam iste tempore molestiae in maxime inventore dolor quam facere. Magni maiores explicabo, doloremque magnam laboriosam placeat distinctio reiciendis unde! In quo odio fuga soluta cupiditate voluptatum qui iusto impedit dicta odit, adipisci assumenda saepe minus iste distinctio itaque dolores dignissimos quod quis eveniet delectus ullam obcaecati temporibus. Dicta impedit explicabo quibusdam labore unde. Enim quo odio reprehenderit possimus ipsum deleniti, repudiandae quas similique, tempore praesentium cupiditate saepe dolore?</div>
+                            <div class="lh-sm text-dark text-wrap"><a class="text-decoration-none text-dark" href="/post">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, tenetur facilis. Animi mollitia dolorum tenetur, voluptas nesciunt similique a ab dignissimos, architecto omnis nobis. Tenetur rerum nobis explicabo corporis ex quae esse recusandae obcaecati dolorem perferendis, incidunt expedita provident aliquid distinctio in, eos facilis voluptate doloribus similique? Sed sunt alias dolores adipisci, nobis ratione soluta quibusdam molestias quam iste labore ipsa ducimus saepe totam omnis cupiditate accusantium a est similique! Ratione impedit rem quasi hic officiis quidem obcaecati explicabo quis alias dicta officia saepe natus numquam, optio accusamus voluptatibus deserunt dolores. Sit tenetur exercitationem voluptate illo dolores ullam aspernatur tempora, quaerat molestias reiciendis, ea provident sint suscipit in asperiores id modi accusamus error sed soluta. Hic asperiores odio mollitia iste?</a></div>
                         </div>
                         <div class="col-8 d-flex align-items-center border-top p-1 ">
                             <div class="border border-0 bg-info px-2" style="border-radius: 30px;"><i class="fas fa-arrow-alt-circle-up me-1"></i>3.5K <i class="text-muted">|</i><i class="fas fa-arrow-alt-circle-down ms-1"></i></div>
