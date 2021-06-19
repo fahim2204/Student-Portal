@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="{{ asset('/vendor/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/app.css') }}">
+    <!-- Components -->
+    <!-- Create Categories -->
+    <link rel="stylesheet" href="{{ asset('css/components/search-list.css') }}">
     <title>Student Portal | Admin Panel</title>
 </head>
 <body>
@@ -36,7 +40,7 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item active">
-                            <a href="{{route('admin-dashboard')}}" class='sidebar-link'>
+                            <a href="{{route('view-admin-dashboard')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -48,10 +52,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="{{route('admin-all-posts')}}">All Posts</a>
+                                    <a href="{{route('view-admin-all-posts')}}">All Posts</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="{{route('admin-create-post')}}">Create Post</a>
+                                    <a href="{{route('view-admin-create-post')}}">Create Post</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="component-breadcrumb.html">Post Statistics</a>
@@ -76,19 +80,19 @@
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin-dashboard')}}" class='sidebar-link'>
+                            <a href="{{route('view-admin-dashboard')}}" class='sidebar-link'>
                                 <i class="bi bi-person-check"></i>
                                 <span>Roles</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin-dashboard')}}" class='sidebar-link'>
+                            <a href="{{route('view-admin-dashboard')}}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>All Users</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin-dashboard')}}" class='sidebar-link'>
+                            <a href="{{route('view-admin-dashboard')}}" class='sidebar-link'>
                                 <i class="bi bi-lock-fill"></i>
                                 <span>Privacy Policy</span>
                             </a>

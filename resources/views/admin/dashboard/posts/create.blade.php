@@ -1,4 +1,4 @@
-@include('admin.sidebar')
+@include('admin.dashboard.sidebar')
 <div id="main">
     <header class="mb-3">
         <a href="#" class="burger-btn d-block d-xl-none">
@@ -58,4 +58,4 @@
             </div>
         </div>
 </div>
-@include('admin.footer')
+@include('admin.dashboard.footer')

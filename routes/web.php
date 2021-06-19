@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('/admin/dashboard', 'admin.dashboard.dashboard')->name('admin-dashboard');
-Route::view('/admin/posts/all', 'admin.dashboard.posts.all')->name('admin-all-posts');
-Route::view('/admin/post/create', 'admin.dashboard.posts.create')->name('admin-create-post');
+Route::view('/admin/dashboard', 'admin.dashboard.dashboard')->name('view-admin-dashboard');
+Route::view('/admin/posts/all', 'admin.dashboard.posts.all')->name('view-admin-all-posts');
+Route::view('/admin/post/create', 'admin.dashboard.posts.create')->name('view-admin-create-post');
+Route::view('/admin/login', 'admin.auth.login')->name('view-admin-login');
+Route::view('/admin/register', 'admin.auth.register')->name('view-admin-register');
+Route::view('/admin/categories/all', 'admin.dashboard.categories.all')->name('view-admin-all-categories');
+Route::view('/admin/categories/create', 'admin.dashboard.categories.create')->name('view-admin-create-category');
+Route::view('/admin/roles', 'admin.dashboard.roles')->name('view-admin-roles');

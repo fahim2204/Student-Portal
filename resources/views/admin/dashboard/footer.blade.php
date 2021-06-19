@@ -20,5 +20,13 @@
 <script src="{{ asset('js/admin/sidebar.js') }}"></script>
 <script src="{{ asset('js/admin/datatable.js') }}"></script>
 
+<!--  Dashboard -->
+<script src="{{asset('/vendor/apexcharts/apexcharts.js') }}"></script>
+<script src="{{ asset('js/admin/dashboard.js') }}"></script>
+<script src="{{ asset('js/admin/main.js') }}"></script>
+
+<!-- Components -->
+<!-- Search List -->
+<script src="{{ asset('js/components/search-list.js') }}"></script>
 </body>
 </html>

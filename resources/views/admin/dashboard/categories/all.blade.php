@@ -15,225 +15,221 @@
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Date</th>
-                        <th>Author</th>
+                        <th>Name</th>
+                        <th>Parent Category</th>
+                        <th>Active Posts</th>
                         <th>Delete</th>
                         <th>Archive</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>How can I calculate the force of bouncing ball?</td>
-                        <td>19.06.2021</td>
-                        <td>Md. Abtahi Tajwar</td>
+                        <td>Physics</td>
+                        <td>-</td>
+                        <td>19,258,965</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How does actually pythagorus works?</td>
-                        <td>18.06.2021</td>
-                        <td>Saif Uddin</td>
+                        <td>Geomatry</td>
+                        <td>Math</td>
+                        <td>21,856,782</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Can dragons create flame biologically?</td>
-                        <td>18.06.2021</td>
-                        <td>Mohim Ibrahim</td>
+                        <td>Archiology</td>
+                        <td>Biology</td>
+                        <td>2,389,456</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Is this good for research topic</td>
-                        <td>17.06.2021</td>
-                        <td>Hasan Mehedi</td>
+                        <td>Research</td>
+                        <td>-</td>
+                        <td>15,689</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How can I calculate the force of bouncing ball?</td>
-                        <td>19.06.2021</td>
-                        <td>Md. Abtahi Tajwar</td>
+                        <td>Physics</td>
+                        <td>-</td>
+                        <td>19,258,965</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How does actually pythagorus works?</td>
-                        <td>18.06.2021</td>
-                        <td>Saif Uddin</td>
+                        <td>Geomatry</td>
+                        <td>Math</td>
+                        <td>21,856,782</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Can dragons create flame biologically?</td>
-                        <td>18.06.2021</td>
-                        <td>Mohim Ibrahim</td>
+                        <td>Archiology</td>
+                        <td>Biology</td>
+                        <td>2,389,456</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Is this good for research topic</td>
-                        <td>17.06.2021</td>
-                        <td>Hasan Mehedi</td>
+                        <td>Research</td>
+                        <td>-</td>
+                        <td>15,689</td>
+                        <td><a href="" class="btn btn-danger">Delete</a></td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr><tr>
+                        <td>Physics</td>
+                        <td>-</td>
+                        <td>19,258,965</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How can I calculate the force of bouncing ball?</td>
-                        <td>19.06.2021</td>
-                        <td>Md. Abtahi Tajwar</td>
+                        <td>Geomatry</td>
+                        <td>Math</td>
+                        <td>21,856,782</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How does actually pythagorus works?</td>
-                        <td>18.06.2021</td>
-                        <td>Saif Uddin</td>
+                        <td>Archiology</td>
+                        <td>Biology</td>
+                        <td>2,389,456</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Can dragons create flame biologically?</td>
-                        <td>18.06.2021</td>
-                        <td>Mohim Ibrahim</td>
+                        <td>Research</td>
+                        <td>-</td>
+                        <td>15,689</td>
+                        <td><a href="" class="btn btn-danger">Delete</a></td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr><tr>
+                        <td>Physics</td>
+                        <td>-</td>
+                        <td>19,258,965</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Is this good for research topic</td>
-                        <td>17.06.2021</td>
-                        <td>Hasan Mehedi</td>
+                        <td>Geomatry</td>
+                        <td>Math</td>
+                        <td>21,856,782</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How can I calculate the force of bouncing ball?</td>
-                        <td>19.06.2021</td>
-                        <td>Md. Abtahi Tajwar</td>
+                        <td>Archiology</td>
+                        <td>Biology</td>
+                        <td>2,389,456</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How does actually pythagorus works?</td>
-                        <td>18.06.2021</td>
-                        <td>Saif Uddin</td>
+                        <td>Research</td>
+                        <td>-</td>
+                        <td>15,689</td>
+                        <td><a href="" class="btn btn-danger">Delete</a></td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr><tr>
+                        <td>Physics</td>
+                        <td>-</td>
+                        <td>19,258,965</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Can dragons create flame biologically?</td>
-                        <td>18.06.2021</td>
-                        <td>Mohim Ibrahim</td>
+                        <td>Geomatry</td>
+                        <td>Math</td>
+                        <td>21,856,782</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Is this good for research topic</td>
-                        <td>17.06.2021</td>
-                        <td>Hasan Mehedi</td>
+                        <td>Archiology</td>
+                        <td>Biology</td>
+                        <td>2,389,456</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How can I calculate the force of bouncing ball?</td>
-                        <td>19.06.2021</td>
-                        <td>Md. Abtahi Tajwar</td>
+                        <td>Research</td>
+                        <td>-</td>
+                        <td>15,689</td>
+                        <td><a href="" class="btn btn-danger">Delete</a></td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr><tr>
+                        <td>Physics</td>
+                        <td>-</td>
+                        <td>19,258,965</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>How does actually pythagorus works?</td>
-                        <td>18.06.2021</td>
-                        <td>Saif Uddin</td>
+                        <td>Geomatry</td>
+                        <td>Math</td>
+                        <td>21,856,782</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Can dragons create flame biologically?</td>
-                        <td>18.06.2021</td>
-                        <td>Mohim Ibrahim</td>
+                        <td>Archiology</td>
+                        <td>Biology</td>
+                        <td>2,389,456</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Is this good for research topic</td>
-                        <td>17.06.2021</td>
-                        <td>Hasan Mehedi</td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td>
-                            <span class="badge bg-success">Active</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>How can I calculate the force of bouncing ball?</td>
-                        <td>19.06.2021</td>
-                        <td>Md. Abtahi Tajwar</td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td>
-                            <span class="badge bg-success">Active</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>How does actually pythagorus works?</td>
-                        <td>18.06.2021</td>
-                        <td>Saif Uddin</td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td>
-                            <span class="badge bg-success">Active</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Can dragons create flame biologically?</td>
-                        <td>18.06.2021</td>
-                        <td>Mohim Ibrahim</td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td>
-                            <span class="badge bg-success">Active</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Is this good for research topic</td>
-                        <td>17.06.2021</td>
-                        <td>Hasan Mehedi</td>
+                        <td>Research</td>
+                        <td>-</td>
+                        <td>15,689</td>
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td>
                             <span class="badge bg-success">Active</span>
