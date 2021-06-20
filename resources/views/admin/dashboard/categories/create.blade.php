@@ -8,15 +8,13 @@
 
     <div class="page-heading">
         <h3>
-        @if(isset($req)) 
-        {{ var_dump($req) }} 
-        @endif
+        Create Category
         </h3>
     </div>
     <div class="page-content">
         <div class="row">
             <div class="create-post col-sm">
-                <form action="{{ route('admin-create-post') }}" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="post-title" class="form-label">Category Name</label>

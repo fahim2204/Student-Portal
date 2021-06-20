@@ -51,7 +51,107 @@
         <div class="col-12 col-lg-8">
             <div class="container">
                 <div class="avatar avatar-xl">
-                    <img src="{{ asset('img/admin/5.jpg') }}" alt="">
+                        <img src="{{ asset('img/admin/5.jpg') }}" alt="">                       
+                </div>
+                <h1 class="display-2">Abtahi Tajwar</h1>
+                <form action="" class="mb-3">
+                    <select class="form-select w-25" aria-label="Disabled select example" disabled>
+                        <option selected>Open this select menu</option>
+                        <option value="admin">Admin</option>
+                        <option value="moderator" selected>Moderator</option>
+                        <option value="instructor">Instructor</option>
+                        <option value="student">Student</option>
+                      </select>
+                </form>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Top Answers</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-lg">
+                                <thead>
+                                    <tr>
+                                        <th>Author</th>
+                                        <th>Title</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar avatar-md">
+                                                    <img src="{{ asset('img/admin/5.jpg') }}" alt="Face 1">
+                                                </div>
+                                                <p class="font-bold ms-3 mb-0">Si Cantik</p>
+                                            </div>
+                                        </td>
+                                        <td class="col-auto">
+                                            <p class=" mb-0">Congratulations on your graduation!</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar avatar-md">
+                                                    <img src="{{ asset('img/admin/4.jpg') }}" alt="Face 1">
+                                                </div>
+                                                <p class="font-bold ms-3 mb-0">Si Ganteng</p>
+                                            </div>
+                                        </td>
+                                        <td class="col-auto">
+                                            <p class=" mb-0">Wow amazing design! Can you make another
+                                                tutorial for
+                                                this design?</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top posts -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Top Posts</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-lg">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Post excerpt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-3">
+                                            <div class="d-flex align-items-center">
+                                                <p class="font-bold ms-3 mb-0">Si Cantik</p>
+                                            </div>
+                                        </td>
+                                        <td class="col-auto">
+                                            <p class=" mb-0">Congratulations on your graduation!</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-3">
+                                            <div class="d-flex align-items-center">
+                                                <p class="font-bold ms-3 mb-0">Si Ganteng</p>
+                                            </div>
+                                        </td>
+                                        <td class="col-auto">
+                                            <p class=" mb-0">Wow amazing design! Can you make another
+                                                tutorial for
+                                                this design?</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

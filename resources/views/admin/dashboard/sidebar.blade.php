@@ -69,10 +69,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="">All Categories</a>
+                                    <a href="{{route('view-admin-all-categories')}}">All Categories</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="">Create Category</a>
+                                    <a href="{{route('view-admin-create-category')}}">Create Category</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="component-breadcrumb.html">Category Statistics</a>
@@ -80,13 +80,13 @@
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('view-admin-dashboard')}}" class='sidebar-link'>
+                            <a href="{{route('view-admin-roles')}}" class='sidebar-link'>
                                 <i class="bi bi-person-check"></i>
                                 <span>Roles</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('view-admin-dashboard')}}" class='sidebar-link'>
+                            <a href="{{route('view-admin-all-users')}}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>All Users</span>
                             </a>
@@ -98,7 +98,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ route('view-admin-website-info') }}" class='sidebar-link'>
                                 <i class="bi bi-info-circle-fill"></i>
                                 <span>Website info</span>
                             </a>
