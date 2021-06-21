@@ -17,7 +17,7 @@
 <body style="background-color: rgb(216, 219, 221);">
     <!-- Header Part -->
     {{-- @include('header-logged') --}}
-    <div class="container bg-light rounded-4 p-3">
+    <div class="container bg-light rounded-4 px-4 fixed-top">
         <div class="row h-100 align-items-center">
             <div class="col-1">
                 <span class="fa fa-hamburger fa-2x"></span>
@@ -30,23 +30,110 @@
             <div class="col-4">
                 <input class="w-100 form-control" type="text" name="search" id="search">
             </div>
-            <div class="col-2 text-end">
-                <span class="far fa-bell fa-2x"></span>
+            <div class="col-2 text-center p-3">
+                <button class="bg-transparent border-0" onclick="return ShowNotification()">
+                    <span class="far fa-bell fa-2x"></span>
+                </button>
             </div>
-            <div class="col-2 border border-info p-1 d-flex m-0">
-                <div class="col-3 text-left align-content-center"><span class="fas fa-user-alt fa-2x"></span></div>
-                <div class="col-9">
+            <div class="col-2 border border-info rounded-1 p-1 d-flex m-0" onclick="return ShowProfileSec()">
+                <div class="col-3 text-left align-self-center"><span class="fas fa-user-alt fa-2x"></span></div>
+                <div class="col-8">
                     <div>Fahim Faisal</div>
-                    <div style="font-size: 14px">Admin</div>
+                    <div class="text-muted" style="font-size: 14px">Admin</div>
+                </div>
+                <div class="col-1 align-self-center pe-1">
+                    <div><i class="fas fa-sort-down"></i></div>
                 </div>
             </div>
         </div>
     </div>
     </div>
 
+    {{-- Profile Pop up Section --}}
+    <div class="container shadow-lg bg-light rounded-1 fixed-top" id="profile-sec"
+        style="width: 190px; top: 66px; left:68vw;display: none;">
+
+        <div class="d-flex m-1 hover-overlay">
+            <div class="col-2 text-left align-self-center">
+                <i class="far fa-user-circle"></i>
+            </div>
+            <div class="col-10">
+                <div>
+                   Profile
+                </div>
+            </div>
+        </div>
+        <hr class="m-1 p-0">
+
+        <div class="d-flex m-0 hover">
+            <div class="col-2 text-left align-self-center">
+                <i class="fas fa-cogs"></i>
+            </div>
+            <div class="col-10">
+                <div>
+                   User Setting
+                </div>
+            </div>
+        </div>
+        <hr class="m-1 p-0">
+
+        <div class="d-flex m-0 hover">
+            <div class="col-2 text-left align-self-center">
+                <i class="far fa-question-circle"></i>
+            </div>
+            <div class="col-10">
+                <div>
+                   Help Center
+                </div>
+            </div>
+        </div>
+        <hr class="m-1 p-0">
+
+        <div class="d-flex m-0 hover">
+            <div class="col-2 text-left align-self-center">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <div class="col-10">
+                <div>
+                   Logout
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    {{-- Notification Container --}}
+    <div class="container shadow-lg bg-light rounded-3 fixed-top" id="notification-sec"
+        style="width: 320px; top: 70px; left:50vw;display: none;">
+        <h4 class="text-center">Notification</h4>
+        <hr class="m-0 p-0">
+
+        @for ($i = 0; $i < 6; $i++)
+            {{-- Single notification Items --}}
+            <div class="d-flex m-0 hover">
+                <div class="col-2 text-left align-self-center"><img class="rounded-circle"
+                        src="https://picsum.photos/id/{{ $i * 100 }}/40" /></div>
+                <div class="col-10">
+                    <div>
+                        <span class="fw-bold">Fahim Faisal</span>
+                        <span>reacted to your post</span>
+                    </div>
+                    <div class="text-muted" style="font-size: 14px">10 mins ago</div>
+                </div>
+            </div>
+            <hr class="m-0 p-0">
+        @endfor
+
+        <div class="text-center w-25 mx-auto">View All</div>
+
+    </div>
+
 
     <!-- Main Body Construction -->
-    <div class="container mt-2">
+    <div class="container" style="margin-top: 75px">
         <div class="row">
             <!-- Left Main body Section -->
             <div class="col-md-9 col-sm-12">
@@ -86,262 +173,108 @@
                 </div>
 
                 <!-- All Posts Section -->
-                <div class="row border bg-light rounded-1 mt-2 py-1">
-                    <div class="row g-0">
-                        <!-- POst info section -->
-                        <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
-                            <div class="text-primary">Category Name</div>
-                            <div class="mx-1">|</div>
-                            <div class="lh-sm text-muted align-self-end me-1">Posted By</div>
-                            <a href="#user-profile" class="fs-6 text-success me-1 text-decoration-none">User Name</a
-                                href="#user-profile">
-                            <div class="lh-sm text-danger align-self-end">3 hours ago</div>
-                        </div>
-                        <!-- Post header section  -->
-                        <div class="col-12 ps-2 border-top">
-                            <div class="fs-4 fw-bold my-1">Lorem ipsum dolor sit amet consectetur.</div>
-                        </div>
-                        <div class="ms-3 pe-3 col-12 mb-2">
-                            <div class="lh-sm text-dark text-wrap"><a class="text-decoration-none text-dark"
-                                    href="/post">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus,
-                                    tenetur facilis. Animi mollitia dolorum tenetur, voluptas nesciunt similique a ab
-                                    dignissimos, architecto omnis nobis. Tenetur rerum nobis explicabo corporis ex quae
-                                    esse recusandae obcaecati dolorem perferendis, incidunt expedita provident aliquid
-                                    distinctio in, eos facilis voluptate doloribus similique? Sed sunt alias dolores
-                                    adipisci, nobis ratione soluta quibusdam molestias quam iste labore ipsa ducimus
-                                    saepe totam omnis cupiditate accusantium a est similique! Ratione impedit rem quasi
-                                    hic officiis quidem obcaecati explicabo quis alias dicta officia saepe natus
-                                    numquam, optio accusamus voluptatibus deserunt dolores. Sit tenetur exercitationem
-                                    voluptate illo dolores ullam aspernatur tempora, quaerat molestias reiciendis, ea
-                                    provident sint suscipit in asperiores id modi accusamus error sed soluta. Hic
-                                    asperiores odio mollitia iste?</a></div>
-                        </div>
-                        <div class="col-8 d-flex align-items-center border-top p-1 ">
-                            <div class="border border-0 bg-info px-2" style="border-radius: 30px;"><i
-                                    class="fas fa-arrow-alt-circle-up me-1"></i>3.5K <i class="text-muted">|</i><i
-                                    class="fas fa-arrow-alt-circle-down ms-1"></i></div>
-                            <div class="mx-3"><i class="fas fa-comment-dots me-1"></i>741 Comments</div>
-                            <div class="me-3"><i class="fas fa-eye me-1"></i>741 Views</div>
-                        </div>
-                        <div class="col-4 justify-content-end d-flex align-items-center border-top p-1 ">
-                            <div class="mx-3"><i class="far fa-heart me-1"></i></i>Favourite</div>
-                            <div class="me-3"><i class="fas fa-share me-1"></i>Share</div>
-                            <div class="me-3"><i class="fas fa-ellipsis-h me-1"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row border bg-light rounded-1 mt-2 py-1">
-                    <div class="row g-0">
-                        <!-- POst info section -->
-                        <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
-                            <div class="text-primary">Category Name</div>
-                            <div class="mx-1">|</div>
-                            <div class="lh-sm text-muted align-self-end me-1">Posted By</div>
-                            <a href="#user-profile" class="fs-6 text-success me-1 text-decoration-none">User Name</a
-                                href="#user-profile">
-                            <div class="lh-sm text-danger align-self-end">3 hours ago</div>
-                        </div>
-                        <!-- Post header section  -->
-                        <div class="col-12 ps-2 border-top">
-                            <div class="fs-4 fw-bold my-1">Lorem ipsum dolor sit amet consectetur.</div>
-                        </div>
-                        <div class="ms-3 pe-3 col-12 mb-2">
-                            <div class="lh-sm text-dark text-wrap">Lorem, ipsum dolor sit amet consectetur adipisicing
-                                elit. Delectus dignissimos et ipsam dolorem modi nesciunt eius cumque. Maxime natus quas
-                                earum magni, modi esse tempore iusto? Nisi, ipsam at? Debitis at, veniam iste tempore
-                                molestiae in maxime inventore dolor quam facere. Magni maiores explicabo, doloremque
-                                magnam laboriosam placeat distinctio reiciendis unde! In quo odio fuga soluta cupiditate
-                                voluptatum qui iusto impedit dicta odit, adipisci assumenda saepe minus iste distinctio
-                                itaque dolores dignissimos quod quis eveniet delectus ullam obcaecati temporibus. Dicta
-                                impedit explicabo quibusdam labore unde. Enim quo odio reprehenderit possimus ipsum
-                                deleniti, repudiandae quas similique, tempore praesentium cupiditate saepe dolore?</div>
-                        </div>
-                        <div class="col-8 d-flex align-items-center border-top p-1 ">
-                            <div class="border border-0 bg-info px-2" style="border-radius: 30px;"><i
-                                    class="fas fa-arrow-alt-circle-up me-1"></i>3.5K <i class="text-muted">|</i><i
-                                    class="fas fa-arrow-alt-circle-down ms-1"></i></div>
-                            <div class="mx-3"><i class="fas fa-comment-dots me-1"></i>741 Comments</div>
-                            <div class="me-3"><i class="fas fa-eye me-1"></i>741 Views</div>
-                        </div>
-                        <div class="col-4 justify-content-end d-flex align-items-center border-top p-1 ">
-                            <div class="mx-3"><i class="far fa-heart me-1"></i></i>Favourite</div>
-                            <div class="me-3"><i class="fas fa-share me-1"></i>Share</div>
-                            <div class="me-3"><i class="fas fa-ellipsis-h me-1"></i></div>
+                @for ($i = 0; $i < 6; $i++)
+                    <div class="row border bg-light rounded-1 mt-2 py-1">
+                        <div class="row g-0">
+                            <!-- POst info section -->
+                            <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
+                                <div class="text-primary">Category Name</div>
+                                <div class="mx-1">|</div>
+                                <div class="lh-sm text-muted align-self-end me-1">Posted By</div>
+                                <a href="#user-profile" class="fs-6 text-success me-1 text-decoration-none">User Name</a
+                                    href="#user-profile">
+                                <div class="lh-sm text-danger align-self-end">3 hours ago</div>
+                            </div>
+                            <!-- Post header section  -->
+                            <div class="col-12 ps-2 border-top">
+                                <div class="fs-4 fw-bold my-1">Lorem ipsum dolor sit amet consectetur.</div>
+                            </div>
+                            <div class="ms-3 pe-3 col-12 mb-2">
+                                <div class="lh-sm text-dark text-wrap"><a class="text-decoration-none text-dark"
+                                        href="/post">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Repellendus,
+                                        tenetur facilis. Animi mollitia dolorum tenetur, voluptas nesciunt similique a
+                                        ab
+                                        dignissimos, architecto omnis nobis. Tenetur rerum nobis explicabo corporis ex
+                                        quae
+                                        esse recusandae obcaecati dolorem perferendis, incidunt expedita provident
+                                        aliquid
+                                        distinctio in, eos facilis voluptate doloribus similique? Sed sunt alias dolores
+                                        adipisci, nobis ratione soluta quibusdam molestias quam iste labore ipsa ducimus
+                                        saepe totam milique! Ratione impedit rem quasi
+                                        hic officiis quidem obcaecati explicabo quis alias dicta officia saepe natus
+                                        numquam, optio accusamus voluptatibus deserunt dolores. Sit tenetur
+                                        exercitationem
+                                        voluptate illo dolores ullam aspernatur tempora, quaerat molestias reiciendis,
+                                        ea
+                                        provident sint suscipit in asperiores id modi accusamus error sed soluta. Hic
+                                        asperiores odio mollitia iste?</a></div>
+                            </div>
+                            <div class="col-8 d-flex align-items-center border-top p-1 ">
+                                <div class="border border-0 bg-info px-2" style="border-radius: 30px;"><i
+                                        class="fas fa-arrow-alt-circle-up me-1"></i>3.5K <i class="text-muted">|</i><i
+                                        class="fas fa-arrow-alt-circle-down ms-1"></i></div>
+                                <div class="mx-3"><i class="fas fa-comment-dots me-1"></i>741 Comments</div>
+                                <div class="me-3"><i class="fas fa-eye me-1"></i>741 Views</div>
+                            </div>
+                            <div class="col-4 justify-content-end d-flex align-items-center border-top p-1 ">
+                                <div class="mx-3"><i class="far fa-heart me-1"></i></i>Favourite</div>
+                                <div class="me-3"><i class="fas fa-share me-1"></i>Share</div>
+                                <div class="me-3"><i class="fas fa-ellipsis-h me-1"></i></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row border bg-light rounded-1 mt-2 py-1">
-                    <div class="row g-0">
-                        <!-- POst info section -->
-                        <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
-                            <div class="text-primary">Category Name</div>
-                            <div class="mx-1">|</div>
-                            <div class="lh-sm text-muted align-self-end me-1">Posted By</div>
-                            <a href="#user-profile" class="fs-6 text-success me-1 text-decoration-none">User Name</a
-                                href="#user-profile">
-                            <div class="lh-sm text-danger align-self-end">3 hours ago</div>
-                        </div>
-                        <!-- Post header section  -->
-                        <div class="col-12 ps-2 border-top">
-                            <div class="fs-4 fw-bold my-1">Lorem ipsum dolor sit amet consectetur.</div>
-                        </div>
-                        <div class="ms-3 pe-3 col-12 mb-2">
-                            <div class="lh-sm text-dark text-wrap">Lorem, ipsum dolor sit amet consectetur adipisicing
-                                elit. Delectus dignissimos et ipsam dolorem modi nesciunt eius cumque. Maxime natus quas
-                                earum magni, modi esse tempore iusto? Nisi, ipsam at? Debitis at, veniam iste tempore
-                                molestiae in maxime inventore dolor quam facere. Magni maiores explicabo, doloremque
-                                magnam laboriosam placeat distinctio reiciendis unde! In quo odio fuga soluta cupiditate
-                                voluptatum qui iusto impedit dicta odit, adipisci assumenda saepe minus iste distinctio
-                                itaque dolores dignissimos quod quis eveniet delectus ullam obcaecati temporibus. Dicta
-                                impedit explicabo quibusdam labore unde. Enim quo odio reprehenderit possimus ipsum
-                                deleniti, repudiandae quas similique, tempore praesentium cupiditate saepe dolore?</div>
-                        </div>
-                        <div class="col-8 d-flex align-items-center border-top p-1 ">
-                            <div class="border border-0 bg-info px-2" style="border-radius: 30px;"><i
-                                    class="fas fa-arrow-alt-circle-up me-1"></i>3.5K <i class="text-muted">|</i><i
-                                    class="fas fa-arrow-alt-circle-down ms-1"></i></div>
-                            <div class="mx-3"><i class="fas fa-comment-dots me-1"></i>741 Comments</div>
-                            <div class="me-3"><i class="fas fa-eye me-1"></i>741 Views</div>
-                        </div>
-                        <div class="col-4 justify-content-end d-flex align-items-center border-top p-1 ">
-                            <div class="mx-3"><i class="far fa-heart me-1"></i></i>Favourite</div>
-                            <div class="me-3"><i class="fas fa-share me-1"></i>Share</div>
-                            <div class="me-3"><i class="fas fa-ellipsis-h me-1"></i></div>
-                        </div>
-                    </div>
-                </div>
-
+                @endfor
             </div>
 
             <!-- Right Aside Section -->
             <div class="col-md-3 col-sm-12 ps-2 g-0">
-                <div class="ca rd border rounded-1 mb-2">
-                    <h6 class="card-header bg-info">Top-Contributor</h6>
-                    <div class="card-body p-0">
-                        <table class="table table-sm table-primary table-striped table-hover mb-0">
-                            <caption class="py-0"><a
-                                    class="btn-info d-block text-center text-white text-decoration-none rounded-1"
-                                    href="#">View All</a> </caption>
-                            <tbody>
-                                <tr class="align-items-center">
-                                    <th scope="row">1</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
 
-                                    </td>
-                                    <td>Fahim Faisal <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
-                                    </td>
-                                    <td>Thornton <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
-                                    </td>
-                                    <td>Thornton <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
+                @for ($i = 0; $i < 4; $i++)
+                    <div class="ca rd border rounded-1 mb-2">
+                        <h6 class="card-header bg-info">Top-Contributor</h6>
+                        <div class="card-body p-0">
+                            <table class="table table-sm table-primary table-striped table-hover mb-0">
+                                <caption class="py-0"><a
+                                        class="btn-info d-block text-center text-white text-decoration-none rounded-1"
+                                        href="#">View All</a> </caption>
+                                <tbody>
+                                    <tr class="align-items-center">
+                                        <th scope="row">1</th>
+                                        <td style="width:35px;">
+                                            <div class="rounded-4 bg-info">
+                                                <span class="fas fa-user-circle fa-2x"></span>
+                                            </div>
 
-                            </tbody>
-                        </table>
+                                        </td>
+                                        <td>Fahim Faisal <span class="badge bg-secondary text-danger ms-2">^</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td style="width:35px;">
+                                            <div class="rounded-4 bg-info">
+                                                <span class="fas fa-user-circle fa-2x"></span>
+                                            </div>
+                                        </td>
+                                        <td>Thornton <span class="badge bg-secondary text-danger ms-2">^</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td style="width:35px;">
+                                            <div class="rounded-4 bg-info">
+                                                <span class="fas fa-user-circle fa-2x"></span>
+                                            </div>
+                                        </td>
+                                        <td>Thornton <span class="badge bg-secondary text-danger ms-2">^</span></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="ca rd border rounded-1 mb-2">
-                    <h6 class="card-header bg-info">Top-Contributor</h6>
-                    <div class="card-body p-0">
-                        <table class="table table-sm table-primary table-striped table-hover mb-0">
-                            <caption class="py-0"><a
-                                    class="btn-info d-block text-center text-white text-decoration-none rounded-1"
-                                    href="#">View All</a> </caption>
-                            <tbody>
-                                <tr class="align-items-center">
-                                    <th scope="row">1</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
+                @endfor
 
-                                    </td>
-                                    <td>Fahim Faisal <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
-                                    </td>
-                                    <td>Thornton <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
-                                    </td>
-                                    <td>Thornton <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="ca rd border rounded-1 mb-2">
-                    <h6 class="card-header bg-info">Top-Contributor</h6>
-                    <div class="card-body p-0">
-                        <table class="table table-sm table-primary table-striped table-hover mb-0">
-                            <caption class="py-0"><a
-                                    class="btn-info d-block text-center text-white text-decoration-none rounded-1"
-                                    href="#">View All</a> </caption>
-                            <tbody>
-                                <tr class="align-items-center">
-                                    <th scope="row">1</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
-
-                                    </td>
-                                    <td>Fahim Faisal <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
-                                    </td>
-                                    <td>Thornton <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td style="width:35px;">
-                                        <div class="rounded-4 bg-info">
-                                            <span class="fas fa-user-circle fa-2x"></span>
-                                        </div>
-                                    </td>
-                                    <td>Thornton <span class="badge bg-secondary text-danger ms-2">^</span></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
-
-
-
 
         </div>
     </div>
@@ -371,6 +304,28 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js "
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT " crossorigin="anonymous ">
+    </script>
+
+    <script>
+        function ShowNotification() {
+            //alert("helooo");
+            var notif = document.getElementById("notification-sec");
+            if (notif.style.display == "none") {
+                notif.style.display = "block"
+            } else {
+                notif.style.display = "none"
+            }
+        }
+
+        function ShowProfileSec() {
+            //alert("helooo");
+            var notif = document.getElementById("profile-sec");
+            if (notif.style.display == "none") {
+                notif.style.display = "block"
+            } else {
+                notif.style.display = "none"
+            }
+        }
     </script>
 
 
