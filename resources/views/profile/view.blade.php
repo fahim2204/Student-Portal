@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/profile/view.css') }}">
-    <title>Document</title>
-</head>
-<body>
+@include('header')
     <div class="container">
-        <div class="main-body">
-        
+        <div class="main-body">        
               <!-- Breadcrumb -->
               <nav aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb">
@@ -119,70 +108,143 @@
                     </div>
                   </div>
     
-                  <div class="row gutters-sm">
-                    <div class="col-sm-6 mb-3">
-                      <div class="card h-100">
-                        <div class="card-body">
-                          <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                          <small>Web Design</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <small>Website Markup</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <small>One Page</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <small>Mobile Template</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <small>Backend API</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="col-md-12">
+                    <div class="container posts">
+                      <!-- Single Post -->
+                      <div class="row post mb-2">
+                        <div class="col-4 col-lg-4">
+                          <div class="row post-attr text-center">
+                            <div class="col-4">
+                              0<br />
+                              <b>Likes</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Answers</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Views</b>
+                            </div>
+                          </div>                          
+                        </div>
+                        <div class="col-lg-8">
+                          <div class="container">
+                            <h5><a href="">This is a question</a></h5>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam neque accusantium culpa,?</p>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-sm-6 mb-3">
-                      <div class="card h-100">
-                        <div class="card-body">
-                          <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                          <small>Web Design</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <small>Website Markup</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <small>One Page</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <small>Mobile Template</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <small>Backend API</small>
-                          <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                      <!-- Single Post end -->
+                      <!-- Single Post -->
+                      <div class="row post mb-2">
+                        <div class="col-4 col-lg-4">
+                          <div class="row post-attr text-center">
+                            <div class="col-4">
+                              0<br />
+                              <b>Likes</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Answers</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Views</b>
+                            </div>
+                          </div>                          
+                        </div>
+                        <div class="col-lg-8">
+                          <div class="container">
+                            <h5><a href="">This is a question</a></h5>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam neque accusantium culpa,?</p>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-    
-    
-    
+                      <!-- Single Post end -->
+                      <!-- Single Post -->
+                      <div class="row post mb-2">
+                        <div class="col-4 col-lg-4">
+                          <div class="row post-attr text-center">
+                            <div class="col-4">
+                              0<br />
+                              <b>Likes</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Answers</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Views</b>
+                            </div>
+                          </div>                          
+                        </div>
+                        <div class="col-lg-8">
+                          <div class="container">
+                            <h5><a href="">This is a question</a></h5>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam neque accusantium culpa,?</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Single Post end -->
+                      <!-- Single Post -->
+                      <div class="row post mb-2">
+                        <div class="col-4 col-lg-4">
+                          <div class="row post-attr text-center">
+                            <div class="col-4">
+                              0<br />
+                              <b>Likes</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Answers</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Views</b>
+                            </div>
+                          </div>                          
+                        </div>
+                        <div class="col-lg-8">
+                          <div class="container">
+                            <h5><a href="">This is a question</a></h5>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam neque accusantium culpa,?</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Single Post end -->
+                      <!-- Single Post -->
+                      <div class="row post mb-2">
+                        <div class="col-4 col-lg-4">
+                          <div class="row post-attr text-center">
+                            <div class="col-4">
+                              0<br />
+                              <b>Likes</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Answers</b>
+                            </div>
+                            <div class="col-4">
+                              0<br />
+                              <b>Views</b>
+                            </div>
+                          </div>                          
+                        </div>
+                        <div class="col-lg-8">
+                          <div class="container">
+                            <h5><a href="">This is a question</a></h5>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam neque accusantium culpa,?</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Single Post end -->
+                    </div>                                        
+                  </div> 
                 </div>
               </div>
     
             </div>
         </div>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-</body>
-</html>
+@include('footer')
