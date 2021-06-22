@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 Route::view('/login', 'login.index');
 Route::view('/register', 'registration.index');
 Route::view('/profile/edit', 'profile.edit')->name('view-edit-profile');
 Route::view('/profile/view', 'profile.view')->name('view-view-profile');
+Route::view('/post/view', 'posts.single')->name('view-single-post');
 
 Route::view('/admin/dashboard', 'admin.dashboard.dashboard')->name('view-admin-dashboard');
 Route::view('/admin/posts/all', 'admin.dashboard.posts.all')->name('view-admin-all-posts');

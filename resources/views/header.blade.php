@@ -6,9 +6,10 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>Blog Template · Bootstrap v5.0</title>
+    <title>Student Portal</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
+    <link href="{{ asset('img/favicon.png') }}" rel="icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -42,6 +43,7 @@
 
     <link href="{{ asset('css/profile/edit.css') }}" rel="stylesheet">
     <link href="{{ asset('css/components/chips.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components/comments.css') }}" rel="stylesheet">
     
   </head>
   <body>
@@ -53,7 +55,7 @@
         <a class="link-secondary" href="#">Subscribe</a>
       </div>
       <div class="col-4 text-center">
-        <a class="blog-header-logo text-dark" href="#">Student Portal</a>
+        <a class="blog-header-logo text-dark" href="{{ route('index') }}">Student Portal</a>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
         <a class="link-secondary" href="#" aria-label="Search">
@@ -66,18 +68,18 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 link-secondary" href="#">World</a>
-      <a class="p-2 link-secondary" href="#">U.S.</a>
-      <a class="p-2 link-secondary" href="#">Technology</a>
-      <a class="p-2 link-secondary" href="#">Design</a>
-      <a class="p-2 link-secondary" href="#">Culture</a>
-      <a class="p-2 link-secondary" href="#">Business</a>
-      <a class="p-2 link-secondary" href="#">Politics</a>
-      <a class="p-2 link-secondary" href="#">Opinion</a>
-      <a class="p-2 link-secondary" href="#">Science</a>
+      <a class="p-2 link-secondary" href="#">Math</a>
+      <a class="p-2 link-secondary" href="#">Physics</a>
+      <a class="p-2 link-secondary" href="#">Chemistry</a>
+      <a class="p-2 link-secondary" href="#">Biology</a>
+      <a class="p-2 link-secondary" href="#">Progamming</a>
+      <a class="p-2 link-secondary" href="#">Networking</a>
+      <a class="p-2 link-secondary" href="#">Language</a>
+      <a class="p-2 link-secondary" href="#">Exam Preperation</a>
+      {{-- <a class="p-2 link-secondary" href="#">Science</a>
       <a class="p-2 link-secondary" href="#">Health</a>
       <a class="p-2 link-secondary" href="#">Style</a>
-      <a class="p-2 link-secondary" href="#">Travel</a>
+      <a class="p-2 link-secondary" href="#">Travel</a> --}}
     </nav>
   </div>
 </div>
