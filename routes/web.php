@@ -32,5 +32,8 @@ Route::get('/registration', function () {
 Route::get('/post', function () {
     return view('single-post');
 });
+Route::get('/profile', function () {
+    return view('profile');
+});
 
 //Route::get('/home', ['as'=>'home.index ','uses'=>'HomeController@index']);

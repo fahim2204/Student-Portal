@@ -181,8 +181,7 @@
                                 <div class="text-primary">Category Name</div>
                                 <div class="mx-1">|</div>
                                 <div class="lh-sm text-muted align-self-end me-1">Posted By</div>
-                                <a href="#user-profile" class="fs-6 text-success me-1 text-decoration-none">User Name</a
-                                    href="#user-profile">
+                                <a href="/profile" class="fs-6 text-success me-1 text-decoration-none">User Name</a>
                                 <div class="lh-sm text-danger align-self-end">3 hours ago</div>
                             </div>
                             <!-- Post header section  -->
