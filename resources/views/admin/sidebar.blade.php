@@ -40,7 +40,7 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item active">
-                            <a href="{{route('view-admin-dashboard')}}" class='sidebar-link'>
+                            <a href="{{route('admin.dashboard')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -52,10 +52,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="{{route('view-admin-all-posts')}}">All Posts</a>
+                                    <a href="{{route('admin.posts')}}">All Posts</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="{{route('view-admin-create-post')}}">Create Post</a>
+                                    <a href="{{route('admin.posts.create')}}">Create Post</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="component-breadcrumb.html">Post Statistics</a>
@@ -69,36 +69,47 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="{{route('view-admin-all-categories')}}">All Categories</a>
+                                    <a href="{{route('admin.categories')}}">All Categories</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="{{route('view-admin-create-category')}}">Create Category</a>
+                                    <a href="{{route('admin.categories.create')}}">Create Category</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-tags-fill"></i>
+                                <span>Sub-Categories</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="{{route('admin.categories')}}">All Sub-Categories</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-breadcrumb.html">Category Statistics</a>
+                                    <a href="{{route('admin.categories.create')}}">Create Sub-Category</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('view-admin-roles')}}" class='sidebar-link'>
+                            <a href="{{route('admin.roles')}}" class='sidebar-link'>
                                 <i class="bi bi-person-check"></i>
                                 <span>Roles</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('view-admin-all-users')}}" class='sidebar-link'>
+                            <a href="{{route('admin.users')}}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>All Users</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('view-admin-dashboard')}}" class='sidebar-link'>
+                            <a href="{{route('admin.web.info')}}" class='sidebar-link'>
                                 <i class="bi bi-lock-fill"></i>
                                 <span>Privacy Policy</span>
                             </a>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="{{ route('view-admin-website-info') }}" class='sidebar-link'>
+                            <a href="{{ route('admin.web.info') }}" class='sidebar-link'>
                                 <i class="bi bi-info-circle-fill"></i>
                                 <span>Website info</span>
                             </a>
@@ -108,7 +119,6 @@
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
         </div>
-    
-        
 
-    
+
+

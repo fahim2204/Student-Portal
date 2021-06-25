@@ -6,7 +6,7 @@
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
         Trending Questions
       </h3>
-      
+
       <div class="posts mb-3">
           <!-- Single Post -->
         <div class="index-single-post row border bg-light rounded-1 mb-2 py-1 p-3">
@@ -37,7 +37,7 @@
                     <div class="me-3"><i class="fas fa-ellipsis-h me-1"></i></div>
                 </div>
             </div>
-        </div>        
+        </div>
       </div>
       <!-- Comment Section -->
       <div class="mt-5 mb-5">

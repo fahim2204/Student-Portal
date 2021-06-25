@@ -1,4 +1,4 @@
-@include('admin.dashboard.sidebar')
+@include('admin.sidebar')
 
 <div id="main">
     <header class="mb-3">
@@ -312,8 +312,8 @@
                         <td><a href="" class="btn btn-danger">Delete</a></td>
                         <td><a href="" class="btn btn-secondary">Ban</a></td>
                     </tr>
-                    
+
                 </tbody>
             </table>
 
-@include('admin.dashboard.footer')
+@include('admin.footer')

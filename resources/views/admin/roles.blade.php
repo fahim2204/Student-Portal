@@ -1,4 +1,4 @@
-@include('admin.dashboard.sidebar')
+@include('admin.sidebar')
 <div id="main">
     <header class="mb-3">
         <a href="#" class="burger-btn d-block d-xl-none">
@@ -51,7 +51,7 @@
         <div class="col-12 col-lg-8">
             <div class="container">
                 <div class="avatar avatar-xl">
-                        <img src="{{ asset('img/admin/5.jpg') }}" alt="">                       
+                        <img src="{{ asset('img/admin/5.jpg') }}" alt="">
                 </div>
                 <h1 class="display-2">Abtahi Tajwar</h1>
                 <form action="" class="mb-3">
@@ -157,4 +157,4 @@
         </div>
     </div>
 </div>
-@include('admin.dashboard.footer')
+@include('admin.footer')

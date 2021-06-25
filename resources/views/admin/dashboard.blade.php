@@ -1,4 +1,4 @@
-@include('admin.dashboard.sidebar')
+@include('admin.sidebar')
 
 <div id="main">
     <header class="mb-3">
@@ -10,7 +10,7 @@
     <div class="page-heading">
         <h3>Website Statistics</h3>
     </div>
-    <div class="page-content"> 
+    <div class="page-content">
         <section class="row">
             <div class="col-12 col-lg-9">
                 <div class="row">
@@ -233,7 +233,7 @@
                     </div>
                 </div>
             </div>
-        </section>       
+        </section>
     </div>
 
-@include('admin.dashboard.footer')
+@include('admin.footer')

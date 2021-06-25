@@ -18,4 +18,19 @@ class AdminController extends Controller
     public function webinfo(){
         return view('admin.websiteinfo');
     }
+    public function categories(){
+        return view('admin.categories.all');
+    }
+    public function categoriescreate(){
+        return view('admin.categories.create');
+    }
+    public function subcategories(){
+        return view('admin.sub-categories.all');
+    }
+    public function roles(){
+        return view('admin.roles');
+    }
+    public function users(){
+        return view('admin.users.all');
+    }
 }

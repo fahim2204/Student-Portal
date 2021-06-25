@@ -1,4 +1,4 @@
-@include('admin.dashboard.sidebar')
+@include('admin.sidebar')
 {{-- <?php use App\Http\Controllers\Sidebar;
 echo Sidebar::init(); ?> --}}
 <div id="main">
@@ -28,16 +28,16 @@ echo Sidebar::init(); ?> --}}
                         <label for="website-service-list" class="form-label">Service</label>
                     </div>
                     <div class="project-service-list">
-                        <div class="input-group mb-3 item">                            
+                        <div class="input-group mb-3 item">
                             <span class="input-group-text" id="basic-addon1">Services</span>
                             <input type="text" value="" name="project-services-title[]" class="form-control project-services-title" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                             <input type="text" value="" name="project-services-subtitle[]" class="form-control project-services-subtitle" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                        </div>                                          
-                    </div>                    
+                        </div>
+                    </div>
                     <div class="input-group mb-3">
                         <button type="button" class="btn btn-success" id="add-project-service">Add More Items</button>
                     </div>
-                    <!--  About -->                    
+                    <!--  About -->
                     <div class="mb-3">
                         <label for="website-about" class="form-label">About Services</label>
                         <textarea class="form-control" name="website-about" id="website-about" rows="3"></textarea>
@@ -47,7 +47,7 @@ echo Sidebar::init(); ?> --}}
                         <div class="input-group mb-3 item">
                             <span class="input-group-text" id="basic-addon1">Project Featue</span>
                             <input type="text" value="" name="about-services[]" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                        </div>                      
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <button type="button" class="btn btn-success" id="add-about-service">Add More Items</button>
@@ -61,7 +61,7 @@ echo Sidebar::init(); ?> --}}
                             <span class="input-group-text" id="basic-addon1">Project Featue</span>
                             <input type="text" value="" name="phone-numbers[]" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
-                        
+
                     </div>
                     <div class="input-group mb-3">
                         <button type="button" class="btn btn-success" id="add-phone-number">Add More Items</button>
@@ -89,6 +89,6 @@ echo Sidebar::init(); ?> --}}
             </div>
         </div>
 </div>
-@include('admin.dashboard.footer')
+@include('admin.footer')
 {{-- <?php use App\Http\Controllers\AdminFooter;
 echo AdminFooter::init(); ?> --}}
