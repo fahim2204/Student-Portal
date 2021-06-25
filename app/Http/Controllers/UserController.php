@@ -9,7 +9,7 @@ class UserController extends Controller
     public function view($uname){
         return view('profile.view')->with('uname',$uname);
     }
-    public function edit($uname){
-        return view('profile.edit')->with('uname',$uname);
+    public function edit(){
+        return view('profile.edit');
     }
 }

@@ -34,7 +34,7 @@ Route::post('/registration', [RegistrationController::class,'verify'])->name('re
 
 //------------PROFILE SECTION-------------//
 Route::get('/profile/{uname}', [UserController::class,'view'])->name('profile.view');
-Route::get('/profile/{uname}/edit', [UserController::class,'edit'])->name('profile.edit');
+Route::get('/profile/edit', [UserController::class,'edit'])->name('profile.edit');
 
 //------------MSG SECTION-------------// Later
 Route::get('/{uname}/msg', [MsgController::class,'index'])->name('msg.view');
@@ -56,7 +56,7 @@ Route::get('/admin/sub-categories', [AdminController::class,'subcategories'])->n
 Route::get('/admin/sub-categories/create', [AdminController::class,'subcategoriescreate'])->name('admin.sub.categories.create');
 Route::get('/admin/users', [AdminController::class,'users'])->name('admin.users');
 Route::get('/admin/moderator/request', [AdminController::class,'moderatorreq'])->name('admin.mod.req');
-Route::get('/admin/edit/{uname}', [AdminController::class,'useredit'])->name('admin.user.edit');
+// Route::get('/admin/edit/{uname}', [AdminController::class,'useredit'])->name('admin.user.edit');
 Route::get('/admin/roles', [AdminController::class,'roles'])->name('admin.roles');
 Route::get('/admin/instructor/request', [AdminController::class,'instructorreq'])->name('admin.ins.req');
 
@@ -67,7 +67,7 @@ Route::get('/moderator/posts/create', [ModeratorController::class,'postscreate']
 Route::get('/moderator/sub-categories', [ModeratorController::class,'subcategories'])->name('moderator.sub.categories');
 Route::get('/moderator/sub-categories/create', [ModeratorController::class,'subcategoriescreate'])->name('moderator.sub.categories.create');
 Route::get('/moderator/users', [ModeratorController::class,'users'])->name('moderator.users');
-Route::get('/moderator/edit/{uname}', [ModeratorController::class,'useredit'])->name('moderator.user.edit');
+// Route::get('/moderator/edit/{uname}', [ModeratorController::class,'useredit'])->name('moderator.user.edit');
 Route::get('/moderator/instructor/request', [ModeratorController::class,'instructorreq'])->name('moderator.mod.req');
 
 //------------INSTRUCTOR SECTION-------------//
