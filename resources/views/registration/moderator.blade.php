@@ -15,14 +15,26 @@
 
     <div class=" container rounded-3 bg-light mt-5 p-4 shadow " style="width: 500px ">
 
-        <h1 class=" text-secondary text-center fw-bold mb-5 ">Registration</h1>
+        <h3 class=" text-secondary text-center fw-bold mb-5 " style="padding-top:15px"><i class="fas fa-user-shield"></i>  Moderator Registration</h3>
 
-        <form action=" " method="GET ">
-            <!-- User name section -->
+        <form action=" " method="post ">
+            @csrf
+            <!-- Full Name section -->
             <div class="mx-5 my-4 ">
-                <label for="username " class="form-label fw-bold ">User Name/Email:</label>
+                <label for="fullName " class="form-label fw-bold ">Full Name:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-user "></i></span>
+                    <input type="text " class="form-control rounded-end " id="fullName " placeholder="Enter Your Full Name ">
+                    <div class="valid-feedback ">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <!-- User name section -->
+            <div class="mx-5 my-4 ">
+                <label for="username " class="form-label fw-bold ">Username:</label>
+                <div class="input-group ">
+                    <span class="input-group-text "> <i class="fas fa-at "></i></span>
                     <input type="text " class="form-control rounded-end " id="username " placeholder="Enter a Username ">
                     <div class="valid-feedback ">
                         Looks good!
@@ -45,23 +57,59 @@
                     <input type="password " class="form-control rounded-end " id="cpassword " placeholder="Confirm Password ">
                 </div>
             </div>
+            <!-- Email section -->
+            <div class="mx-5 my-4 ">
+                <label for="email " class="form-label fw-bold ">Email:</label>
+                <div class="input-group ">
+                    <span class="input-group-text "> <i class="fas fa-envelope "></i></span>
+                    <input type="text " class="form-control rounded-end " id="email " placeholder="Enter Your Email ">
+                    <div class="valid-feedback ">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <!-- Contact section -->
+            <div class="mx-5 my-4 ">
+                <label for="contact " class="form-label fw-bold ">Contact Number:</label>
+                <div class="input-group ">
+                    <span class="input-group-text "> <i class="fas fa-phone "></i></span>
+                    <input type="text " class="form-control rounded-end " id="contact " placeholder="Enter Your Contact Number ">
+                    <div class="valid-feedback ">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <!-- User name section -->
+            <div class="mx-5 my-4 ">
+                <label for="address " class="form-label fw-bold ">Address:</label>
+                <div class="input-group ">
+                    <span class="input-group-text "> <i class="fas fa-address-card"></i></span>
+                    <input type="text " class="form-control rounded-end " id="address " placeholder="Enter Your Address ">
+                    <div class="valid-feedback ">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            {{-- Image Upload --}}
 
+            <div class="mx-5 my-4 ">
+                <label for="address " class="form-label fw-bold ">Profile Picture:</label>
+                <div class="input-group ">
+                    <span class="input-group-text "> <i class="fas fa-camera"></i></span>
+                    <input type="file" class="form-control" id="customFile" name="image" />
+                    <div class="valid-feedback ">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
 
             <!-- Registration -->
             <div class="d-flex justify-content-center my-2 ">
                 <button type="submit " class="btn btn-lg btn-success px-sm-4 ">Register</button>
             </div>
 
-            <div class="text-start mx-5 my-3 ">
+            <div class="text-start mx-5 my-3 d-flex justify-content-center">
                 <a class="link-info " href="/login">Already Registered?</a>
-            </div>
-            <!-- Registration with Oauth 2 -->
-            <div class="text-center mx-5 my-3 ">
-                <h6 class="text-muted ">Or, Register using</h5>
-            </div>
-            <div class="d-flex justify-content-center ">
-                <a href="# "><img class="mx-4 my-3 " src="https://img.icons8.com/fluent/50/000000/google-logo.png " /></a>
-                <a href="# "><img class="mx-4 my-3 " src="https://img.icons8.com/color/50/000000/facebook-new.png " /></a>
             </div>
 
 

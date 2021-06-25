@@ -38,7 +38,7 @@ Route::post('/moderator/registration', [RegistrationController::class,'moderator
 
 //------------PROFILE SECTION-------------//
 Route::get('/profile/{uname}', [UserController::class,'view'])->name('profile.view');
-Route::get('/profile/edit', [UserController::class,'edit'])->name('profile.edit');
+Route::get('/profile/info/edit', [UserController::class,'edit'])->name('profile.edit');
 
 //------------MSG SECTION-------------// Later
 Route::get('/{uname}/msg', [MsgController::class,'index'])->name('msg.view');
