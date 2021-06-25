@@ -6,10 +6,22 @@ use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
-    public function Index(){
-        return view('registration.index');
+    public function studentindex(){
+        return view('registration.student');
     }
-    public function Verify(Request $req){
+    public function instructorindex(){
+        return view('registration.instructor');
+    }
+    public function moderatorindex(){
+        return view('registration.moderator');
+    }
+    public function studentverify(Request $req){
+        //
+    }
+    public function instructorverify(Request $req){
+        //
+    }
+    public function moderatorverify(Request $req){
         //
     }
 }
