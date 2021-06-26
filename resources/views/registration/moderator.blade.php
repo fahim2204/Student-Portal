@@ -17,20 +17,20 @@
 
         <h3 class=" text-secondary text-center fw-bold mb-5 " style="padding-top:15px"><i class="fas fa-user-shield"></i>  Moderator Registration</h3>
 
-        <form action=" " method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             @csrf
             <!-- Full Name section -->
             <div class="mx-5 my-4 ">
                 <label for="fullName " class="form-label fw-bold ">Full Name:</label>
-                <div class="input-group ">
-                    <span class="input-group-text "> <i class="fas fa-user "></i></span>
+                <div class="input-group">
+                    <span class="input-group-text"> <i class="fas fa-user "></i></span>
                     <input type="text " name="fullName" class="form-control rounded-end " id="fullName " placeholder="Enter Your Full Name" value="{{ old('fullName')}}">
                 </div>
                 @if ($errors->get('fullName') !=null)
-                    <br>
-                    <div class="alert alert-danger" role="alert">
+
+                    <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
                         @foreach ($errors->get('fullName') as $error)
-                        {{$error}} <br>
+                        <li>{{$error}}</li>
                         @endforeach
 
 
@@ -46,10 +46,9 @@
                     <input type="text " name="username" class="form-control rounded-end " id="username " placeholder="Enter a Username " value="{{ old('username')}}">
                 </div>
                 @if ($errors->get('username') != null)
-                    <br>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
                         @foreach ($errors->get('username') as $uError)
-                            {{$uError}} <br>
+                        <li>{{$uError}}</li>
                         @endforeach
                     </div>
                 @endif
@@ -63,10 +62,10 @@
                     <input type="password" name="password" class="form-control rounded-end " id="password " placeholder="Enter a Password ">
                 </div>
                 @if ($errors->get('password') != null)
-                    <br>
-                    <div class="alert alert-danger" role="alert">
+
+                    <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
                         @foreach ($errors->get('password') as $error)
-                            {{$error}} <br>
+                        <li>{{$error}}</li>
                         @endforeach
                     </div>
                 @endif
@@ -79,10 +78,10 @@
                     <input type="password" name="cpassword" class="form-control rounded-end " id="cpassword " placeholder="Confirm Password ">
                 </div>
                 @if ($errors->get('cpassword') != null)
-                    <br>
-                    <div class="alert alert-danger" role="alert">
+
+                    <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
                         @foreach ($errors->get('cpassword') as $error)
-                            {{$error}} <br>
+                        <li>{{$error}}</li>
                         @endforeach
                     </div>
                 @endif
@@ -95,10 +94,10 @@
                     <input type="email" name="email" class="form-control rounded-end " id="email " placeholder="Enter Your Email " value="{{ old('email')}}">
                 </div>
                 @if ($errors->get('email') != null)
-                    <br>
-                    <div class="alert alert-danger" role="alert">
+
+                    <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
                         @foreach ($errors->get('email') as $error)
-                            {{$error}} <br>
+                        <li>{{$error}}</li>
                         @endforeach
                     </div>
                 @endif
@@ -108,13 +107,13 @@
                 <label for="contact " class="form-label fw-bold ">Contact Number:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-phone "></i></span>
-                    <input type="text " name="contact" class="form-control rounded-end " id="contact " placeholder="Enter Your Contact Number " value="{{ old('contact')}}">
+                    <input type="text " name="contact" class="form-control rounded-end " id="contact " placeholder="+8801XXXXXXXXX " value="{{ old('contact')}}">
                 </div>
                 @if ($errors->get('contact') != null)
-                    <br>
-                    <div class="alert alert-danger" role="alert">
+
+                    <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
                         @foreach ($errors->get('contact') as $error)
-                            {{$error}} <br>
+                            <li>{{$error}}</li>
                         @endforeach
                     </div>
                 @endif
@@ -127,10 +126,10 @@
                     <input type="text " name="address" class="form-control rounded-end " id="address " placeholder="Enter Your Address " value="{{ old('address')}}">
                 </div>
                 @if ($errors->get('address') != null)
-                    <br>
-                    <div class="alert alert-danger" role="alert">
+
+                    <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
                         @foreach ($errors->get('address') as $error)
-                            {{$error}} <br>
+                        <li>{{$error}}</li>
                         @endforeach
                     </div>
                 @endif
@@ -144,10 +143,9 @@
                     <input type="file" class="form-control" id="customFile" name="image" multiple="multiple"/>
                 </div>
                 @if ($errors->get('image') != null)
-                    <br>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
                         @foreach ($errors->get('image') as $error)
-                            {{$error}} <br>
+                        <li>{{$error}}</li>
                         @endforeach
                     </div>
                 @endif

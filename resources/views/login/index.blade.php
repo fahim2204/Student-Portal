@@ -49,6 +49,9 @@
             <div class="text-start mx-5 my-3 ">
                 <a class="link-info " href="/registration">Not registered yet?</a>
             </div>
+            <div class="alert alert-primary" role="alert">
+                {{session('msg')}}
+            </div>
             <!-- Login with Oauth 2 -->
             <div class="text-center mx-5 my-3 ">
                 <h6 class="text-muted ">Or, Loging using</h5>
