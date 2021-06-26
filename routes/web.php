@@ -32,4 +32,5 @@ Route::view('/admin/categories/all', 'admin.dashboard.categories.all')->name('vi
 Route::view('/admin/categories/create', 'admin.dashboard.categories.create')->name('view-admin-create-category');
 Route::view('/admin/roles', 'admin.dashboard.roles')->name('view-admin-roles');
 Route::view('/admin/users/all', 'admin.dashboard.users.all')->name('view-admin-all-users');
+Route::view('/admin/privacy-policy', 'admin.dashboard.privacy-policy')->name('view-admin-privacy-policy');
 
