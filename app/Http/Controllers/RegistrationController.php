@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\modRegistrationRequest;
 use Illuminate\Http\Request;
+
 
 class RegistrationController extends Controller
 {
@@ -21,7 +23,7 @@ class RegistrationController extends Controller
     public function instructorverify(Request $req){
         //
     }
-    public function moderatorverify(Request $req){
-        //
+    public function moderatorverify(modRegistrationRequest $req){
+        return view('login.index');
     }
 }

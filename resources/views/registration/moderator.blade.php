@@ -17,95 +17,145 @@
 
         <h3 class=" text-secondary text-center fw-bold mb-5 " style="padding-top:15px"><i class="fas fa-user-shield"></i>  Moderator Registration</h3>
 
-        <form action=" " method="post ">
+        <form action=" " method="post">
             @csrf
             <!-- Full Name section -->
             <div class="mx-5 my-4 ">
                 <label for="fullName " class="form-label fw-bold ">Full Name:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-user "></i></span>
-                    <input type="text " class="form-control rounded-end " id="fullName " placeholder="Enter Your Full Name ">
-                    <div class="valid-feedback ">
-                        Looks good!
-                    </div>
+                    <input type="text " name="fullName" class="form-control rounded-end " id="fullName " placeholder="Enter Your Full Name" value="{{ old('fullName')}}">
                 </div>
+                @if ($errors->get('fullName') !=null)
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                        @foreach ($errors->get('fullName') as $error)
+                        {{$error}} <br>
+                        @endforeach
+
+
+                    </div>
+
+                @endif
             </div>
             <!-- User name section -->
             <div class="mx-5 my-4 ">
                 <label for="username " class="form-label fw-bold ">Username:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-at "></i></span>
-                    <input type="text " class="form-control rounded-end " id="username " placeholder="Enter a Username ">
-                    <div class="valid-feedback ">
-                        Looks good!
-                    </div>
+                    <input type="text " name="username" class="form-control rounded-end " id="username " placeholder="Enter a Username " value="{{ old('username')}}">
                 </div>
+                @if ($errors->get('username') != null)
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                        @foreach ($errors->get('username') as $uError)
+                            {{$uError}} <br>
+                        @endforeach
+                    </div>
+                @endif
             </div>
+
             <!-- Password section -->
             <div class="mx-5 my-4 ">
                 <label for="password " class="form-label fw-bold ">Password:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-key "></i></span>
-                    <input type="password " class="form-control rounded-end " id="password " placeholder="Enter a Password ">
+                    <input type="password" name="password" class="form-control rounded-end " id="password " placeholder="Enter a Password ">
                 </div>
+                @if ($errors->get('password') != null)
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                        @foreach ($errors->get('password') as $error)
+                            {{$error}} <br>
+                        @endforeach
+                    </div>
+                @endif
             </div>
             <!-- Confirm Password section -->
             <div class="mx-5 my-4 ">
-                <label for="cpassword " class="form-label fw-bold ">Confirm Password:</label>
+                <label for="cpassword" class="form-label fw-bold ">Confirm Password:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-key "></i></span>
-                    <input type="password " class="form-control rounded-end " id="cpassword " placeholder="Confirm Password ">
+                    <input type="password" name="cpassword" class="form-control rounded-end " id="cpassword " placeholder="Confirm Password ">
                 </div>
+                @if ($errors->get('cpassword') != null)
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                        @foreach ($errors->get('cpassword') as $error)
+                            {{$error}} <br>
+                        @endforeach
+                    </div>
+                @endif
             </div>
             <!-- Email section -->
             <div class="mx-5 my-4 ">
                 <label for="email " class="form-label fw-bold ">Email:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-envelope "></i></span>
-                    <input type="text " class="form-control rounded-end " id="email " placeholder="Enter Your Email ">
-                    <div class="valid-feedback ">
-                        Looks good!
-                    </div>
+                    <input type="email" name="email" class="form-control rounded-end " id="email " placeholder="Enter Your Email " value="{{ old('email')}}">
                 </div>
+                @if ($errors->get('email') != null)
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                        @foreach ($errors->get('email') as $error)
+                            {{$error}} <br>
+                        @endforeach
+                    </div>
+                @endif
             </div>
             <!-- Contact section -->
             <div class="mx-5 my-4 ">
                 <label for="contact " class="form-label fw-bold ">Contact Number:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-phone "></i></span>
-                    <input type="text " class="form-control rounded-end " id="contact " placeholder="Enter Your Contact Number ">
-                    <div class="valid-feedback ">
-                        Looks good!
-                    </div>
+                    <input type="text " name="contact" class="form-control rounded-end " id="contact " placeholder="Enter Your Contact Number " value="{{ old('contact')}}">
                 </div>
+                @if ($errors->get('contact') != null)
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                        @foreach ($errors->get('contact') as $error)
+                            {{$error}} <br>
+                        @endforeach
+                    </div>
+                @endif
             </div>
             <!-- User name section -->
             <div class="mx-5 my-4 ">
                 <label for="address " class="form-label fw-bold ">Address:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-address-card"></i></span>
-                    <input type="text " class="form-control rounded-end " id="address " placeholder="Enter Your Address ">
-                    <div class="valid-feedback ">
-                        Looks good!
-                    </div>
+                    <input type="text " name="address" class="form-control rounded-end " id="address " placeholder="Enter Your Address " value="{{ old('address')}}">
                 </div>
+                @if ($errors->get('address') != null)
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                        @foreach ($errors->get('address') as $error)
+                            {{$error}} <br>
+                        @endforeach
+                    </div>
+                @endif
             </div>
             {{-- Image Upload --}}
 
             <div class="mx-5 my-4 ">
-                <label for="address " class="form-label fw-bold ">Profile Picture:</label>
+                <label for="image " class="form-label fw-bold ">Profile Picture:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-camera"></i></span>
-                    <input type="file" class="form-control" id="customFile" name="image" />
-                    <div class="valid-feedback ">
-                        Looks good!
-                    </div>
+                    <input type="file" class="form-control" id="customFile" name="image" multiple="multiple"/>
                 </div>
+                @if ($errors->get('image') != null)
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                        @foreach ($errors->get('image') as $error)
+                            {{$error}} <br>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
             <!-- Registration -->
             <div class="d-flex justify-content-center my-2 ">
-                <button type="submit " class="btn btn-lg btn-success px-sm-4 ">Register</button>
+                <button type="submit " name="Submit" class="btn btn-lg btn-success px-sm-4 ">Register</button>
             </div>
 
             <div class="text-start mx-5 my-3 d-flex justify-content-center">
@@ -128,7 +178,10 @@
             </div> -->
 
         </form>
-
+        {{-- @foreach ($errors->all() as $error)
+		{{$error}} <br>
+	    @endforeach --}}
+        {{-- {{$errors->first()}} --}}
 
     </div>
 
