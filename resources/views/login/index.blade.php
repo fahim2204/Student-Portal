@@ -49,7 +49,7 @@
             </div>
 
             @if (session('error')!= null)
-                <div class="alert alert-primary" role="alert">
+                <div class="alert alert-warning" role="alert">
                      {{session('error')}}
                 </div>
             @endif

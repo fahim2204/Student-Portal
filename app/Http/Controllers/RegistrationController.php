@@ -46,6 +46,7 @@ class RegistrationController extends Controller
             'email' => $req->email,
             'created_at' => Carbon::now(),
             'contact' => $req->contact,
+            'address' => $req->address,
             'image' => $req->uname.'.'.$req->image->getClientOriginalExtension(),
             'fr_user_id' => $lastId
         ]);
@@ -55,7 +56,7 @@ class RegistrationController extends Controller
 
 
 
-        $req->session()->flash('msg', 'Registration Successful');
+        $req->session()->flash('msg', 'Registration Application Successful');
         return redirect()->route('login.index');
     }
 }
