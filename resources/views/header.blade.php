@@ -155,7 +155,7 @@
 
             </div>
             {{-- Notification Container --}}
-            <div class="container shadow-lg bg-light rounded-3 fixed-top" id="notification-sec" style="width: 320px; top: 70px; left:50vw;display: block;">
+            <div class="container shadow-lg bg-light rounded-3 fixed-top" id="notification-sec" style="width: 320px; top: 70px; left:50vw;display: none;">
                 <h4 class="text-center">Notification</h4>
                 <hr class="m-0 p-0">
 
