@@ -50,14 +50,14 @@
             </div>
 
             @if (session('error')!= null)
-                <div class="alert alert-warning" role="alert">
+                <div class="alert alert-danger d-flex justify-content-center my-2" role="alert">
                      {{session('error')}}
                 </div>
             @endif
-            {{$message = session('msg')}}
-            @if ($message!= null)
-                <div class="alert alert-primary" role="alert">
-                    {{$message}}
+            {{-- {{$message = session('msg')}} --}}
+            @if (session('msg')!= null)
+                <div class="alert alert-success d-flex justify-content-center my-2" role="alert">
+                    {{session('msg')}}
                 </div>
             @endif
 

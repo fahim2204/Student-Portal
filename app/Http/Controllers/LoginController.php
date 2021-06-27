@@ -41,24 +41,6 @@ class LoginController extends Controller
         }
 
 
-        // dd($users);
-                // ->where('password','=',$req->password);
-                // have to add type and status
-                // ->where();
-        // if($user!==null){
-        //     $req->session()->put('uname', $req->uname);
-        //     $req->session()->put('type', $req->type);
-        //     //set session or cookie
-        //     return redirect()->route('home');
-        // }
-        // else{
-
-        //     $req->session()->flash('error', 'Invalid username or password!');
-        //     // return redirect('/login');
-        //     return redirect()->route('login.index');
-        // }
-
-
     }
 
 }
