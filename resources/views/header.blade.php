@@ -89,8 +89,8 @@
                     <div class="col-2  d-flex justify-content-end align-items-center">
                         <div class="col-3 text-left align-self-center"><span class="fas fa-user-alt fa-2x"></span></div>
                         <div class="col-8">
-                            <div>Fahim Faisal</div>
-                            <div class="text-muted" style="font-size: 14px">Admin</div>
+                            <div>{{session()->get('name')}}</div>
+                            <div class="text-muted" style="font-size: 14px">{{session()->get('type')}}</div>
                         </div>
                         <div class="col-1 align-self-center pe-1">
                             <button class="bg-transparent border-0" onclick="ShowProfileSec();">
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-10">
                         <div>
-                            Profile
+                           <a href="{{route('profile.view',session()->get('uname'))}}">Profile</a>
                         </div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="col-10">
                         <div>
-                            Logout
+                            <a href="{{route('logout.index')}}">Logout</a>
                         </div>
                     </div>
                 </div>

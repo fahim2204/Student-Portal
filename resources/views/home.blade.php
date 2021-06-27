@@ -1,7 +1,10 @@
 @include('header')
-
-@yield('header-main')
+@if (session()->get('uname')!==null)
 @yield('header-main-logged')
+@else
+@yield('header-main')
+@endif
+
 @yield('header-navbar')
 
 <main class="container">
