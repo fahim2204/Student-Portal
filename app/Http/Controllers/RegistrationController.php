@@ -11,6 +11,9 @@ use Illuminate\Support\Carbon;
 
 class RegistrationController extends Controller
 {
+    public function index(){
+        return view('registration.index');
+    }
     public function studentindex(){
         return view('registration.student');
     }
@@ -48,6 +51,7 @@ class RegistrationController extends Controller
             'contact' => $req->contact,
             'address' => $req->address,
             'image' => $req->uname.'.'.$req->image->getClientOriginalExtension(),
+
             'fr_user_id' => $lastId
         ]);
 

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\moderator;
+use App\Models\User;
 
 class modRegistrationRequest extends FormRequest
 {
@@ -26,7 +27,9 @@ class modRegistrationRequest extends FormRequest
     {
         return [
             'fullName'  => 'required|min:3',
+
             'uname'  => 'required|min:5|unique:users',
+
             'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'cpassword' => 'required|same:password',
             'email'     => 'required|unique:moderators',
