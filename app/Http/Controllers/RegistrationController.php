@@ -46,6 +46,7 @@ class RegistrationController extends Controller
             'email' => $req->email,
             'created_at' => Carbon::now(),
             'contact' => $req->contact,
+            'address' => $req->address,
             'image' => $req->username.'.'.$req->image->getClientOriginalExtension(),
             'fr_user_id' => $lastId
         ]);

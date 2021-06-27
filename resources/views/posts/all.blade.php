@@ -1,5 +1,6 @@
 @include('header')
 <!-- Single Post -->
+@section('allposts')
 <div class="index-single-post row border bg-light rounded-1 mb-2 py-1 p-3">
     <div class="row g-0">
         <!-- Post info section -->
@@ -87,4 +88,5 @@
         </div>
     </div>
 </div>
+@endsection
 @include('footer')

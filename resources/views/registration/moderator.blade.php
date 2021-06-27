@@ -118,7 +118,7 @@
                     </div>
                 @endif
             </div>
-            <!-- User name section -->
+            <!-- Address section -->
             <div class="mx-5 my-4 ">
                 <label for="address " class="form-label fw-bold ">Address:</label>
                 <div class="input-group ">

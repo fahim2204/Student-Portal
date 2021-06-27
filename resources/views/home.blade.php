@@ -62,7 +62,7 @@
       </h3>
 
       <div class="posts mb-3">
-          @include('posts.all')
+          @yield('allposts')
         </div>
 
       <nav class="blog-pagination" aria-label="Pagination">
