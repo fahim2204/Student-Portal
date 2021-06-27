@@ -141,7 +141,7 @@
                 <label for="level" class="form-label fw-bold ">Class:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-landmark"></i></span>
-                    <input type="text" name="level" class="form-control rounded-end " id="address " placeholder="Enter Your Class" value="{{ old('level')}}">
+                    <input type="text" name="level" class="form-control rounded-end " id="address " placeholder="Eg: BSc. 3rd Year" value="{{ old('level')}}">
                 </div>
                 @if ($errors->get('level') != null)
                     <br>
