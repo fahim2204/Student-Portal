@@ -27,7 +27,9 @@ class modRegistrationRequest extends FormRequest
     {
         return [
             'fullName'  => 'required|min:3',
-            'username'  => 'required|min:5|unique:Users',
+
+            'uname'  => 'required|min:5|unique:users',
+
             'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'cpassword' => 'required|same:password',
             'email'     => 'required|unique:moderators',

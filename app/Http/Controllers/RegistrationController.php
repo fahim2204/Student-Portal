@@ -32,9 +32,9 @@ class RegistrationController extends Controller
     public function moderatorverify(modRegistrationRequest $req){
 
 
-        $imgName = $req->username.'.'.$req->image->getClientOriginalExtension();
+        $imgName = $req->uname.'.'.$req->image->getClientOriginalExtension();
         user::insert([
-            'username' => $req->username,
+            'uname' => $req->input('uname'),
             'password' => $req->password,
             'type' => 'moderator',
             'status' => 4,
@@ -50,7 +50,8 @@ class RegistrationController extends Controller
             'created_at' => Carbon::now(),
             'contact' => $req->contact,
             'address' => $req->address,
-            'image' => $req->username.'.'.$req->image->getClientOriginalExtension(),
+            'image' => $req->uname.'.'.$req->image->getClientOriginalExtension(),
+
             'fr_user_id' => $lastId
         ]);
 
@@ -59,7 +60,7 @@ class RegistrationController extends Controller
 
 
 
-        $req->session()->flash('msg', 'Registration Successful');
-        return view('login.index');
+        $req->session()->flash('msg', 'Registration Application Successful');
+        return redirect()->route('login.index');
     }
 }
