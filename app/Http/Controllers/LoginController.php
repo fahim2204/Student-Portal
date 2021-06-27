@@ -32,6 +32,7 @@ class LoginController extends Controller
                 // if(Hash::check($req->input('password'))){
 
                     $req->session()->put('uname', $user->uname);
+                    $req->session()->put('id', $user->id);
                     $req->session()->put('type', $user->type);
                     $req->session()->put('status', $user->status);
                     $req->session()->put('name', $name->$type->name);

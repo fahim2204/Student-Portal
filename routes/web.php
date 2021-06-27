@@ -81,6 +81,7 @@ Route::get('/moderator/instructor/request', [ModeratorController::class,'instruc
 Route::get('/instructor', [InstructorController::class,'index'])->name('instructor.dashboard');
 Route::get('/instructor/posts', [InstructorController::class,'posts'])->name('instructor.posts');
 Route::get('/instructor/posts/create', [InstructorController::class,'postscreate'])->name('instructor.posts.create');
+Route::post('/instructor/posts/create', [InstructorController::class,'postsave'])->name('instructor.posts.create.save');
 Route::get('/instructor/group/{gid}', [InstructorController::class,'groups'])->name('instructor.groups');
 Route::get('/instructor/group/create', [InstructorController::class,'groupcreate'])->name('instructor.groups.create');
 
