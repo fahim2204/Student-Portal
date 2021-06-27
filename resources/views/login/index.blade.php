@@ -24,7 +24,7 @@
                 <label for="username " class="form-label fw-bold ">User Name:</label>
                 <div class="input-group">
                     <span class="input-group-text"> <i class="fas fa-user "></i></span>
-                    <input type="text" name="username" class="form-control rounded-end " id="username " placeholder="Type your Username ">
+                    <input type="text" name="uname" class="form-control rounded-end " id="uname " placeholder="Type your Username ">
                 </div>
             </div>
             <!-- Password section -->

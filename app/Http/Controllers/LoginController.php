@@ -23,13 +23,17 @@ class LoginController extends Controller
 
         $user = User::where('uname',$req->input('uname'))
         ->first();
+        $password = $req->input('password');
+        // dd($user);
         if($user!==null){
-            if(Hash::check($req->input('password'))){
-                $req->session()->put('uname', $req->uname);
-                $req->session()->put('type', $req->type);
-                $req->session()->put('status', $user->status);
-                return redirect()->route('home');
+            if($user->password === $password){
+                // if(Hash::check($req->input('password'))){
+                    $req->session()->put('uname', $req->uname);
+                    $req->session()->put('type', $req->type);
+                    $req->session()->put('status', $user->status);
+                    return redirect()->route('home');
 
+                // }
             }
             else{
 
