@@ -17,16 +17,14 @@
 
         <h1 class=" text-secondary text-center fw-bold mb-5 ">login</h1>
 
-        <form action="user/home" method="GET">
+        <form action="" method="post">
+            @csrf
             <!-- User name section -->
             <div class="mx-5 my-4 ">
                 <label for="username " class="form-label fw-bold ">User Name:</label>
                 <div class="input-group">
                     <span class="input-group-text"> <i class="fas fa-user "></i></span>
-                    <input type="text" class="form-control rounded-end " id="username " placeholder="Type your Username ">
-                    <div class="valid-feedback ">
-                        Looks good!
-                    </div>
+                    <input type="text" name="username" class="form-control rounded-end " id="username " placeholder="Type your Username ">
                 </div>
             </div>
             <!-- Password section -->
@@ -34,7 +32,7 @@
                 <label for="password " class="form-label fw-bold ">Password:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-key "></i></span>
-                    <input type="password" class="form-control rounded-end " id="password " placeholder="Type your Password ">
+                    <input type="password" name='password' class="form-control rounded-end " id="password " placeholder="Type your Password ">
                 </div>
             </div>
 
@@ -49,23 +47,18 @@
             <div class="text-start mx-5 my-3 ">
                 <a class="link-info " href="/registration">Not registered yet?</a>
             </div>
-            <div class="alert alert-primary" role="alert">
-                {{session('msg')}}
-            </div>
-            <!-- Login with Oauth 2 -->
-            <div class="text-center mx-5 my-3 ">
-                <h6 class="text-muted ">Or, Loging using</h5>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="#"><img class="mx-4 my-3" src="https://img.icons8.com/fluent/50/000000/google-logo.png" /></a>
-                <a href="#"><img class="mx-4 my-3" src="https://img.icons8.com/color/50/000000/facebook-new.png" /></a>
 
-            </div>
-
-
-
-
-
+            @if (session('error')!= null)
+                <div class="alert alert-primary" role="alert">
+                     {{session('error')}}
+                </div>
+            @endif
+            {{$message = session('msg')}}
+            @if ($message!= null)
+                <div class="alert alert-primary" role="alert">
+                    {{$message}}
+                </div>
+            @endif
 
 
 

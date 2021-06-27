@@ -40,14 +40,14 @@
             </div>
             <!-- User name section -->
             <div class="mx-5 my-4 ">
-                <label for="username " class="form-label fw-bold ">Username:</label>
+                <label for="uname " class="form-label fw-bold ">Username:</label>
                 <div class="input-group ">
                     <span class="input-group-text "> <i class="fas fa-at "></i></span>
-                    <input type="text " name="username" class="form-control rounded-end " id="username " placeholder="Enter a Username " value="{{ old('username')}}">
+                    <input type="text " name="uname" class="form-control rounded-end " id="uname " placeholder="Enter a Username " value="{{ old('uname')}}">
                 </div>
-                @if ($errors->get('username') != null)
+                @if ($errors->get('uname') != null)
                     <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
-                        @foreach ($errors->get('username') as $uError)
+                        @foreach ($errors->get('uname') as $uError)
                         <li>{{$uError}}</li>
                         @endforeach
                     </div>
