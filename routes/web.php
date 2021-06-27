@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -27,6 +28,7 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 //------------LOGIN SECTION-------------//
 Route::get('/login', [LoginController::class,'index'])->name('login.index');
 Route::post('/login', [LoginController::class,'verify'])->name('login.verify');
+Route::get('/logout', [LogoutController::class,'index'])->name('logout.index');
 
 //------------REGISTRATION SECTION-------------//
 Route::get('/registration', [RegistrationController::class,'index'])->name('registration.index');
