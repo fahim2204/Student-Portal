@@ -1,5 +1,9 @@
 @include('header')
 
+@yield('header-main')
+@yield('header-main-logged')
+@yield('header-navbar')
+
 <main class="container">
   <div class="p-4 p-md-5 mb-4 text-white rounded" style="background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)), url({{asset('img/posts/featured-1.jpg')}})">
     <div class="col-md-6 px-0">
