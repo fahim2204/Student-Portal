@@ -29,6 +29,7 @@ Route::get('/login', [LoginController::class,'index'])->name('login.index');
 Route::post('/login', [LoginController::class,'verify'])->name('login.verify');
 
 //------------REGISTRATION SECTION-------------//
+Route::get('/registration', [RegistrationController::class,'index'])->name('registration.index');
 Route::get('/student/registration', [RegistrationController::class,'studentindex'])->name('student.registration.index');
 Route::get('/instructor/registration', [RegistrationController::class,'instructorindex'])->name('instructor.registration.index');
 Route::get('/moderator/registration', [RegistrationController::class,'moderatorindex'])->name('moderator.registration.index');

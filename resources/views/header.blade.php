@@ -32,7 +32,6 @@
       }
     </style>
 
-
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"
@@ -51,15 +50,15 @@
 <div class="container">
   <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
-      <div class="col-4 pt-1">
-        <a class="link-secondary" href="#">Subscribe</a>
+      <div class="col-4 pt-1 d-flex">
+        <img src="https://img.icons8.com/material-outlined/40/000000/menu--v1.png"/>
+        <input class="w-100 form-control mx-4" type="text" name="search" id="search" placeholder="search">
       </div>
       <div class="col-4 text-center">
         <a class="blog-header-logo text-dark" href="{{ route('home') }}">Student Portal</a>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
-          <a class="btn btn-outline-success me-3" href="/registration">Register as Student</a>
-          <a class="btn btn-outline-success me-3" href="/registration">Register as Instructor</a>
+          <a class="btn btn-outline-success me-3" href="{{route('registration.index')}}">Register</a>
         <a class="btn btn-outline-primary me-3" href="/login">Login</a>
       </div>
     </div>
@@ -75,11 +74,6 @@
       <a class="p-2 link-secondary" href="#">Networking</a>
       <a class="p-2 link-secondary" href="#">Language</a>
       <a class="p-2 link-secondary" href="#">Exam Preperation</a>
-
-      {{-- <a class="p-2 link-secondary" href="#">Science</a>
-      <a class="p-2 link-secondary" href="#">Health</a>
-      <a class="p-2 link-secondary" href="#">Style</a>
-      <a class="p-2 link-secondary" href="#">Travel</a> --}}
     </nav>
   </div>
 </div>

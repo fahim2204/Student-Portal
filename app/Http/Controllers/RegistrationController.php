@@ -11,6 +11,9 @@ use Illuminate\Support\Carbon;
 
 class RegistrationController extends Controller
 {
+    public function index(){
+        return view('registration.index');
+    }
     public function studentindex(){
         return view('registration.student');
     }
