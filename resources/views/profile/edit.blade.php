@@ -4,60 +4,34 @@
   <div class="row">
     <div class="py-5 text-center">
       <h2>Edit Profile</h2>
-      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+      <p class="lead">Student</p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 col-lg-4">
-      <div class="row">
-        <div class="col-sm-12 col-md-12 sidebar">
-        <div class="mini-submenu">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </div>
-        <div class="list-group">
-            <span href="#" class="list-group-item active">
-                Submenu
-
-            </span>
-            <a href="#" class="list-group-item">
-                <i class="fa fa-comment-o"></i> General Information
-            </a>
-            <a href="#" class="list-group-item">
-                <i class="fa fa-search"></i> Privacy Settings
-            </a>
-            <a href="#" class="list-group-item">
-                <i class="fa fa-user"></i> Favourite Topics
-            </a>
-        </div>
-    </div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-8">
+  <div class="row d-flex justify-content-center">
+    
     <main>
 
       <div class="row g-5">
         <div class="col-md-7 col-lg-12">
           <form class="needs-validation" novalidate>
             <div class="row g-3">
-              <div class="col-sm-6">
-                <label for="firstName" class="form-label">First name</label>
+              <div class="col-sm-12">
+                <label for="firstName" class="form-label">Full name</label>
                 <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
 
-              <div class="col-sm-6">
+              {{-- <div class="col-sm-6">
                 <label for="lastName" class="form-label">Last name</label>
                 <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
-              </div>
+              </div> --}}
 
-              <div class="col-12">
+              {{-- <div class="col-12">
                 <label for="username" class="form-label">Username</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text">@</span>
@@ -66,7 +40,7 @@
                     Your username is required.
                   </div>
                 </div>
-              </div>
+              </div> --}}
 
               <div class="col-12">
                 <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
@@ -85,11 +59,45 @@
               </div>
 
               <div class="col-12">
+                <label for="phone" class="form-label">Contact No.</label>
+                <input type="text" class="form-control" id="phone" placeholder="xxxxxxxxxxx" required>
+                <div class="invalid-feedback">
+                  Please enter your phone number.
+                </div>
+              </div>
+              
+              <hr class="my-4"> 
+
+              <div class="col-12">
+                <label for="password" class="form-label">New password</label>
+                <input type="password" class="form-control" id="newPass" placeholder="abc">
+                {{-- <div class="invalid-feedback">
+                  Please enter your phone number.
+                </div> --}}
+              </div>
+
+              <div class="col-12">
+                <label for="phone" class="form-label">Confirm New Password</label>
+                <input type="password" class="form-control" id="cNewPass" placeholder="abc">
+                {{-- <div class="invalid-feedback">
+                  Please enter your phone number.
+                </div> --}}
+              </div>
+
+              <div class="col-12">
+                <label for="profilePic" class="form-label">New Profile Picture</label>
+                <input type="file" class="form-control" id="" placeholder="Insert New Picture">
+                {{-- <div class="invalid-feedback">
+                  Please enter your phone number.
+                </div> --}}
+              </div>
+
+              {{-- <div class="col-12">
                 <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
                 <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
               </div>
 
-              <div class="col-md-5">
+               <div class="col-md-5">
                 <label for="country" class="form-label">Country</label>
                 <select class="form-select" id="country" required>
                   <option value="">Choose...</option>
@@ -118,10 +126,10 @@
                   Zip code required.
                 </div>
               </div>
-            </div>
+            </div>  --}}
 
 
-            <hr class="my-4">
+            <hr class="my-4"> 
 
             <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
           </form>

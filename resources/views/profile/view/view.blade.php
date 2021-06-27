@@ -16,11 +16,11 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="StudentProfilePic" class="rounded-circle" width="150">
                         <div class="mt-3">
-                          <h4>John Doe</h4>
-                          <p class="text-secondary mb-1">Full Stack Developer</p>
-                          <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                          <h4>@username</h4>
+                          <p class="text-secondary mb-1">Student</p>
+                          <p class="text-muted font-size-sm">Level 1</p>
                           <button class="btn btn-primary">Follow</button>
                           <button class="btn btn-outline-primary">Message</button>
                         </div>
@@ -84,27 +84,23 @@
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Mobile</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                          (320) 380-4539
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
                           <h6 class="mb-0">Address</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
                           Bay Area, San Francisco, CA
                         </div>
                       </div>
+
+                      {{-- xyz will replace session uanme --}}
+                      @if ($uname == 'xyz')
                       <hr>
                       <div class="row">
                         <div class="col-sm-12">
-                          <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                          <a class="btn btn-info " target="__blank" href="{{route('profile.edit')}}">Edit</a>
                         </div>
                       </div>
+                      @endif
+
                     </div>
                   </div>
 
