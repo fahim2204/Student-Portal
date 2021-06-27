@@ -35,8 +35,7 @@ class modRegistrationRequest extends FormRequest
             'email'     => 'required|unique:moderators',
             'contact'   => 'required|regex:/(01)[0-9]{9}/',
             'address'   => 'required',
-            // 'image'     => 'required|image|mimes:jpeg,jpg,png'
-            'image'     => 'required'
+            'image'     => 'required|mimes:jpeg,jpg,png'
         ];
     }
     public function messages()
