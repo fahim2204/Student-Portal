@@ -35,9 +35,9 @@
                     <button type="submit" class="btn btn-primary me-3">
                         Create
                     </button>
-                    <button class="btn btn-outline-danger">
+                    <a class="btn btn-outline-danger" href="{{route('home')}}">
                         Cancel
-                    </button>
+                    </a>
                 </div>
 
             </form>

@@ -18,10 +18,9 @@ class PostController extends Controller
     public function viewall()
     {
         $post = Post::with('category', 'user')
-        ->orderBy('id', 'desc')
-        
-        ->get();
-        
+                ->orderBy('id','desc')
+                ->paginate(5);
+
 
         return view('posts.all')->with('posts',$post);
         // return redirect()->route('posts.view.all');
@@ -33,7 +32,6 @@ class PostController extends Controller
     }
     public function create(Request $req)
     {
-
         ///post insertion
         if ($req->title !== null && $req->category !== null && $req->description !== null) {
             Post::insert([
@@ -46,7 +44,6 @@ class PostController extends Controller
                 'views' => 0,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-
             ]);
             $post = post::orderBy('id', 'desc')->first();
             $postCount = ($post->id);
@@ -65,7 +62,22 @@ class PostController extends Controller
     // IMPLEMENTing
     public function catwiseview($cat)
     {
-        return view('posts.catview')->with('category', $cat);
+        $catid = Category::where('name','=',$cat)->first()->id;
+        $post = Post::with('category', 'user')
+                ->where('fr_category_id','=',$catid)
+                ->orderBy('id','desc')
+                ->paginate(5);
+        return view('posts.catview')->with('category', $cat)
+                                        ->with('posts',$post);
+    }
+    public function viewsearched($text)
+    {
+        $post = Post::with('category', 'user')
+                ->where('title','like','%' .$text. '%')
+                ->orderBy('id','desc')
+                ->paginate(5);
+        return view('posts.all')->with('text',$text)
+                                ->with('posts',$post);
     }
     public function singleview($cat, $id)
     {
@@ -88,7 +100,6 @@ class PostController extends Controller
     {
         $post = Post::with('category', 'comments', 'votes')->get();
         return $post;
-
         // return redirect()->route('posts.view.all');
     }
     public function edit($cat, $id)
@@ -100,8 +111,8 @@ class PostController extends Controller
         return view('posts.edit')->with('post', $post)
                                  ->with('catall', $category);
 
-
     }
+
     public function update(Request $req){
         Post::where('id', '=', $req->id)->update(array('title' => $req->title, 'pbody' => $req->description));
         // return view('home');

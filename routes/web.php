@@ -48,6 +48,7 @@ Route::get('/{uname}/msg', [MsgController::class,'index'])->name('msg.view');
 
 //------------POST SECTION-------------//
 Route::get('/posts', [PostController::class,'viewall'])->name('posts.view.all');
+Route::get('/posts/search/{text}', [PostController::class,'viewsearched'])->name('posts.view.search');
 Route::get('/posts/create', [PostController::class,'createview'])->name('posts.create.view');
 Route::post('/posts/create', [PostController::class,'create'])->name('posts.create.save');
 //Route::post('/posts/create/edit', [PostController::class,'edit'])->name('posts.edit.save');

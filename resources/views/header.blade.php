@@ -77,7 +77,10 @@
                 <div class="row flex-nowrap justify-content-between align-items-center">
                     <div class="col-4 pt-1 d-flex">
                         <img src="https://img.icons8.com/material-outlined/40/000000/menu--v1.png" />
-                        <input class="w-100 form-control mx-4" type="text" name="search" id="search" placeholder="search">
+                        <form class="d-flex" action="{{route('posts.view.search',)}}" method="GET">
+                            <input class="w-100 form-control mx-4" type="text" name="search" id="search" placeholder="search">
+                            <input class="btn btn-primary rounded-3" type="button" value="Search">
+                        </form>
                     </div>
                     <div class="col-4 text-center">
                         <a class="blog-header-logo text-dark" href="{{ route('home') }}">Student Portal</a>
@@ -190,10 +193,10 @@
                         <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'physics') }}">Physics</a>
                         <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'chemistry') }}">Chemistry</a>
                         <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'biology') }}">Biology</a>
-                        <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'progamming') }}">Progamming</a>
-                        <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'gk') }}">General Knowledge</a>
+                        <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'Programming') }}">Progamming</a>
+                        <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'General Knowledge') }}">General Knowledge</a>
                         <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'economics') }}">Economics</a>
-                        <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'exam-prep') }}">Exam
+                        <a class="p-2 link-secondary" href="{{ route('posts.view.cat', 'Exam Preparation') }}">Exam
                             Preperation</a>
                     </nav>
                 </div>
