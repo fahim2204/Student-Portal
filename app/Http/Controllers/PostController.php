@@ -39,8 +39,8 @@ class PostController extends Controller
         $post->image = $imgName;
 
         $post->save();
-        
-        return redirect()->route('admin.posts');
+
+        return redirect()->route('moderator.posts');
     }
     public function delete($id)
     {
