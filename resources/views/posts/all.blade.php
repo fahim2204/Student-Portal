@@ -1,4 +1,4 @@
-@extends('header')
+@extends('home')
 
 <!-- Single Post -->
 @section('allposts')

@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col-sm-12 col-md-6">
               <h6>About</h6>
-              <p class="text-justify">Student Portal is an initiative  to help Students with the answer. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+              <p class="text-justify">Student Portal is an initiative  to help Students with the answer.Biggest online learning platform in Bangladesh! Post questions about anything, get help from experts and share expertise with others.</p>
             </div>
 
             <div class="col-xs-6 col-md-3">

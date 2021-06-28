@@ -1,4 +1,9 @@
 @include('header')
+@if (session()->get('uname')!==null)
+@yield('header-main-logged')
+@else
+@yield('header-main')
+@endif
 
 <div class="container">
   <div class="row g-5">
