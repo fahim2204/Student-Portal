@@ -25,4 +25,8 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\Category', 'fr_category_id', 'id');
     }
+    function user()
+    {
+        return $this->belongsTo('App\Models\User', 'fr_user_id', 'id');
+    }
 }

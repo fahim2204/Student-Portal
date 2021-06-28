@@ -9,6 +9,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,14 +53,25 @@ Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('p
 
 //------------ADMIN SECTION-------------//
 Route::get('/admin', [AdminController::class,'index'])->name('admin.dashboard');
-Route::get('/admin/posts', [AdminController::class,'posts'])->name('admin.posts');
+Route::get('/admin/posts/all', [AdminController::class,'posts'])->name('admin.posts');
 Route::get('/admin/posts/create', [AdminController::class,'postscreate'])->name('admin.posts.create');
+Route::post('/admin/posts/create', [PostController::class, 'create'])->name('admin.posts.create-POST');
+Route::get('/admin/posts/delete/{id}', [PostController::class, 'delete'])->name('admin.posts.delete');
 Route::get('/admin/website-info', [AdminController::class,'webinfo'])->name('admin.web.info');
+Route::post('/admin/update/website-info', [AdminController::class, 'updateWebsiteInfo'])->name('admin.update.web-info');
 Route::get('/admin/categories', [AdminController::class,'categories'])->name('admin.categories');
+Route::get('/admin/categories/search/{keyword}', [Category::class, 'searchJSON'])->name('admin.categories.search');
 Route::get('/admin/categories/create', [AdminController::class,'categoriescreate'])->name('admin.categories.create');
-Route::get('/admin/sub-categories', [AdminController::class,'subcategories'])->name('admin.sub.categories');
-Route::get('/admin/sub-categories/create', [AdminController::class,'subcategoriescreate'])->name('admin.sub.categories.create');
+Route::post('/admin/categories/create', [CategoryController::class,'create'])->name('admin.categories.create');
+Route::get('/admin/categories/{id}', [CategoryController::class,'delete'])->name('admin.categories.delete');
+Route::get('/admin/categories/edit/{id}', [AdminController::class, 'categoriesedit'])->name('admin.categories.edit');
+Route::post('/admin/categories/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit-POST');
+Route::post('/admin/users/edit/type', [UserController::class, 'changeRole'])->name('admin.users.edit.type-POST');
 Route::get('/admin/users', [AdminController::class,'users'])->name('admin.users');
+Route::get('/admin/users/view/{id}', [AdminController::class, 'viewUser'])->name('admin.users.view');
+Route::get('/admin/users/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
+Route::get('/admin/users/ban/{id}', [UserController::class, 'ban'])->name('admin.users.ban');
+Route::get('/admin/users/unban/{id}', [UserController::class, 'unban'])->name('admin.users.unban');
 Route::get('/admin/moderator/request', [AdminController::class,'moderatorreq'])->name('admin.mod.req');
 // Route::get('/admin/edit/{uname}', [AdminController::class,'useredit'])->name('admin.user.edit');
 Route::get('/admin/roles', [AdminController::class,'roles'])->name('admin.roles');
