@@ -74,6 +74,7 @@
                                                         <input type="text" name="ctext" class="form-control mr-3 my-2" placeholder="Add comment">
                                                         <input type="hidden" name="postId" value="{{ $post->id }}">
                                                         <input type="hidden" name="catId" value="{{ $post->category->name }}">
+                                                        <input type="hidden" name="postUserId" value="{{ $post->fr_user_id }}">
                                                     </div>
                                                     <div class="col-3">
                                                         <button class="btn btn-primary my-2" type="submit">Comment</button>
