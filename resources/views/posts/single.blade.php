@@ -22,6 +22,12 @@
                                 href="#user-profile">
                             <div class="lh-sm text-danger align-self-end">{{ $post->created_at->diffForHumans() }}
                             </div>
+                            <div class=""><a href="{{route('posts.edit',[
+                                $post->category->name,
+                                $post->id
+                            ])}}">edit</a></div>
+                            <div class="">|</div>
+                            <div class=""><form action="" method="post"><button>delete</button></form></div>
                         </div>
                         <!-- Post header section  -->
                         <div class="col-12 ps-2 border-top">

@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
@@ -51,9 +50,13 @@ Route::get('/{uname}/msg', [MsgController::class,'index'])->name('msg.view');
 Route::get('/posts', [PostController::class,'viewall'])->name('posts.view.all');
 Route::get('/posts/create', [PostController::class,'createview'])->name('posts.create.view');
 Route::post('/posts/create', [PostController::class,'create'])->name('posts.create.save');
+//Route::post('/posts/create/edit', [PostController::class,'edit'])->name('posts.edit.save');
 Route::get('/posts/{subcat}', [PostController::class,'catwiseview'])->name('posts.view.cat');
 Route::get('/posts/{subcat}/{id}', [PostController::class,'singleview'])->name('posts.view.single');
+// Route::post('/', [PostController::class,'update'])->name('posts.update');
 Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('posts.edit');
+Route::post('/posts/{subcat}/{id}/delete', [PostController::class,'delete'])->name('posts.delete');
+Route::post('/posts/{subcat}/{id}/edit', [PostController::class,'update'])->name('posts.update');
 Route::post('/posts/{subcat}/{id}', [commentController::class,'insertComment'])->name('comment.add');
 
 //------------ADMIN SECTION-------------//
