@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Vote;
 use App\Models\Comment;
 use Illuminate\Support\Carbon;
+use Illuminate\Pagination\Paginator;
 
 
 use Illuminate\Http\Request;
@@ -16,7 +17,14 @@ class PostController extends Controller
 {
     public function viewall()
     {
-        return view('posts.all');
+        $post = Post::with('category', 'user')
+        ->orderBy('id', 'desc')
+        
+        ->get();
+        
+
+        return view('posts.all')->with('posts',$post);
+        // return redirect()->route('posts.view.all');
     }
     public function createview()
     {
@@ -85,5 +93,7 @@ class PostController extends Controller
     {
         $post = Post::with('category', 'comments', 'votes')->get();
         return $post;
+
+        // return redirect()->route('posts.view.all');
     }
 }
