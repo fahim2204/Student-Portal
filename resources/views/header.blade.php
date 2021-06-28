@@ -112,7 +112,9 @@
                     </div>
                     <div class="col-10">
                         <div>
-                           <a href="{{route('profile.view',session()->get('uname'))}}">Profile</a>
+                            @if (session()->get('uname')!==null)
+                            <a href="{{route('profile.view',session()->get('uname'))}}">Profile</a>
+                            @endif
                         </div>
                     </div>
                 </div>
