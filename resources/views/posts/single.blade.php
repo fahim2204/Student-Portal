@@ -60,6 +60,7 @@
                                 <form action="" method='post'>
                                     <div class='w-100'> <input type="text" name="ctext" class="form-control mr-3 " placeholder="Add comment"></div>
                                      <input type="hidden" name="postId" value="{{$post->id}}">
+                                     <input type="hidden" name="catId" value="{{$post->category->name}}">
                                      <button class="btn btn-primary" type="submit">Comment</button>
                                  </form>
                             </div>

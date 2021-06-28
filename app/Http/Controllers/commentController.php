@@ -21,5 +21,8 @@ class commentController extends Controller
             'created_at' => Carbon::now()
 
         ]);
+        return redirect()->route('posts.view.single',[
+            $req->catId, $req->postId
+        ]);
     }
 }
