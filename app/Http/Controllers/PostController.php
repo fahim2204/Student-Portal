@@ -99,7 +99,8 @@ class PostController extends Controller
         // dd($req->id);
     }
     public function delete(Request $req){
-        return redirect()->route('post.delete');
+        Post::where('id',$req->id)->delete();
+        return redirect()->route('home');
     }
 
 

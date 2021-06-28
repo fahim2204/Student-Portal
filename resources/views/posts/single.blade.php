@@ -27,7 +27,13 @@
                                 $post->id
                             ])}}">edit</a></div>
                             <div class="">|</div>
-                            <div class=""><form action="" method="post"><button>delete</button></form></div>
+
+                            <div class="">
+                                <form action="{{route('posts.delete',$post->id)}}" method="post">
+                                    {{-- <input type="hidden"> --}}
+                                    <input type="submit" value="Delete" onclick="return deletePostConfirmation()">
+                                </form>
+                            </div>
                         </div>
                         <!-- Post header section  -->
                         <div class="col-12 ps-2 border-top">
@@ -156,4 +162,17 @@
 
     </main>
 </div>
+
+<script>
+    function deletePostConfirmation(){
+    var confimDel = confirm("Are you Sure Want To Delete?");
+
+    if (confimDel == true) {
+        return true;
+   }
+   return false;
+}
+</script>
+
+
 @include('footer')
