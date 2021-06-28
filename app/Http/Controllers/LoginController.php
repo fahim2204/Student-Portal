@@ -22,6 +22,7 @@ class LoginController extends Controller
         // $type = $user->type;
         // $name = User::with($type)->where('uname',$req->input('uname'))->first();
         // dd($user);
+
         if ($user !== null) {
             $type = $user->type;
             $name = User::with($type)->where('uname', $req->input('uname'))->first();

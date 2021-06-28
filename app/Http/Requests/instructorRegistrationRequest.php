@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\student;
+use App\Models\instructor;
 
-class studentRegistrationRequest extends FormRequest
+class instructorRegistrationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,10 +29,9 @@ class studentRegistrationRequest extends FormRequest
             'uname'     => 'required|min:5|unique:users',
             'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'cpassword' => 'required|same:password',
-            'email'     => 'required|unique:students',
+            'email'     => 'required|unique:instructors',
             'contact'   => 'required|regex:/(01)[0-9]{9}/',
             'address'   => 'required',
-            'level'     => 'required',
             'image'     => 'required|mimes:jpeg,jpg,png'
         ];
     }
