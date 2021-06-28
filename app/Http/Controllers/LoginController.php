@@ -29,6 +29,7 @@ class LoginController extends Controller
             if($user->password === $password){
                 // if(Hash::check($req->input('password'))){
                     $req->session()->put('uname', $req->uname);
+                    $req->session()->put('id', $user->id);
                     $req->session()->put('type', $req->type);
                     $req->session()->put('status', $user->status);
                     return redirect()->route('home');
