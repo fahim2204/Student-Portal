@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Vote;
 use App\Models\Comment;
 use Illuminate\Support\Carbon;
+
+
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -16,6 +18,18 @@ class PostController extends Controller
     {
         return view('posts.all');
     }
+    public function createview()
+    {
+        $category = category::orderBy('name','asc')->get();
+        return view('posts.create-post')->with('catall',$category);
+    }
+    public function create()
+    {
+        ///
+
+
+        //return redirect(posts.view.single)
+    }
     // IMPLEMENTing
     public function catwiseview($cat)
     {
@@ -23,25 +37,14 @@ class PostController extends Controller
     }
     public function singleview($cat, $id)
     {
-        // return view('posts.single')->with('category',$cat)
-        //                         ->with('id',$id);
-        $post = Post::with('category', 'user')->where('id', $id)->first();
-        // return view('posts.single')->with('post',$post);
-        // dd($post);
 
+        $post = Post::with('category', 'user')->where('id', $id)->first();
         $upcount = Vote::where('status', '=', '1')
             ->where('fr_post_id', '=', $post->id)->count();
         $downcount = Vote::where('status', '=', '2')
             ->where('fr_post_id', '=', $post->id)->count();
         $count = $upcount - $downcount;
-        // $count = Carbon::now('Asia/Dhaka');
 
-
-        //comment logic
-        // $comments = Comment::with('user','post')
-        //                     //->where('fr_post_id','=',$id)
-        //                     ->first();
-        //dd($comments);
         $comments = commentController::allComment($post->id);
 
         return view('posts.single')->with('post',$post)

@@ -13,10 +13,7 @@ class InstructorController extends Controller
     public function index(){
         return view('instructor.index');
     }
-    public function postscreate(){
-        $category = category::orderBy('name','asc')->get();
-        return view('instructor.create-post')->with('catall',$category);
-    }
+
     public function postsave(Request $req){
         dd($req);
         // Post::insert([
