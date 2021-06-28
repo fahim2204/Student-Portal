@@ -19,23 +19,64 @@
                     <div class="tab-content" id="v-pills-tabContent">
                       <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
                       <div class="tab-pane fade my-3 ms-2" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                        <form>
+                        
+                        
+                        
+                        <form action="" method="post">
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Full Name:</label>
-                              <input type="text" name="name" class="form-control">
+                              <input type="text" name="fullName" value="{{$user->$type->name}}" class="form-control">
                             </div>
+                            @if ($errors->get('fullName') !=null)
+                                  <br>
+                                  <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
+                                      @foreach ($errors->get('fullName') as $error)
+                                      <li>{{$error}}</li>
+                                      @endforeach
+
+
+                                  </div>
+
+                            @endif
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Email address:</label>
-                              <input type="text" name="email" class="form-control">
+                              <input type="text" name="email" value="{{$user->$type->email}}" class="form-control">
                             </div>
+                            @if ($errors->get('email') != null)
+                                <br>
+                                <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
+                                    @foreach ($errors->get('email') as $error)
+                                    <li>{{$error}}</li>
+                                    @endforeach
+                                </div>
+                            @endif
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Phone:</label>
-                              <input type="text" name="phone" class="form-control">
+                              <input type="text" name="contact" value="{{$user->$type->contact}}" class="form-control">
                             </div>
+
+                            @if ($errors->get('contact') != null)
+                                <br>
+                                <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
+                                    @foreach ($errors->get('contact') as $error)
+                                    <li>{{$error}}</li>
+                                    @endforeach
+                                </div>
+                            @endif
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Address:</label>
-                              <input type="text" name="address" class="form-control">
+                              <input type="text" name="address" value="{{$user->$type->address}}" class="form-control">
                             </div>
+
+                            @if ($errors->get('address') != null)
+                                <br>
+                                <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
+                                    @foreach ($errors->get('address') as $error)
+                                    <li>{{$error}}</li>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <input name="testedit" type="hidden" value="{{session()->get('type')}}">
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                           </form>
