@@ -20,32 +20,37 @@ class PostController extends Controller
     }
     public function createview()
     {
-        $category = category::orderBy('name','asc')->get();
-        return view('posts.create-post')->with('catall',$category);
+        $category = category::orderBy('name', 'asc')->get();
+        return view('posts.create-post')->with('catall', $category);
     }
     public function create(Request $req)
     {
 
         ///post insertion
-        Post::insert([
-           // 'id' => $postCount->id,
-            'title' => $req->title,
-            'pbody' => $req->description,
-            'fr_user_id' => $req->session()->get('id'),
-            'fr_category_id' => $req->category,
-            'status' => 1,
-            'views' => 0,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
+        if ($req->title !== null && $req->category !== null && $req->desciption !== null) {
+            Post::insert([
+                // 'id' => $postCount->id,
+                'title' => $req->title,
+                'pbody' => $req->description,
+                'fr_user_id' => $req->session()->get('id'),
+                'fr_category_id' => $req->category,
+                'status' => 1,
+                'views' => 0,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
 
-        ]);
-        $post = post::orderBy('id','desc')->first();
-        $postCount = ($post->id);
-        return redirect()->route('posts.view.single',[
-            $req->category,
-            $postCount
-        ]);
-
+            ]);
+            $post = post::orderBy('id', 'desc')->first();
+            $postCount = ($post->id);
+            return redirect()->route('posts.view.single', [
+                $req->category,
+                $postCount
+            ]);
+        }
+        else{
+            $req->session()->flash('msg', 'Every field need to be fill');
+            return redirect()->route('posts.create.view');
+        }
 
         //return redirect(posts.view.single)
     }
@@ -66,10 +71,9 @@ class PostController extends Controller
 
         $comments = commentController::allComment($post->id);
 
-        return view('posts.single')->with('post',$post)
-                                   ->with('count',$count)
-                                   ->with('comments',$comments);
-
+        return view('posts.single')->with('post', $post)
+            ->with('count', $count)
+            ->with('comments', $comments);
     }
     //NOT IMPLEMENTED YET
     public function edit($cat, $id)
