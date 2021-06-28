@@ -48,6 +48,7 @@
     <link href="{{ asset('css/profile/edit.css') }}" rel="stylesheet">
     <link href="{{ asset('css/components/chips.css') }}" rel="stylesheet">
     <link href="{{ asset('css/components/comments.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
 </head>
 
 <body onscroll="HidePopup()">
