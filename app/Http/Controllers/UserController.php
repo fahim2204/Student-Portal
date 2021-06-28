@@ -63,7 +63,7 @@ class UserController extends Controller
                 'contact' => $req->contact
             ]);
         
-            $req->session()->flash('msg', 'Registration Successful');
+            $req->session()->flash('msg', 'Update Successful');
             return redirect()->route('profile.edit');
             //return view('profile.edit');
         }  
@@ -78,7 +78,7 @@ class UserController extends Controller
                 'contact' => $req->contact
             ]);
         
-            $req->session()->flash('msg', 'Registration Successful');
+            $req->session()->flash('msg', 'Update Successful');
             return redirect()->route('profile.edit');
             //return view('profile.edit');
         }
@@ -93,7 +93,7 @@ class UserController extends Controller
                 'contact' => $req->contact
             ]);
         
-            $req->session()->flash('msg', 'Registration Successful');
+            $req->session()->flash('msg', 'Update Successful');
             return redirect()->route('profile.edit');
             //return view('profile.edit');
         }

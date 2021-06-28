@@ -76,9 +76,15 @@
                                     @endforeach
                                 </div>
                             @endif
-                            <input name="testedit" type="hidden" value="{{session()->get('type')}}">
 
                             <button type="submit" class="btn btn-primary">Submit</button>
+
+                            @if (session('msg')!= null)
+                                <div class="alert alert-success d-flex justify-content-center my-2" role="alert">
+                                    {{session('msg')}}
+                                </div>
+                            @endif
+                            
                           </form>
 
 
