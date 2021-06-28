@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Vote;
+use App\Models\Comment;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
@@ -34,8 +35,19 @@ class PostController extends Controller
             ->where('fr_post_id', '=', $post->id)->count();
         $count = $upcount - $downcount;
         // $count = Carbon::now('Asia/Dhaka');
-        return view('posts.single')->with('post', $post)
-            ->with('count', $count);
+
+
+        //comment logic
+        // $comments = Comment::with('user','post')
+        //                     //->where('fr_post_id','=',$id)
+        //                     ->first();
+        //dd($comments);
+        $comments = commentController::allComment($post->id);
+
+        return view('posts.single')->with('post',$post)
+                                   ->with('count',$count)
+                                   ->with('comments',$comments);
+
     }
     //NOT IMPLEMENTED YET
     public function edit($cat, $id)

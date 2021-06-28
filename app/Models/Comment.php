@@ -13,4 +13,12 @@ class Comment extends Model
     {
         return $this->hasMany('App\Models\Post', 'fr_category_id', 'id');
     }
+    function user()
+    {
+        return $this->belongsTo('App\Models\User', 'fr_user_id', 'id');
+    }
+    function post()
+    {
+        return $this->belongsTo('App\Models\Post', 'fr_post_id', 'id');
+    }
 }

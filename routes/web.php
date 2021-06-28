@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\commentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,7 @@ Route::get('/posts', [PostController::class,'viewall'])->name('posts.view.all');
 Route::get('/posts/{subcat}', [PostController::class,'catwiseview'])->name('posts.view.cat');
 Route::get('/posts/{subcat}/{id}', [PostController::class,'singleview'])->name('posts.view.single');
 Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('posts.edit');
+Route::post('/posts/{subcat}/{id}', [commentController::class,'insertComment'])->name('comment.add');
 
 //------------ADMIN SECTION-------------//
 Route::get('/admin', [AdminController::class,'index'])->name('admin.dashboard');
