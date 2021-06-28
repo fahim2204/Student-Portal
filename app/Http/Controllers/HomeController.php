@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-        return view('home');
+        $posts = PostController::all();
+        return view('home')->with('posts',$posts);
     }
 }

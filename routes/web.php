@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -28,6 +29,7 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 //------------LOGIN SECTION-------------//
 Route::get('/login', [LoginController::class,'index'])->name('login.index');
 Route::post('/login', [LoginController::class,'verify'])->name('login.verify');
+Route::get('/logout', [LogoutController::class,'index'])->name('logout.index');
 
 //------------REGISTRATION SECTION-------------//
 Route::get('/registration', [RegistrationController::class,'index'])->name('registration.index');
@@ -81,6 +83,7 @@ Route::get('/moderator/instructor/request', [ModeratorController::class,'instruc
 Route::get('/instructor', [InstructorController::class,'index'])->name('instructor.dashboard');
 Route::get('/instructor/posts', [InstructorController::class,'posts'])->name('instructor.posts');
 Route::get('/instructor/posts/create', [InstructorController::class,'postscreate'])->name('instructor.posts.create');
+Route::post('/instructor/posts/create', [InstructorController::class,'postsave'])->name('instructor.posts.create.save');
 Route::get('/instructor/group/{gid}', [InstructorController::class,'groups'])->name('instructor.groups');
 Route::get('/instructor/group/create', [InstructorController::class,'groupcreate'])->name('instructor.groups.create');
 
