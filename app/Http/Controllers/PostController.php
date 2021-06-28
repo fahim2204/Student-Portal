@@ -23,9 +23,28 @@ class PostController extends Controller
         $category = category::orderBy('name','asc')->get();
         return view('posts.create-post')->with('catall',$category);
     }
-    public function create()
+    public function create(Request $req)
     {
-        ///
+
+        ///post insertion
+        Post::insert([
+           // 'id' => $postCount->id,
+            'title' => $req->title,
+            'pbody' => $req->description,
+            'fr_user_id' => $req->session()->get('id'),
+            'fr_category_id' => $req->category,
+            'status' => 1,
+            'views' => 0,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+
+        ]);
+        $post = post::orderBy('id','desc')->first();
+        $postCount = ($post->id);
+        return redirect()->route('posts.view.single',[
+            $req->category,
+            $postCount
+        ]);
 
 
         //return redirect(posts.view.single)
