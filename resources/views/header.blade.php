@@ -77,9 +77,9 @@
                 <div class="row flex-nowrap justify-content-between align-items-center">
                     <div class="col-4 pt-1 d-flex">
                         <img src="https://img.icons8.com/material-outlined/40/000000/menu--v1.png" />
-                        <form class="d-flex" action="{{route('posts.view.search',)}}" method="GET">
+                        <form class="d-flex" action="{{route('home')}}" method="post">
                             <input class="w-100 form-control mx-4" type="text" name="search" id="search" placeholder="search">
-                            <input class="btn btn-primary rounded-3" type="button" value="Search">
+                            <input class="btn btn-primary rounded-3" type="submit" value="Search">
                         </form>
                     </div>
                     <div class="col-4 text-center">

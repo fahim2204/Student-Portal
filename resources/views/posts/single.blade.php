@@ -22,12 +22,16 @@
                                 href="#user-profile">
                             <div class="lh-sm text-danger align-self-end">{{ $post->created_at->diffForHumans() }}
                             </div>
-                            <div class=""><a href="{{route('posts.edit',[
-                                $post->category->name,
-                                $post->id
-                            ])}}">edit</a></div>
+                            <div class=""><a
+                                    href="{{ route('posts.edit', [$post->category->name, $post->id]) }}">edit</a>
+                            </div>
                             <div class="">|</div>
-                            <div class=""><form action="" method="post"><button>delete</button></form></div>
+                            <div class="">
+                                <form action="{{ route('posts.delete', $post->id) }}" method="post">
+                                    {{-- <input type="hidden"> --}}
+                                    <input type="submit" value="Delete" onclick="return deletePostConfirmation()">
+                                </form>
+                            </div>
                         </div>
                         <!-- Post header section  -->
                         <div class="col-12 ps-2 border-top">
@@ -71,12 +75,15 @@
                                             <div class="d-flex flex">
                                                 <div class="row w-100">
                                                     <div class="col-9">
-                                                        <input type="text" name="ctext" class="form-control mr-3 my-2" placeholder="Add comment">
+                                                        <input type="text" name="ctext" class="form-control mr-3 my-2"
+                                                            placeholder="Add comment">
                                                         <input type="hidden" name="postId" value="{{ $post->id }}">
-                                                        <input type="hidden" name="catId" value="{{ $post->category->name }}">
+                                                        <input type="hidden" name="catId"
+                                                            value="{{ $post->category->name }}">
                                                     </div>
                                                     <div class="col-3">
-                                                        <button class="btn btn-primary my-2" type="submit">Comment</button>
+                                                        <button class="btn btn-primary my-2"
+                                                            type="submit">Comment</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -90,11 +97,15 @@
                             <div class="commented-section mt-2 rounded shadow-2">
                                 <div class="d-flex flex-row align-items-center commented-user ">
 
-                                    <h5 class="mr-2"><a href="{{route('profile.view',$comment->user->uname)}}" class="fs-6 text-success me-1 text-decoration-none">{{$comment->user->uname}}</a></h5>
+                                    <h5 class="mr-2"><a href="{{ route('profile.view', $comment->user->uname) }}"
+                                            class="fs-6 text-success me-1 text-decoration-none">{{ $comment->user->uname }}</a>
+                                    </h5>
                                     <span class="dot mb-1"></span>
                                     <span class="mb-1 ml-2">{{ $comment->created_at->diffForHumans() }}</span>
                                 </div>
-                                <div class="comment-text-sm ms-3"><li><span>{{ $comment->ctext }}</span></li></div>
+                                <div class="comment-text-sm ms-3">
+                                    <li><span>{{ $comment->ctext }}</span></li>
+                                </div>
 
                             </div>
                         @endforeach
@@ -156,4 +167,18 @@
 
     </main>
 </div>
+
+
+
+<script>
+    function deletePostConfirmation() {
+        var confimDel = confirm("Are you Sure Want To Delete?");
+        if (confimDel == true) { ​​​​​​​​
+            return true;
+        }​​​​​​​​
+        return false;
+    }​​​​​​​​
+</script>
+
+
 @include('footer')

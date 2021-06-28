@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index'])->name('home');
+Route::post('/', [HomeController::class,'search'])->name('home.search');
 
 //------------LOGIN SECTION-------------//
 Route::get('/login', [LoginController::class,'index'])->name('login.index');
@@ -57,7 +58,7 @@ Route::get('/posts/{subcat}', [PostController::class,'catwiseview'])->name('post
 Route::get('/posts/{subcat}/{id}', [PostController::class,'singleview'])->name('posts.view.single');
 // Route::post('/', [PostController::class,'update'])->name('posts.update');
 Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('posts.edit');
-Route::post('/posts/{subcat}/{id}/delete', [PostController::class,'delete'])->name('posts.delete');
+Route::post('/posts/{id}/delete', [PostController::class,'delete'])->name('posts.delete');
 Route::post('/posts/{subcat}/{id}/edit', [PostController::class,'update'])->name('posts.update');
 Route::post('/posts/{subcat}/{id}', [commentController::class,'insertComment'])->name('comment.add');
 
