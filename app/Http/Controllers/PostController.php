@@ -27,7 +27,7 @@ class PostController extends Controller
     {
 
         ///post insertion
-        if ($req->title !== null && $req->category !== null && $req->desciption !== null) {
+        if ($req->title !== null && $req->category !== null && $req->description !== null) {
             Post::insert([
                 // 'id' => $postCount->id,
                 'title' => $req->title,
@@ -75,15 +75,32 @@ class PostController extends Controller
             ->with('count', $count)
             ->with('comments', $comments);
     }
-    //NOT IMPLEMENTED YET
-    public function edit($cat, $id)
-    {
-        return view('posts.edit')->with('category', $cat)
-            ->with('id', $id);
-    }
+
     public static function all()
     {
         $post = Post::with('category', 'comments', 'votes')->get();
         return $post;
     }
+    public function edit($cat, $id)
+    {
+
+        $post = Post::with('category', 'user')->where('id', $id)->first();
+        $category = category::orderBy('name', 'asc')->get();
+
+        return view('posts.edit')->with('post', $post)
+                                 ->with('catall', $category);
+
+
+    }
+    public function update(Request $req){
+        Post::where('id', '=', $req->id)->update(array('title' => $req->title, 'pbody' => $req->description));
+        // return view('home');
+        return redirect()->route('home');
+        // dd($req->id);
+    }
+    public function delete(Request $req){
+        return redirect()->route('post.delete');
+    }
+
+
 }
