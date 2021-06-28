@@ -34,6 +34,10 @@ class editRequest extends FormRequest
             'email'     => 'required',
             'contact'   => 'required|regex:/(01)[0-9]{9}/',
             'address'   => 'required'
+            // 'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            // 'oldpass'   => 'required',
+            // 'newpass'   => 'required',
+            // 'confirmpass'=>'required|same:newpass'
         ];
     }
 

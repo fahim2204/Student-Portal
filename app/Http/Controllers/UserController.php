@@ -71,7 +71,7 @@ class UserController extends Controller
         elseif($type=='instructor'){
             student::where('fr_user_id',$req->session()->get('id'))
             ->update([
-                'name' => $req->fullName,
+                'name' => $req->name,
                 'email' => $req->email,
                 'address' => $req->address,
                 'updated_at' => Carbon::now(),
@@ -86,7 +86,7 @@ class UserController extends Controller
         elseif($type=='student'){
             student::where('fr_user_id',$req->session()->get('id'))
             ->update([
-                'name' => $req->fullName,
+                'name' => $req->name,
                 'email' => $req->email,
                 'address' => $req->address,
                 'updated_at' => Carbon::now(),
@@ -96,6 +96,38 @@ class UserController extends Controller
             $req->session()->flash('msg', 'Update Successful');
             return redirect()->route('profile.edit');
             //return view('profile.edit');
+        }
+
+        elseif($req->newpass!=null){
+            if($req->newpasse==$req->confirmpass){
+                    $user = User::where('uname', $req->session()->get('uname'))
+                    ->first();
+                    $password = $user->password;
+
+                        if($req->oldpass==$password){
+                            user::where('fr_user_id',$req->session()->get('id'))
+                            ->update([
+                                'password' => $req->newpass    
+                            ]);
+                            $req->session()->flash('msg', 'Update Successful');
+                            return redirect()->route('profile.edit');
+                        }
+                        else{
+                            $req->session()->flash('error', 'Unauthorized Access');
+                            return redirect()->route('profile.edit');
+                        }
+                    
+            
+            }
+            else{
+                $req->session()->flash('error', 'Confirm New Password Correctly');
+                return redirect()->route('profile.edit');
+            }
+
+        }
+        else{
+            $req->session()->flash('error', 'Check Again');
+            return redirect()->route('profile.edit');
         }
 
     }
