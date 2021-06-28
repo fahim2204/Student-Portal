@@ -41,6 +41,11 @@
                 </div>
 
             </form>
+            @if (session('msg')!= null)
+                <div class="alert alert-danger d-flex justify-content-center my-2" role="alert">
+                    {{session('msg')}}
+                </div>
+            @endif
         </div>
 
     </div>
