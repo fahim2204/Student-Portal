@@ -24,10 +24,13 @@ class LoginController extends Controller
         $user = User::where('uname',$req->input('uname'))
         ->first();
         $password = $req->input('password');
-        $type = $user->type;
-        $name = User::with($type)->where('uname',$req->input('uname'))->first();
+        // $type = $user->type;
+        // $name = User::with($type)->where('uname',$req->input('uname'))->first();
         // dd($user);
         if($user!==null){
+            $type = $user->type;
+            $name = User::with($type)->where('uname',$req->input('uname'))->first();
+            
             if($user->password === $password){
                 // if(Hash::check($req->input('password'))){
 
