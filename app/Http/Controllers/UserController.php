@@ -38,32 +38,66 @@ class UserController extends Controller
         ->with('slinks',$slinks);
     }
 
-    public function update(Request $req){
+    public function update(editRequest $req){
        
-        $user = User::where('uname', $req->session()->get('uname'))
-        ->first();
+        // $user = User::where('uname', $req->session()->get('uname'))
+        // ->first();
     
     // $type = $user->type;
     // $name = User::with($type)->where('uname',$req->input('uname'))->first();
     // dd($user);
 
     
-        $type = $user->type;
+        // $type = $user->type;
         
 
-        //$type=(string)$req->session()->get('type');
-        //dd($type);
-        $type::where('fr_user_id',$req->session()->get('id'))
-        ->update([
-            'name' => $req->fullName,
-            'email' => $req->email,
-            'address' => $req->address,
-            'updated_at' => Carbon::now(),
-            'contact' => $req->contact
-        ]);
-       
-        $req->session()->flash('msg', 'Registration Successful');
-        return redirect()->route('profile.edit');
-        //return view('profile.edit');
+        $type=$req->session()->get('type');
+            //dd($type);
+        if($type=='moderator'){
+            moderator::where('fr_user_id',$req->session()->get('id'))
+            ->update([
+                'name' => $req->name,
+                'email' => $req->email,
+                'address' => $req->address,
+                'updated_at' => Carbon::now(),
+                'contact' => $req->contact
+            ]);
+        
+            $req->session()->flash('msg', 'Registration Successful');
+            return redirect()->route('profile.edit');
+            //return view('profile.edit');
+        }  
+
+        elseif($type=='instructor'){
+            student::where('fr_user_id',$req->session()->get('id'))
+            ->update([
+                'name' => $req->fullName,
+                'email' => $req->email,
+                'address' => $req->address,
+                'updated_at' => Carbon::now(),
+                'contact' => $req->contact
+            ]);
+        
+            $req->session()->flash('msg', 'Registration Successful');
+            return redirect()->route('profile.edit');
+            //return view('profile.edit');
+        }
+
+        elseif($type=='student'){
+            student::where('fr_user_id',$req->session()->get('id'))
+            ->update([
+                'name' => $req->fullName,
+                'email' => $req->email,
+                'address' => $req->address,
+                'updated_at' => Carbon::now(),
+                'contact' => $req->contact
+            ]);
+        
+            $req->session()->flash('msg', 'Registration Successful');
+            return redirect()->route('profile.edit');
+            //return view('profile.edit');
+        }
+
     }
+
 }

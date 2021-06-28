@@ -30,10 +30,10 @@ class editRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required|min:3',
+            'name'      => 'required|min:3',
             'email'     => 'required',
             'contact'   => 'required|regex:/(01)[0-9]{9}/',
-            'address'   => 'required',
+            'address'   => 'required'
         ];
     }
 

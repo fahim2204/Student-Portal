@@ -25,12 +25,12 @@
                         <form action="" method="post">
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Full Name:</label>
-                              <input type="text" name="fullName" value="{{$user->$type->name}}" class="form-control">
+                              <input type="text" name="name" value="{{$user->$type->name}}" class="form-control">
                             </div>
-                            @if ($errors->get('fullName') !=null)
+                            @if ($errors->get('name') !=null)
                                   <br>
                                   <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
-                                      @foreach ($errors->get('fullName') as $error)
+                                      @foreach ($errors->get('name') as $error)
                                       <li>{{$error}}</li>
                                       @endforeach
 
