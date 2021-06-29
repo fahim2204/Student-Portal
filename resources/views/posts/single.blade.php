@@ -22,16 +22,21 @@
                                 href="#user-profile">
                             <div class="lh-sm text-danger align-self-end">{{ $post->created_at->diffForHumans() }}
                             </div>
-                            <div class=""><a
-                                    href="{{ route('posts.edit', [$post->category->name, $post->id]) }}">edit</a>
-                            </div>
-                            <div class="">|</div>
-                            <div class="">
-                                <form action="{{ route('posts.delete', $post->id) }}" method="post">
-                                    {{-- <input type="hidden"> --}}
-                                    <input type="submit" value="Delete" onclick="return deletePostConfirmation()">
-                                </form>
-                            </div>
+                            @if (session()->get('id') === $post->fr_user_id)
+                                <div class="d-flex ms-4">
+                                    <div><a class="btn btn-outline-info p-2 py-0 text-decoration-none text-primary"
+                                            href="{{ route('posts.edit', [$post->category->name, $post->id]) }}">edit</a>
+                                    </div>
+                                    <div class="">|</div>
+                                    <div class="">
+                                        <form action="{{ route('posts.delete', $post->id) }}" method="post">
+                                            {{-- <input type="hidden"> --}}
+                                            <input class="btn btn-outline-danger p-2 py-0" type="submit" value="Delete"
+                                                onclick="return deletePostConfirmation()">
+                                        </form>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         <!-- Post header section  -->
                         <div class="col-12 ps-2 border-top">
@@ -173,7 +178,8 @@
 <script>
     function deletePostConfirmation() {
         var confimDel = confirm("Are you Sure Want To Delete?");
-        if (confimDel == true) { ​​​​​​​​
+        if (confimDel == true) {
+            ​​​​​​​​
             return true;
         }​​​​​​​​
         return false;

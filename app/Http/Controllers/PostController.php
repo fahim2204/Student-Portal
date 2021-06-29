@@ -79,6 +79,7 @@ class PostController extends Controller
     }
     public function singleview($cat, $id)
     {
+        Post::where('id',$id)->increment('views','1');
 
         $post = Post::with('category', 'user')->where('id', $id)->first();
         $upcount = Vote::where('status', '=', '1')
@@ -144,6 +145,6 @@ class PostController extends Controller
     public function delete($id)
     {
         Post::where('id', $id)->first()->delete();
-        return back();
+        return redirect()->route('home');
     }
 }

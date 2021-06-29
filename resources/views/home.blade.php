@@ -109,7 +109,7 @@
                                 <a href="{{ route('profile.view', $post->user->uname) }}"
                                     class="fs-6 text-success me-1 text-decoration-none">{{ $post->user->uname }}</a>
                                 <div class="lh-sm text-danger align-self-end" style="font-size: 12px">
-                                    {{ $post->updated_at->diffForHumans() }}</div>
+                                    {{ $post->created_at->diffForHumans() }}</div>
                             </div>
                             <!-- Post header section  -->
                             <div class="col-12 ps-2 border-top">
@@ -118,8 +118,8 @@
                             <div class="ms-3 pe-3 col-12 mb-2">
                                 {{-- <div class="lh-sm text-dark text-wrap">{{$post->pbody}}</div> --}}
                                 {{ \Illuminate\Support\Str::limit($post->pbody, 550, '....') }} <a
-                                    href="{{ route('posts.view.single', [$post->category->name, $post->id]) }}"
-                                    class='text-primary'>Read More</a>
+                                href="{{ route('posts.view.single', [$post->category->name, $post->id]) }}"
+                                class='text-primary'>Read More</a>
                                 {{-- <div class="lh-sm text-dark text-wrap">{{$post->pbody}}</div> --}}
                             </div>
                             <div class="col-6 d-flex align-items-center border-top py-2 mt-3 ">
