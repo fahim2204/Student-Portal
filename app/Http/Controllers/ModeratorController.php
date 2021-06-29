@@ -58,11 +58,7 @@ class ModeratorController extends Controller
         $categories = Category::all();
         return view('moderator.posts.create', ['categories' => $categories]);
     }
-    public function webinfo(){
-        $path = storage_path() . "\json\info.json";
-        $info = json_decode(file_get_contents($path));
-        return view('moderator.websiteinfo', ['info' => $info]);
-    }
+
 
 
     public function categories(){
@@ -79,9 +75,7 @@ class ModeratorController extends Controller
     public function subcategories(){
         return view('moderator.sub-categories.all');
     }
-    public function roles(){
-        return view('moderator.roles');
-    }
+
     public function users(){
         $users = User::all();
         return view('moderator.users.all', ['users' => $users]);
@@ -89,5 +83,29 @@ class ModeratorController extends Controller
     public function viewUser($id) {
         $user = User::where('id', $id)->with('posts', 'comments', 'moderator', 'instructor', 'moderator', 'student')->first();
         return view('moderator.users.view', ['user' => $user]);
+    }
+
+    public function instructorRequest()
+    {
+        $users = User::where('type', 'instructor')->where('status', 4)->get();
+        return view('moderator.instructor-request', ['users' => $users]);
+    }
+    public function approveInstructor($id)
+    {
+        $instructor = User::where('id', $id)->first();
+        $instructor->status = 1;
+        $instructor->timestamps = false;
+        $instructor->update();
+
+        return back();
+    }
+    public function declineinstructor($id)
+    {
+        $instructor = User::where('id', $id)->first();
+        $instructor->status = -1;
+        $instructor->timestamps = false;
+        $instructor->update();
+
+        return back();
     }
 }

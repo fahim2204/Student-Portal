@@ -34,6 +34,15 @@ class LoginController extends Controller
                     return redirect()->route('home');
                 }
 
+                if ($user->status === -1) {
+                    session()->flash('decline', 'Your' . $user->type . 'account request has been declined by admin');
+                    return redirect()->route('home');
+                }
+                elseif($user->status === 4) {
+                    session()->flash('msg', 'Your ' . $user->type . ' account request pending by moderator');
+                    return redirect()->route('login.index');
+                }
+
                 $req->session()->put('uname', $user->uname);
                 $req->session()->put('id', $user->id);
                 $req->session()->put('type', $user->type);

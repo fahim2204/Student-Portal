@@ -125,6 +125,12 @@
                                     <a href="{{route('moderator.categories.create')}}">Create Category</a>
                                 </li>
                             </ul>
+                            <li class="sidebar-item {{ $all_users }}">
+                                <a href="{{route('moderator.instructor.request')}}" class='sidebar-link'>
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Instructor Requests</span>
+                                </a>
+                            </li>
                         </li>
                         <li class="sidebar-item {{ $all_users }}">
                             <a href="{{route('moderator.users')}}" class='sidebar-link'>

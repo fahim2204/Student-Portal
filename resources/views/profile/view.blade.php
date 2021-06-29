@@ -38,14 +38,28 @@
                 </div>
                 <div class="card mt-3">
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap rounded-top bg-primary text-white">Social Link</li>
                         @foreach ($slinks as $slink)
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap p-0 px-3">
                             <h6 class="mb-0"><img class="me-2 align-self-center" src="https://img.icons8.com/ios-glyphs/20/000000/link--v2.png"/>{{$slink->sname}}</h6>
                             <span class="text-secondary"><a href="{{$slink->link}}">{{$slink->link}}</a></span>
                         </li>
                         @endforeach
                     </ul>
                 </div>
+                @if (session()->get('type')==='instructor')
+                <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap rounded-top bg-success text-white">Qualifications</li>
+                        @foreach ($qualifications as $qualification)
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="mb-0 me-2"><img class="me-2 align-self-center" src="https://img.icons8.com/ios-glyphs/20/000000/certificate.png"/>{{$qualification->degree}} <small>({{$qualification->year}})</small></div>
+                            <div class="text-secondary">Grade: {{$qualification->grade}}</div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
             </div>
             <div class="col-md-8">
                 <div class="card mb-3">

@@ -21,6 +21,6 @@ class GeneralLogin
         } else {
             return back();
         }
-        
+
     }
 }
