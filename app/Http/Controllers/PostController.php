@@ -78,26 +78,31 @@ class PostController extends Controller
             ->paginate(5);
         return view('posts.all')->with('posts', $post);
     }
-    public function singleview(Request $req, $cat, $id)
-    {
-        Post::where('id',$id)->increment('views','1');
+    public function singleview($cat, $id)
+    {        
+
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes')->where('id', $id)->first();
+        $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+        // //dd($pageWasRefreshed);
+        if($pageWasRefreshed !== true) {
+            Post::where('id',$id)->increment('views','1');
+            $post->update();
+        }
+        
+        $upcount = count($post->upvotes);
+        $downcount = count($post->downvotes);
         //
 
         $post = Post::with('category', 'user')->where('id', $id)->first();
 
-        if($req->session()->get('id')!==null){
+        if(session()->get('id')!==null){
             Notification::insert([
                 'msg' => 'viewed your post',
-                'fr_user_id' => $req->session()->get('id'),
+                'fr_user_id' => session()->get('id'),
                 'fr_notifier_user_id' => $post->fr_user_id,
                 'created_at' => Carbon::now()
             ]);
         }
-
-        $upcount = Vote::where('status', '=', '1')
-            ->where('fr_post_id', '=', $post->id)->count();
-        $downcount = Vote::where('status', '=', '2')
-            ->where('fr_post_id', '=', $post->id)->count();
         $count = $upcount - $downcount;
 
         $comments = commentController::allComment($post->id);
@@ -109,7 +114,7 @@ class PostController extends Controller
 
     public static function all()
     {
-        $post = Post::with('category', 'comments', 'votes')->get();
+        $post = Post::with('category', 'comments', 'upvotes', 'downvotes')->orderBy('created_at', 'desc')->get();
         return $post;
         // return redirect()->route('posts.view.all');
     }

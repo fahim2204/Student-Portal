@@ -12,7 +12,6 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\User', 'fr_user_id', 'id');
     }
-
     function comments()
     {
         return $this->hasMany('App\Models\Comment', 'fr_post_id', 'id');
@@ -21,9 +20,13 @@ class Post extends Model
     {
         return $this->hasMany('App\Models\Reply', 'fr_post_id', 'id');
     }
-    function votes()
+    function upvotes()
     {
-        return $this->hasMany('App\Models\Vote', 'fr_post_id', 'id');
+        return $this->hasMany('App\Models\UpVote', 'fr_post_id', 'id');
+    }
+    function downvotes()
+    {
+        return $this->hasMany('App\Models\DownVote', 'fr_post_id', 'id');
     }
     function category()
     {
