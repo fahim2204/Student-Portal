@@ -105,9 +105,13 @@ class UserController extends Controller
             $req->session()->flash('msg', 'Update Successful');
             return redirect()->route('profile.edit');
             //return view('profile.edit');
-        } elseif ($req->newpass != null) {
-            if ($req->newpasse == $req->confirmpass) {
-                $user = User::where('uname', $req->session()->get('uname'))
+        }
+
+        elseif($req->newpass!=null){
+            if($req->newpasse===$req->confirmpass){
+                    $user = User::where('uname', $req->session()->get('uname'))
+
+      
                     ->first();
                 $password = $user->password;
 
