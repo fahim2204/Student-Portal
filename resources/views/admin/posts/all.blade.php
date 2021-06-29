@@ -19,7 +19,7 @@
                     <td>{{ $post->user->uname }}</td>
                     <td><a href="{{ route('admin.posts.delete', ['id'=> $post->id ]) }}" class="btn btn-danger">Delete</a></td>
                     <td>
-                        <a href="" class="btn btn-success">Delete</a>
+                        <a href="{{ route('posts.view.single', ['subcat' => $post->category->name, 'id' => $post->id]) }}" class="btn btn-success">View</a>
                     </td>
                 </tr>
                 @endforeach

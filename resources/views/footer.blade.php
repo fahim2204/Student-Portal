@@ -31,6 +31,7 @@
                     <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
                     <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
                     <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+                    <li><a href="{{ route('admin.dashboard') }}"><b>Admin Panel</b></a></li>
                 </ul>
             </div>
         </div>
