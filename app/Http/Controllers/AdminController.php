@@ -2,27 +2,75 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Category;
+use App\Models\Instructor;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Student;
 
 class AdminController extends Controller
 {
-    public function index(){
-        return view('admin.dashboard');
+    public function index() {
+        $posts = Post::all();
+        $students = Student::all();
+        $instructors = Instructor::all();
+        $categories = Category::with('posts')->get();
+        $top_posts = Post::orderBy('views', 'DESC')->with('user')->paginate(3);
+        $category_posts = [];
+        $category_names = [];
+        foreach($categories as $category) {
+            array_push($category_names, $category->name);
+            array_push($category_posts, count($category->posts));
+        }
+        return view('admin.dashboard', [
+            'posts' => $posts,
+            'students' => $students,
+            'instructors' => $instructors,
+            'categories' => $categories,
+            'top_posts' => $top_posts,
+            'category_names' => $category_names,
+            'category_posts' => $category_posts
+        ]);
     }
-    public function posts(){
-        return view('admin.posts.all');
+    public function posts() {
+        $posts = Post::with('user')->get();
+        return view('admin.posts.all', ['posts' => $posts]);
     }
     public function postscreate(){
-        return view('admin.posts.create');
+        $categories = Category::all();
+        return view('admin.posts.create', ['categories' => $categories]);
     }
     public function webinfo(){
-        return view('admin.websiteinfo');
+        $path = storage_path() . "\json\info.json";
+        $info = json_decode(file_get_contents($path)); 
+        return view('admin.websiteinfo', ['info' => $info]);
+    }
+    
+    public function updateWebsiteInfo(Request $req) {
+        $info = [
+            "name" => $req->input('website-name'),
+            "about" => $req->input('website-about'),
+            "email" => $req->input('website-email')
+        ];
+
+        $path = storage_path() . "/json/info.json";
+        file_put_contents($path, json_encode($info)); 
+
+        return back();
     }
     public function categories(){
-        return view('admin.categories.all');
+        $categories = Category::with('posts')->get();
+        return view('admin.categories.all', ['categories' => $categories]);
     }
     public function categoriescreate(){
         return view('admin.categories.create');
+    }
+    public function categoriesedit($id) {
+        $category = Category::where('id', $id)->first();
+        return view('admin.categories.edit', ['category'=>$category]);
     }
     public function subcategories(){
         return view('admin.sub-categories.all');
@@ -31,6 +79,15 @@ class AdminController extends Controller
         return view('admin.roles');
     }
     public function users(){
-        return view('admin.users.all');
+        $users = User::all();
+        return view('admin.users.all', ['users' => $users]);
     }
+    public function viewUser($id) {
+        $user = User::where('id', $id)->with('posts', 'comments', 'admin', 'instructor', 'moderator', 'student')->first();
+        return view('admin.users.view', ['user' => $user]);
+    }
+
+    // public function privacy_policy() {
+    //     return view('admin')
+    // }
 }

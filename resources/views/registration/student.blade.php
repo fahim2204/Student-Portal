@@ -180,7 +180,7 @@
                 <a class="link-info " href="/login">Already Registered?</a>
             </div>
          </form>
-    
+
     </div>
 
 

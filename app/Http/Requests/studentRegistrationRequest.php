@@ -26,14 +26,14 @@ class studentRegistrationRequest extends FormRequest
     {
         return [
             'fullName'  => 'required|min:3',
-            'uname'  => 'required|min:5|unique:users',
+            'uname'     => 'required|min:5|unique:users',
             'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'cpassword' => 'required|same:password',
             'email'     => 'required|unique:students',
             'contact'   => 'required|regex:/(01)[0-9]{9}/',
             'address'   => 'required',
-            'level'     => 'required', 
-            'image'     => 'required'
+            'level'     => 'required',
+            'image'     => 'required|mimes:jpeg,jpg,png'
         ];
     }
 
@@ -41,7 +41,7 @@ class studentRegistrationRequest extends FormRequest
     public function messages(){
         return [
             'cpassword.required' => 'Confirm Password Required',
-            'cpassword.same' => 'Confirm Password Dose Not Match'
+            'cpassword.same'     => 'Confirm Password Dose Not Match'
         ];
     }
 }

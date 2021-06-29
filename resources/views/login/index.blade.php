@@ -1,4 +1,3 @@
-  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="text-end mx-5 my-3 d-flex justify-content-center my-2">
+            <div class="text-end mx-5 my-3 ">
                 <a class="link-danger " href="forget-pass ">Forgot Password?</a>
             </div>
             <!-- Login -->
@@ -45,16 +44,15 @@
                 <button type="submit " class="btn btn-lg btn-primary px-sm-4 ">Login</button>
             </div>
 
-            <div class="text-start mx-5 my-3 d-flex justify-content-center my-2">
-                <a class="link-info " href="#">Not registered yet?</a>
+            <div class="text-start mx-5 my-3 ">
+                <a class="link-info " href="/registration">Not registered yet?</a>
             </div>
 
             @if (session('error')!= null)
-                <div class="alert alert-danger d-flex justify-content-center my-2" role="alert">
+                <div class="alert alert-warning" role="alert">
                      {{session('error')}}
                 </div>
             @endif
-            {{-- {{$message = session('msg')}} --}}
             @if (session('msg')!= null)
                 <div class="alert alert-success d-flex justify-content-center my-2" role="alert">
                     {{session('msg')}}
@@ -67,6 +65,32 @@
 
 
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
