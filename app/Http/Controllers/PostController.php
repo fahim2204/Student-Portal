@@ -78,14 +78,18 @@ class PostController extends Controller
         return view('posts.all')->with('posts', $post);
     }
     public function singleview($cat, $id)
-    {
-        Post::where('id',$id)->increment('views','1');
+    {        
 
-        $post = Post::with('category', 'user')->where('id', $id)->first();
-        $upcount = Vote::where('status', '=', '1')
-            ->where('fr_post_id', '=', $post->id)->count();
-        $downcount = Vote::where('status', '=', '2')
-            ->where('fr_post_id', '=', $post->id)->count();
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes')->where('id', $id)->first();
+        $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+        // //dd($pageWasRefreshed);
+        if($pageWasRefreshed !== true) {
+            Post::where('id',$id)->increment('views','1');
+            $post->update();
+        }
+        
+        $upcount = count($post->upvotes);
+        $downcount = count($post->downvotes);
         $count = $upcount - $downcount;
 
         $comments = commentController::allComment($post->id);
@@ -97,7 +101,7 @@ class PostController extends Controller
 
     public static function all()
     {
-        $post = Post::with('category', 'comments', 'votes')->get();
+        $post = Post::with('category', 'comments', 'upvotes', 'downvotes')->orderBy('created_at', 'desc')->get();
         return $post;
         // return redirect()->route('posts.view.all');
     }

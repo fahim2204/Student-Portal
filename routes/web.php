@@ -12,6 +12,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use App\Http\Controllers\commentController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +53,8 @@ Route::group(['middleware' => ['general-login']], function () {
     Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('posts.edit');
     Route::post('/posts/{id}/delete', [PostController::class,'delete'])->name('posts.delete');
     Route::post('/posts/{subcat}/{id}/edit', [PostController::class,'update'])->name('posts.update');
+    Route::get('/posts/upvote/{post_id}/{user_id}', [VoteController::class, 'upVote'])->name('posts.upvote');
+    Route::get('/posts/downvote/{post_id}/{user_id}', [VoteController::class, 'downVote'])->name('posts.downvote');
     //------------MSG SECTION-------------// Later
     Route::get('/{uname}/msg', [MsgController::class,'index'])->name('msg.view');
 });
