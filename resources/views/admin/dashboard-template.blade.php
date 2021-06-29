@@ -140,6 +140,12 @@
                                 <span>All Users</span>
                             </a>
                         </li>
+                        <li class="sidebar-item {{ $all_users }}">
+                            <a href="{{route('admin.moderator.request')}}" class='sidebar-link'>
+                                <i class="bi bi-people-fill"></i>
+                                <span>Moderator Requests</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item {{ $privacy_policy }}">
                             <a href="{{route('admin.web.info')}}" class='sidebar-link'>
                                 <i class="bi bi-lock-fill"></i>

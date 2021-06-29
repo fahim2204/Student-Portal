@@ -29,6 +29,10 @@ class LoginController extends Controller
 
             if ($user->password === $password) {
                 // if(Hash::check($req->input('password'))){
+                if($user->status === -1) {
+                    session()->flash('decline', 'Your Moderator account request has been declined by admin');
+                    return redirect()->route('home');
+                }
 
                 if ($user->status === -1) {
                     session()->flash('decline', 'Your' . $user->type . 'account request has been declined by admin');

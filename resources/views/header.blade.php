@@ -81,6 +81,10 @@
             @elseif (session()->has('decline'))
                 <div class="alert alert-success" role="alert">{{ session()->get('decline') }}</div>
             @endif
+<<<<<<< HEAD
+=======
+
+>>>>>>> ea55f1be761bdbba1e10f13f7a53dd50f745160f
             <header class="blog-header pb-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
                     <div class="col-4 pt-1 d-flex">

@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index'])->name('home');
+Route::get('/blog', [HomeController::class,'blog'])->name('blog');
 Route::post('/', [HomeController::class,'search'])->name('home.search');
 
 //------------LOGIN SECTION-------------//
@@ -53,7 +54,7 @@ Route::group(['middleware' => ['general-login']], function () {
     Route::post('/posts/{id}/delete', [PostController::class,'delete'])->name('posts.delete');
     Route::post('/posts/{subcat}/{id}/edit', [PostController::class,'update'])->name('posts.update');
     //------------MSG SECTION-------------// Later
-    Route::get('/{uname}/msg', [MsgController::class,'index'])->name('msg.view');
+    Route::get('/msg/{uname}', [MsgController::class,'index'])->name('msg.view');
 });
 
 //------------POST SECTION-------------//
@@ -91,7 +92,9 @@ Route::group(['middleware' => ['admin-panel']], function() {
     Route::get('/admin/users/unban/{id}', [UserController::class, 'unban'])->name('admin.users.unban');
     Route::get('/admin/moderator/request', [AdminController::class,'moderatorreq'])->name('admin.mod.req');
     Route::get('/admin/roles', [AdminController::class,'roles'])->name('admin.roles');
-    Route::get('/admin/instructor/request', [AdminController::class,'instructorreq'])->name('admin.ins.req');
+    Route::get('/admin/moderator/request', [AdminController::class,'moderatorRequest'])->name('admin.moderator.request');
+    Route::get('/admin/moderator/approve/{id}', [AdminController::class, 'approveModerator'])->name('admin.moderator.approve');
+    Route::get('/admin/moderator/decline/{id}', [AdminController::class, 'declineModerator'])->name('admin.moderator.decline');
 });
 
 

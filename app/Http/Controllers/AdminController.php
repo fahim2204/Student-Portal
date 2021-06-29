@@ -86,7 +86,29 @@ class AdminController extends Controller
         $user = User::where('id', $id)->with('posts', 'comments', 'admin', 'instructor', 'moderator', 'student')->first();
         return view('admin.users.view', ['user' => $user]);
     }
+    public function moderatorRequest()
+    {
+        $users = User::where('type', 'moderator')->where('status', 4)->get();
+        return view('admin.moderator-requests', ['users' => $users]);
+    }
+    public function approveModerator($id)
+    {
+        $moderator = User::where('id', $id)->first();
+        $moderator->status = 1;
+        $moderator->timestamps = false;
+        $moderator->update();
 
+        return back();
+    }
+    public function declineModerator($id)
+    {
+        $moderator = User::where('id', $id)->first();
+        $moderator->status = -1;
+        $moderator->timestamps = false;
+        $moderator->update();
+
+        return back();
+    }
     // public function privacy_policy() {
     //     return view('admin')
     // }
