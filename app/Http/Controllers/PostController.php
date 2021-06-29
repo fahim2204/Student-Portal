@@ -144,6 +144,6 @@ class PostController extends Controller
     public function delete($id)
     {
         Post::where('id', $id)->first()->delete();
-        return back();
+        return redirect()->route('home');
     }
 }

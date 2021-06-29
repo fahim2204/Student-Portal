@@ -39,17 +39,17 @@ class UserController extends Controller
     }
 
     public function update(Request $req){
-       
+
         $user = User::where('uname', $req->session()->get('uname'))
         ->first();
-    
+
     // $type = $user->type;
     // $name = User::with($type)->where('uname',$req->input('uname'))->first();
     // dd($user);
 
-    
+
         $type = $user->type;
-        
+
 
         //$type=(string)$req->session()->get('type');
         //dd($type);
@@ -61,7 +61,7 @@ class UserController extends Controller
             'updated_at' => Carbon::now(),
             'contact' => $req->contact
         ]);
-       
+
         $req->session()->flash('msg', 'Registration Successful');
         return redirect()->route('profile.edit');
         //return view('profile.edit');
@@ -116,7 +116,7 @@ class UserController extends Controller
         $user->status = 2;
         $user->timestamps = false;
         $user->update();
-        return back();
+        return redirect()->route('moderator.users');
     }
     public function unban($id)
     {
@@ -124,6 +124,6 @@ class UserController extends Controller
         $user->status = 1;
         $user->timestamps = false;
         $user->update();
-        return back();
+        return redirect()->route('moderator.users');
     }
 }
