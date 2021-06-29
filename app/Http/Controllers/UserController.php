@@ -26,17 +26,22 @@ class UserController extends Controller
         $tempIns = Instructor::where('fr_user_id', $tempUser->id)
             ->first();
 
-        $qalifications = Qualification::where('fr_instructor_id', $tempIns->id)->get();
-        $posts = PostController::all()->where('fr_user_id', $tempUser->id);
-        // $post = Post::with('comment', 'vote')->where('fr_user_id', $tempUser->id)
-        //                             ->get();
-        $user = User::with($tempUser->type)->where('uname', $uname)->first();
-        //dd($user);
-        return view('profile.view')->with('user', $user)
-            ->with('type', $tempUser->type)
-            ->with('posts', $posts)
-            ->with('slinks', $slinks)
-            ->with('qualifications', $qalifications);
+            $posts = PostController::all()->where('fr_user_id', $tempUser->id);
+            $user = User::with($tempUser->type)->where('uname', $uname)->first();
+            //dd($user);
+            if(session()->get('type')=='instructor'){
+                $qalifications = Qualification::where('fr_instructor_id', $tempIns->id)->get();
+                return view('profile.view')->with('user', $user)
+                    ->with('type', $tempUser->type)
+                    ->with('posts', $posts)
+                    ->with('slinks', $slinks)
+                    ->with('qualifications', $qalifications);
+            }else{
+                return view('profile.view')->with('user', $user)
+                    ->with('type', $tempUser->type)
+                    ->with('posts', $posts)
+                    ->with('slinks', $slinks);
+            }
     }
     public function edit(Request $req)
     {
@@ -111,7 +116,7 @@ class UserController extends Controller
             if($req->newpasse===$req->confirmpass){
                     $user = User::where('uname', $req->session()->get('uname'))
 
-      
+
                     ->first();
                 $password = $user->password;
 
