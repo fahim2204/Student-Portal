@@ -9,7 +9,9 @@ use App\Models\Post;
 use App\Models\moderator;
 use App\Models\Student;
 use App\Models\Instructor;
+use App\Models\Admin;
 use Illuminate\Support\Carbon;
+
 
 class UserController extends Controller
 {

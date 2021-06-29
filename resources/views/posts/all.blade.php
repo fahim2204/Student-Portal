@@ -31,7 +31,7 @@
                 </div>
                 <div class="ms-3 pe-3 col-12 mb-2">
                     {{-- <div class="lh-sm text-dark text-wrap">{{$post->pbody}}</div> --}}
-                    {{ str_limit($post->pbody, 550, '....') }} <a
+                    {{ \Illuminate\Support\Str::limit($post->pbody, 550, '....') }} <a
                         href='{{ route('posts.view.single', [$post->category->name, $post->id]) }}'
                         class='text-primary'>Read More</a>
                     {{-- <div class="lh-sm text-dark text-wrap">{{$post->pbody}}</div> --}}

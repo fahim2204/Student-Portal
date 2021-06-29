@@ -45,6 +45,12 @@ class Kernel extends HttpKernel
         ],
         'admin-panel' => [
             \App\Http\Middleware\AdminPanel::class,
+        ],
+        'admin-panel-moderator' => [
+            \App\Http\Middleware\ModeratorLogin::class,
+        ],
+        'general-login' => [
+            \App\Http\Middleware\GeneralLogin::class,
         ]
     ];
 
