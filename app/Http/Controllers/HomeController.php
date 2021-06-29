@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Notification;
 use App\Models\Post;
 
 class HomeController extends Controller
 {
     public function index(){
+        $notifs = Notification::with('userNotifier','user')
+                        ->where('fr_notifier_user_id',session()->get('id'))
+                        ->orderBy('created_at','desc')
+                        ->limit(5)
+                        ->get();
+                        //dd($notifs);
         $posts = PostController::all()->take(6);
+        session()->put('notifs', $notifs);
         return view('home')->with('posts',$posts);
     }
     public function search(Request $req){

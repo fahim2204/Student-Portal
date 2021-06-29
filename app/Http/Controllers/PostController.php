@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Vote;
+use App\Models\Notification;
 use App\Models\Comment;
 use Illuminate\Support\Carbon;
 use Illuminate\Pagination\Paginator;
@@ -90,6 +91,18 @@ class PostController extends Controller
         
         $upcount = count($post->upvotes);
         $downcount = count($post->downvotes);
+        //
+
+        $post = Post::with('category', 'user')->where('id', $id)->first();
+
+        if(session()->get('id')!==null){
+            Notification::insert([
+                'msg' => 'viewed your post',
+                'fr_user_id' => session()->get('id'),
+                'fr_notifier_user_id' => $post->fr_user_id,
+                'created_at' => Carbon::now()
+            ]);
+        }
         $count = $upcount - $downcount;
 
         $comments = commentController::allComment($post->id);
