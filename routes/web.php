@@ -1,6 +1,6 @@
 <?php
-
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -11,6 +11,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CategoryController;
 use App\Models\Category;
+use App\Http\Controllers\commentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,12 +26,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index'])->name('home');
+Route::post('/', [HomeController::class,'search'])->name('home.search');
 
 //------------LOGIN SECTION-------------//
 Route::get('/login', [LoginController::class,'index'])->name('login.index');
 Route::post('/login', [LoginController::class,'verify'])->name('login.verify');
+Route::get('/logout', [LogoutController::class,'index'])->name('logout.index');
 
 //------------REGISTRATION SECTION-------------//
+Route::get('/registration', [RegistrationController::class,'index'])->name('registration.index');
 Route::get('/student/registration', [RegistrationController::class,'studentindex'])->name('student.registration.index');
 Route::get('/instructor/registration', [RegistrationController::class,'instructorindex'])->name('instructor.registration.index');
 Route::get('/moderator/registration', [RegistrationController::class,'moderatorindex'])->name('moderator.registration.index');
@@ -41,21 +45,30 @@ Route::post('/moderator/registration', [RegistrationController::class,'moderator
 //------------PROFILE SECTION-------------//
 Route::get('/profile/{uname}', [UserController::class,'view'])->name('profile.view');
 Route::get('/profile/info/edit', [UserController::class,'edit'])->name('profile.edit');
+Route::post('/profile/info/edit', [UserController::class,'update'])->name('profile.edit.verify');
 
 //------------MSG SECTION-------------// Later
 Route::get('/{uname}/msg', [MsgController::class,'index'])->name('msg.view');
 
 //------------POST SECTION-------------//
 Route::get('/posts', [PostController::class,'viewall'])->name('posts.view.all');
+Route::get('/posts/search/{text}', [PostController::class,'viewsearched'])->name('posts.view.search');
+Route::get('/posts/create', [PostController::class,'createview'])->name('posts.create.view');
+Route::post('/posts/create', [PostController::class,'create'])->name('posts.create.save');
+//Route::post('/posts/create/edit', [PostController::class,'edit'])->name('posts.edit.save');
 Route::get('/posts/{subcat}', [PostController::class,'catwiseview'])->name('posts.view.cat');
 Route::get('/posts/{subcat}/{id}', [PostController::class,'singleview'])->name('posts.view.single');
+// Route::post('/', [PostController::class,'update'])->name('posts.update');
 Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('posts.edit');
+Route::post('/posts/{id}/delete', [PostController::class,'delete'])->name('posts.delete');
+Route::post('/posts/{subcat}/{id}/edit', [PostController::class,'update'])->name('posts.update');
+Route::post('/posts/{subcat}/{id}', [commentController::class,'insertComment'])->name('comment.add');
 
 //------------ADMIN SECTION-------------//
 Route::get('/admin', [AdminController::class,'index'])->name('admin.dashboard');
 Route::get('/admin/posts/all', [AdminController::class,'posts'])->name('admin.posts');
 Route::get('/admin/posts/create', [AdminController::class,'postscreate'])->name('admin.posts.create');
-Route::post('/admin/posts/create', [PostController::class, 'create'])->name('admin.posts.create-POST');
+Route::post('/admin/posts/create', [PostController::class, 'adminCreate'])->name('admin.posts.create-POST');
 Route::get('/admin/posts/delete/{id}', [PostController::class, 'delete'])->name('admin.posts.delete');
 Route::get('/admin/website-info', [AdminController::class,'webinfo'])->name('admin.web.info');
 Route::post('/admin/update/website-info', [AdminController::class, 'updateWebsiteInfo'])->name('admin.update.web-info');
@@ -73,14 +86,11 @@ Route::get('/admin/users/delete/{id}', [UserController::class, 'delete'])->name(
 Route::get('/admin/users/ban/{id}', [UserController::class, 'ban'])->name('admin.users.ban');
 Route::get('/admin/users/unban/{id}', [UserController::class, 'unban'])->name('admin.users.unban');
 Route::get('/admin/moderator/request', [AdminController::class,'moderatorreq'])->name('admin.mod.req');
-// Route::get('/admin/edit/{uname}', [AdminController::class,'useredit'])->name('admin.user.edit');
 Route::get('/admin/roles', [AdminController::class,'roles'])->name('admin.roles');
 Route::get('/admin/instructor/request', [AdminController::class,'instructorreq'])->name('admin.ins.req');
 
 //------------MODERATOR SECTION-------------//
 Route::get('/moderator', [ModeratorController::class,'index'])->name('moderator.dashboard');
-Route::get('/moderator/posts', [ModeratorController::class,'posts'])->name('moderator.posts');
-Route::get('/moderator/posts/create', [ModeratorController::class,'postscreate'])->name('moderator.posts.create');
 Route::get('/moderator/sub-categories', [ModeratorController::class,'subcategories'])->name('moderator.sub.categories');
 Route::get('/moderator/sub-categories/create', [ModeratorController::class,'subcategoriescreate'])->name('moderator.sub.categories.create');
 Route::get('/moderator/users', [ModeratorController::class,'users'])->name('moderator.users');
@@ -89,13 +99,9 @@ Route::get('/moderator/instructor/request', [ModeratorController::class,'instruc
 
 //------------INSTRUCTOR SECTION-------------//
 Route::get('/instructor', [InstructorController::class,'index'])->name('instructor.dashboard');
-Route::get('/instructor/posts', [InstructorController::class,'posts'])->name('instructor.posts');
-Route::get('/instructor/posts/create', [InstructorController::class,'postscreate'])->name('instructor.posts.create');
 Route::get('/instructor/group/{gid}', [InstructorController::class,'groups'])->name('instructor.groups');
 Route::get('/instructor/group/create', [InstructorController::class,'groupcreate'])->name('instructor.groups.create');
 
 //------------STUDENT SECTION-------------//
 Route::get('/student', [StudentController::class,'index'])->name('student.dashboard');
-Route::get('/student/posts', [StudentController::class,'posts'])->name('student.posts');
-Route::get('/student/posts/create', [StudentController::class,'postscreate'])->name('student.posts.create');
 Route::get('/student/group/{gid}', [StudentController::class,'groups'])->name('student.groups');

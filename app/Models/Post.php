@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    function user()
+    {
+        return $this->belongsTo('App\Models\User', 'fr_user_id', 'id');
+    }
 
     function comments()
     {
@@ -24,9 +28,5 @@ class Post extends Model
     function category()
     {
         return $this->belongsTo('App\Models\Category', 'fr_category_id', 'id');
-    }
-    function user()
-    {
-        return $this->belongsTo('App\Models\User', 'fr_user_id', 'id');
     }
 }

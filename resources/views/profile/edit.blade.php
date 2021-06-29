@@ -1,135 +1,107 @@
 @include('header')
+@if (session()->get('uname') !== null)
+    @yield('header-main-logged')
+@else
+    @yield('header-main')
+@endif
+
 <body class="bg-light">
-<div class="container edit-profile-container">
-  <div class="row">
-    <div class="py-5 text-center">
-      <h2>Edit Profile</h2>
-      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-lg-4">
-      <div class="row">
-        <div class="col-sm-12 col-md-12 sidebar">
-        <div class="mini-submenu">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </div>
-        <div class="list-group">
-            <span href="#" class="list-group-item active">
-                Submenu
+    <div class="container edit-profile-container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex align-items-start my-4">
+                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                      <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</button>
+                      <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Basic Info</button>
+                      <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button>
+                      <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Change Password</button>
+                    </div>
+                    <div class="tab-content" id="v-pills-tabContent">
+                      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
+                      <div class="tab-pane fade my-3 ms-2" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        
+                        
+                        
+                        <form action="" method="post">
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Full Name:</label>
+                              <input type="text" name="fullName" value="{{$user->$type->name}}" class="form-control">
+                            </div>
+                            @if ($errors->get('fullName') !=null)
+                                  <br>
+                                  <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
+                                      @foreach ($errors->get('fullName') as $error)
+                                      <li>{{$error}}</li>
+                                      @endforeach
 
-            </span>
-            <a href="#" class="list-group-item">
-                <i class="fa fa-comment-o"></i> General Information
-            </a>
-            <a href="#" class="list-group-item">
-                <i class="fa fa-search"></i> Privacy Settings
-            </a>
-            <a href="#" class="list-group-item">
-                <i class="fa fa-user"></i> Favourite Topics
-            </a>
-        </div>
-    </div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-8">
-    <main>
 
-      <div class="row g-5">
-        <div class="col-md-7 col-lg-12">
-          <form class="needs-validation" novalidate>
-            <div class="row g-3">
-              <div class="col-sm-6">
-                <label for="firstName" class="form-label">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                  Valid first name is required.
-                </div>
-              </div>
+                                  </div>
 
-              <div class="col-sm-6">
-                <label for="lastName" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                  Valid last name is required.
-                </div>
-              </div>
+                            @endif
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Email address:</label>
+                              <input type="text" name="email" value="{{$user->$type->email}}" class="form-control">
+                            </div>
+                            @if ($errors->get('email') != null)
+                                <br>
+                                <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
+                                    @foreach ($errors->get('email') as $error)
+                                    <li>{{$error}}</li>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Phone:</label>
+                              <input type="text" name="contact" value="{{$user->$type->contact}}" class="form-control">
+                            </div>
 
-              <div class="col-12">
-                <label for="username" class="form-label">Username</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text">@</span>
-                  <input type="text" class="form-control" id="username" placeholder="Username" required>
-                <div class="invalid-feedback">
-                    Your username is required.
+                            @if ($errors->get('contact') != null)
+                                <br>
+                                <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
+                                    @foreach ($errors->get('contact') as $error)
+                                    <li>{{$error}}</li>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Address:</label>
+                              <input type="text" name="address" value="{{$user->$type->address}}" class="form-control">
+                            </div>
+
+                            @if ($errors->get('address') != null)
+                                <br>
+                                <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
+                                    @foreach ($errors->get('address') as $error)
+                                    <li>{{$error}}</li>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <input name="testedit" type="hidden" value="{{session()->get('type')}}">
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </form>
+
+
+                    </div>
+                      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">ghdfdfsd</div>
+                      <div class="tab-pane fade ms-4 mt-4" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                           <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Old Password:</label>
+                                <input type="password" name="oldpass" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">New Password:</label>
+                                <input type="password" name="newpass" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Confirm Password:</label>
+                                <input type="password" name="confirmpass" class="form-control">
+                            </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                <div class="invalid-feedback">
-                  Please enter a valid email address for shipping updates.
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-                <div class="invalid-feedback">
-                  Please enter your shipping address.
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-              </div>
-
-              <div class="col-md-5">
-                <label for="country" class="form-label">Country</label>
-                <select class="form-select" id="country" required>
-                  <option value="">Choose...</option>
-                  <option>United States</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please select a valid country.
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label for="state" class="form-label">State</label>
-                <select class="form-select" id="state" required>
-                  <option value="">Choose...</option>
-                  <option>California</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please provide a valid state.
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <label for="zip" class="form-label">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
-                <div class="invalid-feedback">
-                  Zip code required.
-                </div>
-              </div>
             </div>
-
-
-            <hr class="my-4">
-
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
-          </form>
         </div>
-      </div>
-    </main>
+    </div>
 
-    <div>
-  </div>
-</div>
-@include('footer')
+    @include('footer')

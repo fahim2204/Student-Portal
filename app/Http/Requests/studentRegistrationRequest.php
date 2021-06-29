@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\moderator;
-use App\Models\User;
+use App\Models\student;
 
-class modRegistrationRequest extends FormRequest
+class studentRegistrationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,17 +29,19 @@ class modRegistrationRequest extends FormRequest
             'uname'     => 'required|min:5|unique:users',
             'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'cpassword' => 'required|same:password',
-            'email'     => 'required|unique:moderators',
+            'email'     => 'required|unique:students',
             'contact'   => 'required|regex:/(01)[0-9]{9}/',
             'address'   => 'required',
+            'level'     => 'required',
             'image'     => 'required|mimes:jpeg,jpg,png'
         ];
     }
-    public function messages()
-    {
+
+
+    public function messages(){
         return [
             'cpassword.required' => 'Confirm Password Required',
-            'cpassword.same' => 'Confirm Password Dose Not Match'
+            'cpassword.same'     => 'Confirm Password Dose Not Match'
         ];
     }
 }
