@@ -2,99 +2,103 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\moderator;
+use App\Models\Category;
+use App\Models\Moderator;
+use App\Models\Instructor;
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class ModeratorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function store(Request $req)
     {
-        // $moderator = new moderator;
 
-        // $moderator->name    = $req->fullName;
-        // $moderator->address    = $req->address;
-        // $moderator->email       = $req->email;
-        // $moderator->contact    = $req->fullName;
-        // DB::table('moderators')->insert(['name'=>$req->fullName,
-        //                                  'address'=> $req->address,
-        //                                  'email'=> $req->email,
-        //                                  'image'=>$req->image
-
-        // ]);
-        moderator::insert([
+        Moderator::insert([
             'name' => $req->fullName,
             'email' => $req->email
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\moderator  $moderator
-     * @return \Illuminate\Http\Response
-     */
-    public function show(moderator $moderator)
-    {
-        //
+
+
+
+    public function index() {
+        $posts = Post::all();
+        $students = Student::all();
+        $instructors = Instructor::all();
+        $categories = Category::with('posts')->get();
+        $top_posts = Post::orderBy('views', 'DESC')->with('user')->paginate(3);
+        $category_posts = [];
+        $category_names = [];
+        foreach($categories as $category) {
+            array_push($category_names, $category->name);
+            array_push($category_posts, count($category->posts));
+        }
+        return view('moderator.dashboard', [
+            'posts' => $posts,
+            'students' => $students,
+            'instructors' => $instructors,
+            'categories' => $categories,
+            'top_posts' => $top_posts,
+            'category_names' => $category_names,
+            'category_posts' => $category_posts
+        ]);
+    }
+    public function posts() {
+        $posts = Post::with('user')->get();
+        return view('moderator.posts.all', ['posts' => $posts]);
+    }
+    public function postscreate(){
+        $categories = Category::all();
+        return view('moderator.posts.create', ['categories' => $categories]);
+    }
+    public function webinfo(){
+        $path = storage_path() . "\json\info.json";
+        $info = json_decode(file_get_contents($path));
+        return view('moderator.websiteinfo', ['info' => $info]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\moderator  $moderator
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(moderator $moderator)
-    {
-        //
-    }
+    public function updateWebsiteInfo(Request $req) {
+        $info = [
+            "name" => $req->input('website-name'),
+            "about" => $req->input('website-about'),
+            "email" => $req->input('website-email')
+        ];
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\moderator  $moderator
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, moderator $moderator)
-    {
-        //
-    }
+        $path = storage_path() . "/json/info.json";
+        file_put_contents($path, json_encode($info));
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\moderator  $moderator
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(moderator $moderator)
-    {
-        //
+        return back();
+    }
+    public function categories(){
+        $categories = Category::with('posts')->get();
+        return view('moderator.categories.all', ['categories' => $categories]);
+    }
+    public function categoriescreate(){
+        return view('moderator.categories.create');
+    }
+    public function categoriesedit($id) {
+        $category = Category::where('id', $id)->first();
+        return view('moderator.categories.edit', ['category'=>$category]);
+    }
+    public function subcategories(){
+        return view('moderator.sub-categories.all');
+    }
+    public function roles(){
+        return view('moderator.roles');
+    }
+    public function users(){
+        $users = User::all();
+        return view('moderator.users.all', ['users' => $users]);
+    }
+    public function viewUser($id) {
+        $user = User::where('id', $id)->with('posts', 'comments', 'moderator', 'instructor', 'moderator', 'student')->first();
+        return view('moderator.users.view', ['user' => $user]);
     }
 }

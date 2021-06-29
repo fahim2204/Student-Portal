@@ -20,7 +20,7 @@ class CategoryController extends Controller
 
         $req->session()->flash('success', 'Category name '.$category->name.' created successfully');
 
-        return redirect()->route('admin.categories.create');
+        return redirect()->route('moderator.categories.create');
     }
     function all()
     {
@@ -29,7 +29,7 @@ class CategoryController extends Controller
     function delete($id)
     {
         Category::where('id', $id)->delete();
-        return redirect()->route('admin.categories');
+        return redirect()->route('moderator.categories');
 
     }
     function edit(Request $req)
@@ -38,7 +38,7 @@ class CategoryController extends Controller
         $category->name = $req->input('name');
         $category->update();
 
-        return redirect()->route('admin.categories');
+        return redirect()->route('moderator.categories');
     }
     function searchJSON($keyword)
     {

@@ -74,11 +74,11 @@ class UserController extends Controller
         if($req->input('prev_type') === 'admin') {
             $user_details = $user->admin;
         } else if($req->input('prev_type') === 'moderator') {
-            $user_details = $user->moderator; 
+            $user_details = $user->moderator;
         }  else if($req->input('prev_type') === 'instructor') {
-            $user_details = $user->instructor; 
+            $user_details = $user->instructor;
         }  else if($req->input('prev_type') === 'student') {
-            $user_details = $user->student; 
+            $user_details = $user->student;
         }
 
         if($req->input('type') === 'admin') {
@@ -103,7 +103,7 @@ class UserController extends Controller
         $user->timestamps = false;
         $user->update();
 
-        return redirect()->route('admin.users.view', ['id' => $req->input('id')]);
+        return redirect()->route('moderator.users.view', ['id' => $req->input('id')]);
     }
     public function delete($id)
     {
