@@ -18,12 +18,11 @@ class PostController extends Controller
     public function viewall()
     {
         $post = Post::with('category', 'user')
-        ->orderBy('id', 'desc')
-        
-        ->get();
-        
+            ->orderBy('id', 'desc')
+            ->paginate(5);
 
-        return view('posts.all')->with('posts',$post);
+
+        return view('posts.all')->with('posts', $post);
         // return redirect()->route('posts.view.all');
     }
     public function createview()
@@ -33,7 +32,6 @@ class PostController extends Controller
     }
     public function create(Request $req)
     {
-
         ///post insertion
         if ($req->title !== null && $req->category !== null && $req->description !== null) {
             Post::insert([
@@ -46,7 +44,6 @@ class PostController extends Controller
                 'views' => 0,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-
             ]);
             $post = post::orderBy('id', 'desc')->first();
             $postCount = ($post->id);
@@ -54,8 +51,7 @@ class PostController extends Controller
                 $req->category,
                 $postCount
             ]);
-        }
-        else{
+        } else {
             $req->session()->flash('msg', 'Every field need to be fill');
             return redirect()->route('posts.create.view');
         }
@@ -65,10 +61,25 @@ class PostController extends Controller
     // IMPLEMENTing
     public function catwiseview($cat)
     {
-        return view('posts.catview')->with('category', $cat);
+        $catid = Category::where('name', '=', $cat)->first()->id;
+        $post = Post::with('category', 'user')
+            ->where('fr_category_id', '=', $catid)
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+        return view('posts.catview')->with('category', $cat)
+            ->with('posts', $post);
+    }
+    public function viewsearched($text)
+    {
+        $post = Post::with('category', 'user')
+            ->where('title', 'like', '%' . $text . '%')
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+        return view('posts.all')->with('posts', $post);
     }
     public function singleview($cat, $id)
     {
+        Post::where('id',$id)->increment('views','1');
 
         $post = Post::with('category', 'user')->where('id', $id)->first();
         $upcount = Vote::where('status', '=', '1')
@@ -88,7 +99,6 @@ class PostController extends Controller
     {
         $post = Post::with('category', 'comments', 'votes')->get();
         return $post;
-
         // return redirect()->route('posts.view.all');
     }
     public function edit($cat, $id)
@@ -98,19 +108,43 @@ class PostController extends Controller
         $category = category::orderBy('name', 'asc')->get();
 
         return view('posts.edit')->with('post', $post)
-                                 ->with('catall', $category);
-
-
+            ->with('catall', $category);
     }
-    public function update(Request $req){
+
+    public function update(Request $req)
+    {
         Post::where('id', '=', $req->id)->update(array('title' => $req->title, 'pbody' => $req->description));
         // return view('home');
         return redirect()->route('home');
         // dd($req->id);
     }
-    public function delete(Request $req){
-        return redirect()->route('post.delete');
+    // public function delete(Request $req)
+    // {
+    //     Post::where('id', $req->id)->delete();
+    //     return redirect()->route('home');
+    // }
+    public static function get($id)
+    {
+        return Post::where('id', $id)->first();
     }
+    public function adminCreate(Request $req)
+    {
+        $post = new Post();
+        $post->title = $req->input('post-title');
+        $post->pbody = $req->input('post-description');
+        $post->fr_category_id = (int)$req->input('post-category');
+        $post->fr_user_id = 1;
+        $imgName = time().'.'.$req->file('featured_image')->getClientOriginalExtension();
+        $req->file('featured_image')->move(public_path('uploaded/images/posts'), $imgName);
+        $post->image = $imgName;
 
+        $post->save();
 
+        return redirect()->route('moderator.posts');
+    }
+    public function delete($id)
+    {
+        Post::where('id', $id)->first()->delete();
+        return redirect()->route('home');
+    }
 }

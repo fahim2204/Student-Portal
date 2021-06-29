@@ -1,319 +1,35 @@
-@include('admin.sidebar')
+@extends('admin.dashboard-template')
 
-<div id="main">
-    <header class="mb-3">
-        <a href="#" class="burger-btn d-block d-xl-none">
-            <i class="bi bi-justify fs-3"></i>
-        </a>
-    </header>
-
-    <div class="page-heading">
-        <h3>All Posts</h3>
+@section('content')
+    <div class="row">
+        <table class="table table-striped" id="table1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Joined At</th>
+                    <th>Designation</th>
+                    <th>View</th>
+                    <th>Delete</th>
+                    <th>Ban</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                <tr>
+                    <td>{{ $user->uname }}</td>
+                    <td>{{ $user->created_at->DiffForHumans() }}</td>
+                    <td>{{ $user->type }}</td>
+                    <td><a href="{{ route('admin.users.view', ['id' => $user->id]) }}" class="btn btn-primary">View</a></td>
+                    <td><a href="{{ route('admin.users.delete', ['id' => $user->id]) }}" class="btn btn-danger">Delete</a></td>
+                    @if($user->status === 1)
+                    <td><a href="{{ route('admin.users.ban', ['id' => $user->id]) }}" class="btn btn-secondary">Ban</a></td>
+                    @else
+                    <td><a href="{{ route('admin.users.unban', ['id' => $user->id]) }}" class="btn btn-success">Unban</a></td>
+                    @endif
+                </tr>              
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    <div class="page-content">
-        <div class="row">
-            <table class="table table-striped" id="table1">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Joined At</th>
-                        <th>Designation</th>
-                        <th>View</th>
-                        <th>Delete</th>
-                        <th>Ban</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Abtahi Tajwar</td>
-                        <td>19.06.2021</td>
-                        <td>Admin</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fahim Faisal</td>
-                        <td>15.05.2021</td>
-                        <td>Moderator</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Md. Al Amin</td>
-                        <td>15.05.2021</td>
-                        <td>Instructor</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atikullah Habib</td>
-                        <td>01.05.2021</td>
-                        <td>Student</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                        <td><a href="" class="btn btn-secondary">Ban</a></td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-@include('admin.footer')
+@endsection
+        

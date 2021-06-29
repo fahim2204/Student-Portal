@@ -1,14 +1,6 @@
-@include('admin.sidebar')
-<div id="main">
-    <header class="mb-3">
-        <a href="#" class="burger-btn d-block d-xl-none">
-            <i class="bi bi-justify fs-3"></i>
-        </a>
-    </header>
-<div class="page-heading">
-    <h3>Website Statistics</h3>
-</div>
-<div class="page-content">
+@extends('admin.dashboard-template')
+
+@section('content')
     <div class="row">
         <div class="col-12 col-lg-4">
             <!-- Moderators List -->
@@ -61,7 +53,7 @@
                         <option value="moderator" selected>Moderator</option>
                         <option value="instructor">Instructor</option>
                         <option value="student">Student</option>
-                      </select>
+                    </select>
                 </form>
                 <div class="card">
                     <div class="card-header">
@@ -156,5 +148,5 @@
             </div>
         </div>
     </div>
-</div>
-@include('admin.footer')
+@endsection
+
