@@ -31,7 +31,7 @@ class modRegistrationRequest extends FormRequest
             'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'cpassword' => 'required|same:password',
             'email'     => 'required|unique:moderators',
-            'contact'   => 'required|regex:/(01)[0-9]{9}/',
+            'contact'   => ['required','regex:/^(?:\+88|01)?(?:\d{11}|\d{13})$/'],
             'address'   => 'required',
             'image'     => 'required|mimes:jpeg,jpg,png'
         ];
