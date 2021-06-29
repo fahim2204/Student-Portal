@@ -99,7 +99,7 @@ class UserController extends Controller
         }
 
         elseif($req->newpass!=null){
-            if($req->newpasse==$req->confirmpass){
+            if($req->newpasse===$req->confirmpass){
                     $user = User::where('uname', $req->session()->get('uname'))
                     ->first();
                     $password = $user->password;
