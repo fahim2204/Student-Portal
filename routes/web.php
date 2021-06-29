@@ -5,6 +5,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\MsgController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\InstructorController;

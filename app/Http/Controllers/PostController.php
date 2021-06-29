@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Vote;
+use App\Models\Notification;
 use App\Models\Comment;
 use Illuminate\Support\Carbon;
 use Illuminate\Pagination\Paginator;
@@ -77,11 +78,22 @@ class PostController extends Controller
             ->paginate(5);
         return view('posts.all')->with('posts', $post);
     }
-    public function singleview($cat, $id)
+    public function singleview(Request $req, $cat, $id)
     {
         Post::where('id',$id)->increment('views','1');
+        //
 
         $post = Post::with('category', 'user')->where('id', $id)->first();
+
+        if($req->session()->get('id')!==null){
+            Notification::insert([
+                'msg' => 'viewed your post',
+                'fr_user_id' => $req->session()->get('id'),
+                'fr_notifier_user_id' => $post->fr_user_id,
+                'created_at' => Carbon::now()
+            ]);
+        }
+
         $upcount = Vote::where('status', '=', '1')
             ->where('fr_post_id', '=', $post->id)->count();
         $downcount = Vote::where('status', '=', '2')

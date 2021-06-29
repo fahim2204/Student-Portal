@@ -117,7 +117,7 @@
 
 
             {{-- Profile Pop up Section --}}
-            <div class="container shadow-lg bg-light rounded-1 fixed-top" id="profile-sec" style="width: 190px; top: 66px; left:68vw;display: none;">
+            <div class="container shadow-lg bg-light rounded-1 fixed-top my-2" id="profile-sec" style="width: 190px; top: 66px; left:68vw;display: none;">
 
                 <div class="d-flex m-1 hover-overlay">
                     <div class="col-2 text-left align-self-center">
@@ -133,7 +133,7 @@
                 </div>
                 <hr class="m-1 p-0">
 
-                <div class="d-flex m-0 hover">
+                {{-- <div class="d-flex m-0 hover">
                     <div class="col-2 text-left align-self-center">
                         <i class="fas fa-cogs"></i>
                     </div>
@@ -143,8 +143,8 @@
                         </div>
                     </div>
                 </div>
-                <hr class="m-1 p-0">
-
+                <hr class="m-1 p-0"> --}}
+{{--
                 <div class="d-flex m-0 hover">
                     <div class="col-2 text-left align-self-center">
                         <i class="far fa-question-circle"></i>
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <hr class="m-1 p-0">
+                <hr class="m-1 p-0"> --}}
 
                 <div class="d-flex m-0 hover">
                     <div class="col-2 text-left align-self-center">
@@ -174,9 +174,26 @@
                 <h4 class="text-center">Notification</h4>
                 <hr class="m-0 p-0">
 
-                @for ($i = 0; $i < 6; $i++)
+                @foreach (session()->get('notifs') as $notif)
+                <div class="d-flex m-0 hover">
+                    <div class="col-2 text-left align-self-center"><img class="rounded-circle"
+                            src="https://picsum.photos/id/100/40" /></div>
+                    <div class="col-10">
+
+                            <div class="ms-1">
+                            <p class="mb-0">{{$notif->user->uname}} {{$notif->msg}}</p>
+                            </div>
+                            <div class="text-muted ms-1" style="font-size: 14px">{{$notif->created_at->diffForHumans()}}</div>
+
+                    </div>
+                </div>
+                <hr class="m-0 p-0">
+                @endforeach
+
+
+                {{-- @for ($i = 0; $i < 6; $i++) --}}
                     {{-- Single notification Items --}}
-                    <div class="d-flex m-0 hover">
+                    {{-- <div class="d-flex m-0 hover">
                         <div class="col-2 text-left align-self-center"><img class="rounded-circle"
                                 src="https://picsum.photos/id/{{ $i * 100 }}/40" /></div>
                         <div class="col-10">
@@ -187,7 +204,7 @@
                         </div>
                     </div>
                     <hr class="m-0 p-0">
-                @endfor
+                @endfor --}}
 
                 <div class="text-center w-25 mx-auto">View All</div>
 
