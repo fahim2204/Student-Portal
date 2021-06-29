@@ -125,7 +125,6 @@ class UserController extends Controller
                 $req->session()->flash('error', 'Confirm New Password Correctly');
                 return redirect()->route('profile.edit');
             }
-
         }
         else{
             $req->session()->flash('error', 'Check Again');

@@ -96,7 +96,7 @@
 
                       
                       <div class="tab-pane fade ms-4 mt-4" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                        <form action="" method="post">
+                        <form action="{{ route('profile.edit.verify') }}" method="post">
                            <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Old Password:</label>
                                 <input type="password" name="oldpass" class="form-control">

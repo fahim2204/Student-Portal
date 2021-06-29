@@ -17,7 +17,13 @@ class ModeratorLogin
     public function handle(Request $request, Closure $next)
     {
         if($request->session()->get('type') === 'admin' || $request->session()->get('type') === 'moderator') {
-            return $next($request);
+            if($request->session()->get('status') === 1) {
+                return $next($request);
+            } else if($request->session()->get('status') === 4) {
+                $request->session()->flash('approval', 'Admin needs to approve your moderator account');
+                return redirect()->route('home');
+            }
+            
         } else {
             return back();
         }

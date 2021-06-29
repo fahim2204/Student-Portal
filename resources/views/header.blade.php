@@ -76,6 +76,12 @@
     @endsection
     @section('header-main-logged')
         <div class="container">
+            @if (session()->has('approval'))
+                <div class="alert alert-success" role="alert">{{ session()->get('approval') }}</div>
+            @elseif (session()->has('decline'))
+                <div class="alert alert-success" role="alert">{{ session()->get('decline') }}</div>
+            @endif
+
             <header class="blog-header pb-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
                     <div class="col-4 pt-1 d-flex">
