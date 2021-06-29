@@ -77,7 +77,7 @@
                                 </div>
                             @endif
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary"  name="update">Submit</button>
 
                             @if (session('msg')!= null)
                                 <div class="alert alert-success d-flex justify-content-center my-2" role="alert">
@@ -110,7 +110,7 @@
                                 <label for="exampleInputEmail1" class="form-label">Confirm Password:</label>
                                 <input type="password" name="confirmpass" class="form-control">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" name="passupdate">Submit</button>
                             @if (session('msg')!= null)
                                 <div class="alert alert-success d-flex justify-content-center my-2" role="alert">
                                     {{session('msg')}}

@@ -55,6 +55,7 @@ class UserController extends Controller
 
         $type=$req->session()->get('type');
             //dd($type);
+        if($req->has('update')){
         if($type=='moderator'){
             moderator::where('fr_user_id',$req->session()->get('id'))
             ->update([
@@ -100,19 +101,74 @@ class UserController extends Controller
             //return view('profile.edit');
         }
 
-        elseif($req->newpass!=null){
-            if($req->newpasse==$req->confirmpass){
+    }
+
+        
+
+
+
+        
+
+    }
+
+
+    public function passupdate(Request $req){
+
+
+        // if($req->newpass!=null){
+        //     if($req->newpasse==$req->confirmpass){
+        //             $user = User::where('uname', $req->session()->get('uname'))
+        //             ->first();
+        //             dd($user);
+        //             $password = $user->password;
+
+        //                 if($req->oldpass==$password){
+        //                     user::where('uname',$req->session()->get('uname'))
+        //                     ->update([
+        //                         'password' => $req->newpass    
+        //                     ]);
+        //                     $req->session()->flash('msg', 'Update Successful');
+        //                     return redirect()->route('logout.index');
+        //                 }
+        //                 else{
+        //                     $req->session()->flash('error', 'Unauthorized Access');
+        //                     return redirect()->route('profile.edit');
+        //                 }
+                    
+            
+        //     }
+        //     else{
+        //         $req->session()->flash('error', 'Confirm New Password Correctly');
+        //         return redirect()->route('profile.edit');
+        //     }
+
+        // }
+        // else{
+        //     $req->session()->flash('error', 'Check Again');
+        //     return redirect()->route('profile.edit');
+        // }
+
+
+
+        if($req->has('passupdate')){
+            //dd($req->session()->get('uname'));
+
+            if($req->newpass!==null){
+            if($req->newpass===$req->confirmpass){
                     $user = User::where('uname', $req->session()->get('uname'))
                     ->first();
+                    
                     $password = $user->password;
+                    
 
-                        if($req->oldpass==$password){
-                            user::where('fr_user_id',$req->session()->get('id'))
+                        if($req->oldpass===$password){
+                            user::where('uname',$req->session()->get('uname'))
                             ->update([
-                                'password' => $req->newpass    
+                                'password' => $req->newpass,
+                                //'update_at' => Carbon::now()    
                             ]);
                             $req->session()->flash('msg', 'Update Successful');
-                            return redirect()->route('profile.edit');
+                            return redirect()->route('logout.index');
                         }
                         else{
                             $req->session()->flash('error', 'Unauthorized Access');
@@ -130,6 +186,7 @@ class UserController extends Controller
         else{
             $req->session()->flash('error', 'Check Again');
             return redirect()->route('profile.edit');
+        }
         }
 
     }
