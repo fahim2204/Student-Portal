@@ -40,92 +40,98 @@ class UserController extends Controller
         ->with('slinks',$slinks);
     }
 
-    public function update(Request $req){
-
-        $user = User::where('uname', $req->session()->get('uname'))
-        ->first();
-
+    public function update(editRequest $req){
+       
+        // $user = User::where('uname', $req->session()->get('uname'))
+        // ->first();
+    
     // $type = $user->type;
     // $name = User::with($type)->where('uname',$req->input('uname'))->first();
     // dd($user);
 
+    
+        // $type = $user->type;
+        
 
-        $type = $user->type;
+        $type=$req->session()->get('type');
+            //dd($type);
+        if($type=='moderator'){
+            moderator::where('fr_user_id',$req->session()->get('id'))
+            ->update([
+                'name' => $req->name,
+                'email' => $req->email,
+                'address' => $req->address,
+                'updated_at' => Carbon::now(),
+                'contact' => $req->contact
+            ]);
+        
+            $req->session()->flash('msg', 'Update Successful');
+            return redirect()->route('profile.edit');
+            //return view('profile.edit');
+        }  
 
-
-        //$type=(string)$req->session()->get('type');
-        //dd($type);
-        $type::where('fr_user_id',$req->session()->get('id'))
-        ->update([
-            'name' => $req->fullName,
-            'email' => $req->email,
-            'address' => $req->address,
-            'updated_at' => Carbon::now(),
-            'contact' => $req->contact
-        ]);
-
-        $req->session()->flash('msg', 'Registration Successful');
-        return redirect()->route('profile.edit');
-        //return view('profile.edit');
-    }
-    public function changeRole(Request $req)
-    {
-        $user = User::where('id', (int)$req->input('id'))->with($req->input('prev_type'))->first();
-        $user_details = null;
-        $new_user = null;
-        if($req->input('prev_type') === 'admin') {
-            $user_details = $user->admin;
-        } else if($req->input('prev_type') === 'moderator') {
-            $user_details = $user->moderator;
-        }  else if($req->input('prev_type') === 'instructor') {
-            $user_details = $user->instructor;
-        }  else if($req->input('prev_type') === 'student') {
-            $user_details = $user->student;
+        elseif($type=='instructor'){
+            student::where('fr_user_id',$req->session()->get('id'))
+            ->update([
+                'name' => $req->name,
+                'email' => $req->email,
+                'address' => $req->address,
+                'updated_at' => Carbon::now(),
+                'contact' => $req->contact
+            ]);
+        
+            $req->session()->flash('msg', 'Update Successful');
+            return redirect()->route('profile.edit');
+            //return view('profile.edit');
         }
 
-        if($req->input('type') === 'admin') {
-            $new_user = new Admin();
-        } else if($req->input('type') === 'moderator') {
-            $new_user = new Moderator();
-        }  else if($req->input('type') === 'instructor') {
-            $new_user = new Instructor();
-        }  else if($req->input('type') === 'student') {
-            $new_user = new Student();
+        elseif($type=='student'){
+            student::where('fr_user_id',$req->session()->get('id'))
+            ->update([
+                'name' => $req->name,
+                'email' => $req->email,
+                'address' => $req->address,
+                'updated_at' => Carbon::now(),
+                'contact' => $req->contact
+            ]);
+        
+            $req->session()->flash('msg', 'Update Successful');
+            return redirect()->route('profile.edit');
+            //return view('profile.edit');
         }
 
-        $new_user->contact = $user_details->contact;
-        $new_user->email = $user_details->email;
-        $new_user->name = $user_details->name;
-        $new_user->image = $user_details->image;
-        $new_user->fr_user_id = $user_details->fr_user_id;
-        $new_user->save();
-        $user_details->delete();
+        elseif($req->newpass!=null){
+            if($req->newpasse==$req->confirmpass){
+                    $user = User::where('uname', $req->session()->get('uname'))
+                    ->first();
+                    $password = $user->password;
 
-        $user->type = $req->input('type');
-        $user->timestamps = false;
-        $user->update();
+                        if($req->oldpass==$password){
+                            user::where('fr_user_id',$req->session()->get('id'))
+                            ->update([
+                                'password' => $req->newpass    
+                            ]);
+                            $req->session()->flash('msg', 'Update Successful');
+                            return redirect()->route('profile.edit');
+                        }
+                        else{
+                            $req->session()->flash('error', 'Unauthorized Access');
+                            return redirect()->route('profile.edit');
+                        }
+                    
+            
+            }
+            else{
+                $req->session()->flash('error', 'Confirm New Password Correctly');
+                return redirect()->route('profile.edit');
+            }
 
-        return redirect()->route('moderator.users.view', ['id' => $req->input('id')]);
+        }
+        else{
+            $req->session()->flash('error', 'Check Again');
+            return redirect()->route('profile.edit');
+        }
+
     }
-    public function delete($id)
-    {
-        User::where('id', $id)->delete();
-        return back();
-    }
-    public function ban($id)
-    {
-        $user = User::where('id', $id)->first();
-        $user->status = 2;
-        $user->timestamps = false;
-        $user->update();
-        return redirect()->route('moderator.users');
-    }
-    public function unban($id)
-    {
-        $user = User::where('id', $id)->first();
-        $user->status = 1;
-        $user->timestamps = false;
-        $user->update();
-        return redirect()->route('moderator.users');
-    }
+
 }

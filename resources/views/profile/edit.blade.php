@@ -25,12 +25,12 @@
                         <form action="" method="post">
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Full Name:</label>
-                              <input type="text" name="fullName" value="{{$user->$type->name}}" class="form-control">
+                              <input type="text" name="name" value="{{$user->$type->name}}" class="form-control">
                             </div>
-                            @if ($errors->get('fullName') !=null)
+                            @if ($errors->get('name') !=null)
                                   <br>
                                   <div class="alert alert-danger p-0 mt-1 ps-2" role="alert">
-                                      @foreach ($errors->get('fullName') as $error)
+                                      @foreach ($errors->get('name') as $error)
                                       <li>{{$error}}</li>
                                       @endforeach
 
@@ -76,19 +76,32 @@
                                     @endforeach
                                 </div>
                             @endif
-                            <input name="testedit" type="hidden" value="{{session()->get('type')}}">
 
                             <button type="submit" class="btn btn-primary">Submit</button>
+
+                            @if (session('msg')!= null)
+                                <div class="alert alert-success d-flex justify-content-center my-2" role="alert">
+                                    {{session('msg')}}
+                                </div>
+                            @endif
+
                           </form>
 
 
                     </div>
+                    
+                   
+                      
                       <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">ghdfdfsd</div>
+
+                      
                       <div class="tab-pane fade ms-4 mt-4" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                        <form action="" method="post">
                            <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Old Password:</label>
                                 <input type="password" name="oldpass" class="form-control">
                             </div>
+
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">New Password:</label>
                                 <input type="password" name="newpass" class="form-control">
@@ -97,8 +110,28 @@
                                 <label for="exampleInputEmail1" class="form-label">Confirm Password:</label>
                                 <input type="password" name="confirmpass" class="form-control">
                             </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            @if (session('msg')!= null)
+                                <div class="alert alert-success d-flex justify-content-center my-2" role="alert">
+                                    {{session('msg')}}
+                                </div>
+                            @endif
+
+                    @if (session('error')!= null)
+                        <div class="alert alert-warning" role="alert">
+                                 {{session('error')}}
+                        </div>
+                    @endif
+                  
+                  </form>
+                
                       </div>
                     </div>
+
+                    
+
+                    
+
                   </div>
             </div>
         </div>
