@@ -73,7 +73,7 @@ class RegistrationController extends Controller
             'uname' => $req->uname,
             'password' => $req->password,
             'type' => 'instructor',
-            'status' => 1,
+            'status' => 4,
             'created_at' => Carbon::now()
 
         ]);
