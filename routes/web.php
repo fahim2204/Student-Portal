@@ -130,16 +130,19 @@ Route::group(['middleware' => ['admin-panel-moderator']], function() {
     Route::get('/moderator/users/ban/{id}', [UserController::class, 'ban'])->name('moderator.users.ban');
     Route::get('/moderator/users/unban/{id}', [UserController::class, 'unban'])->name('moderator.users.unban');
     Route::get('/moderator/moderator/request', [moderatorController::class,'moderatorreq'])->name('moderator.mod.req');
+    Route::get('/moderator/instructor/request', [moderatorController::class,'instructorRequest'])->name('moderator.instructor.request');
+    Route::get('/moderator/instructor/approve/{id}', [moderatorController::class, 'approveInstructor'])->name('moderator.instructor.approve');
+    Route::get('/moderator/instructor/decline/{id}', [moderatorController::class, 'declineInstructor'])->name('moderator.instructor.decline');
 
-    Route::get('/moderator/instructor/request', [AdminController::class,'instructorreq'])->name('moderator.ins.req');
 });
 
 
 //------------INSTRUCTOR SECTION-------------//
+Route::group(['middleware' => ['moderator-panel-instructor']], function() {
 Route::get('/instructor', [InstructorController::class,'index'])->name('instructor.dashboard');
 Route::get('/instructor/group/{gid}', [InstructorController::class,'groups'])->name('instructor.groups');
 Route::get('/instructor/group/create', [InstructorController::class,'groupcreate'])->name('instructor.groups.create');
-
+});
 //------------STUDENT SECTION-------------//
 Route::get('/student', [StudentController::class,'index'])->name('student.dashboard');
 Route::get('/student/group/{gid}', [StudentController::class,'groups'])->name('student.groups');
