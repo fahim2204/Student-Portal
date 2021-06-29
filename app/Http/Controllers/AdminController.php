@@ -36,7 +36,7 @@ class AdminController extends Controller
         ]);
     }
     public function posts() {
-        $posts = Post::with('user')->get();
+        $posts = Post::with('user', 'category')->get();
         return view('admin.posts.all', ['posts' => $posts]);
     }
     public function postscreate(){
