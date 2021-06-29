@@ -91,11 +91,11 @@
                 </div>
             @endif
             <div class="btn-group mt-4">
-                <a href="{{route('home')}}" class="btn btn-primary active" aria-current="page">Question</a>
-                <a href="{{route('blog')}}" class="btn btn-primary">Blogs</a>
+                <a href="{{route('home')}}" class="btn btn-primary" aria-current="page">Question</a>
+                <a href="{{route('blog')}}" class="btn btn-primary active">Blogs</a>
               </div>
             <h3 class="pb-2 mb-2 mt-3 fst-italic border-bottom">
-                Trending Questions
+                Trending Blogs
             </h3>
             <div class="posts mb-3">
                 @foreach ($posts as $post)

@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index'])->name('home');
+Route::get('/blog', [HomeController::class,'blog'])->name('blog');
 Route::post('/', [HomeController::class,'search'])->name('home.search');
 
 //------------LOGIN SECTION-------------//
@@ -53,7 +54,7 @@ Route::group(['middleware' => ['general-login']], function () {
     Route::post('/posts/{id}/delete', [PostController::class,'delete'])->name('posts.delete');
     Route::post('/posts/{subcat}/{id}/edit', [PostController::class,'update'])->name('posts.update');
     //------------MSG SECTION-------------// Later
-    Route::get('/{uname}/msg', [MsgController::class,'index'])->name('msg.view');
+    Route::get('/msg/{uname}', [MsgController::class,'index'])->name('msg.view');
 });
 
 //------------POST SECTION-------------//
