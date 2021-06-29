@@ -34,7 +34,7 @@
                     @if (session()->get('type')==='admin')
                     <li><a href="{{ route('admin.dashboard') }}"><b>Admin Panel</b></a></li>
                     @elseif (session()->get('type')==='moderator')
-                    <li><a href="{{ route('moderator.dashboard') }}"><b>Admin Panel</b></a></li>
+                    <li><a href="{{ route('moderator.dashboard') }}"><b>Moderator Panel</b></a></li>
                     @endif
 
 
