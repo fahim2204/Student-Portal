@@ -126,28 +126,10 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item {{ $roles }}">
-                            <a href="{{route('moderator.roles')}}" class='sidebar-link'>
-                                <i class="bi bi-person-check"></i>
-                                <span>Roles</span>
-                            </a>
-                        </li>
                         <li class="sidebar-item {{ $all_users }}">
                             <a href="{{route('moderator.users')}}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>All Users</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{ $privacy_policy }}">
-                            <a href="{{route('moderator.web.info')}}" class='sidebar-link'>
-                                <i class="bi bi-lock-fill"></i>
-                                <span>Privacy Policy</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{ $website_info }}">
-                            <a href="{{ route('moderator.web.info') }}" class='sidebar-link'>
-                                <i class="bi bi-info-circle-fill"></i>
-                                <span>Website info</span>
                             </a>
                         </li>
                     </ul>

@@ -106,12 +106,10 @@ Route::get('/moderator', [moderatorController::class,'index'])->name('moderator.
 Route::get('/moderator/posts/all', [moderatorController::class,'posts'])->name('moderator.posts');
 Route::get('/moderator/posts/create', [moderatorController::class,'postscreate'])->name('moderator.posts.create');
 Route::post('/moderator/posts/create', [PostController::class, 'create'])->name('moderator.posts.create-POST');
-Route::get('/moderator/posts/delete/{id}', [PostController::class, 'delete'])->name('moderator.posts.delete');
-Route::get('/moderator/website-info', [moderatorController::class,'webinfo'])->name('moderator.web.info');
-Route::post('/moderator/update/website-info', [moderatorController::class, 'updateWebsiteInfo'])->name('moderator.update.web-info');
+
 Route::get('/moderator/categories', [moderatorController::class,'categories'])->name('moderator.categories');
 Route::get('/moderator/categories/search/{keyword}', [Category::class, 'searchJSON'])->name('moderator.categories.search');
-Route::get('/moderator/categories/create', [moderatornController::class,'categoriescreate'])->name('moderator.categories.create');
+Route::get('/moderator/categories/create', [moderatorController::class,'categoriescreate'])->name('moderator.categories.create');
 Route::post('/moderator/categories/create', [CategoryController::class,'create'])->name('moderator.categories.create');
 Route::get('/moderator/categories/{id}', [CategoryController::class,'delete'])->name('moderator.categories.delete');
 Route::get('/moderator/categories/edit/{id}', [moderatorController::class, 'categoriesedit'])->name('moderator.categories.edit');
@@ -119,12 +117,11 @@ Route::post('/moderator/categories/edit', [CategoryController::class, 'edit'])->
 Route::post('/moderator/users/edit/type', [UserController::class, 'changeRole'])->name('moderator.users.edit.type-POST');
 Route::get('/moderator/users', [moderatorController::class,'users'])->name('moderator.users');
 Route::get('/moderator/users/view/{id}', [moderatorController::class, 'viewUser'])->name('moderator.users.view');
-Route::get('/moderator/users/delete/{id}', [UserController::class, 'delete'])->name('moderator.users.delete');
+
 Route::get('/moderator/users/ban/{id}', [UserController::class, 'ban'])->name('moderator.users.ban');
 Route::get('/moderator/users/unban/{id}', [UserController::class, 'unban'])->name('moderator.users.unban');
 Route::get('/moderator/moderator/request', [moderatorController::class,'moderatorreq'])->name('moderator.mod.req');
-// Route::get('/admin/edit/{uname}', [AdminController::class,'useredit'])->name('admin.user.edit');
-Route::get('/moderator/roles', [AdminController::class,'roles'])->name('moderator.roles');
+
 Route::get('/moderator/instructor/request', [AdminController::class,'instructorreq'])->name('moderator.ins.req');
 
 

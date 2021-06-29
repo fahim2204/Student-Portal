@@ -64,18 +64,7 @@ class ModeratorController extends Controller
         return view('moderator.websiteinfo', ['info' => $info]);
     }
 
-    public function updateWebsiteInfo(Request $req) {
-        $info = [
-            "name" => $req->input('website-name'),
-            "about" => $req->input('website-about'),
-            "email" => $req->input('website-email')
-        ];
 
-        $path = storage_path() . "/json/info.json";
-        file_put_contents($path, json_encode($info));
-
-        return back();
-    }
     public function categories(){
         $categories = Category::with('posts')->get();
         return view('moderator.categories.all', ['categories' => $categories]);
