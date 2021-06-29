@@ -31,7 +31,13 @@
                     <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
                     <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
                     <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+                    @if (session()->get('type')==='admin')
                     <li><a href="{{ route('admin.dashboard') }}"><b>Admin Panel</b></a></li>
+                    @elseif (session()->get('type')==='moderator')
+                    <li><a href="{{ route('moderator.dashboard') }}"><b>Admin Panel</b></a></li>
+                    @endif
+
+
                 </ul>
             </div>
         </div>
