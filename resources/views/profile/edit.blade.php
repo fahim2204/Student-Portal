@@ -181,7 +181,7 @@
 
 
                         
-                        <button type="button" name="delete" class="btn btn-danger">Delete!!!</button>
+                        <button type="submit" name="delete" class="btn btn-danger">Delete!!!</button>
 
                         @if (session('msg')!= null)
                                 <div class="alert alert-success d-flex justify-content-center my-2" role="alert">

@@ -172,13 +172,16 @@ class UserController extends Controller
 
                 $req->validate([
                     
-                    'confirmpass'   => 'required|same:$password'
+                    'confirmpass'   => 'required'
                     ]);
-                if ($req->confirmpass == $password) {
-                    // User::where('uname', $req->session()->get('uname'))
-                    //     ->update([
-                    //         'password' => $req->newpass
-                    //     ]);
+                if ($req->confirmpass === $password) {
+                    //dd($user);
+                    $user->delete();
+                        
+                        $req->session()->flush();
+                        $req->session()->flash('error', 'Sorry to see you go. Register again to start a new journey ;)');
+                        return redirect()->route('registration.index');
+
                     }
 
 
