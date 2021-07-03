@@ -128,7 +128,7 @@
                             </div>
                             <div class="col-6 d-flex align-items-center border-top py-2 mt-3 ">
                                 <div class="border border-0 bg-info px-2" style="border-radius: 30px;"><a href=""><i
-                                            class="fas fa-arrow-alt-circle-up me-1"></i>{{ count($post->votes) }} <i
+                                            class="fas fa-arrow-alt-circle-up me-1"></i>{{ count($post->upvotes) }} <i
                                             class="text-muted"></a>|<a href=""></i><i
                                             class="fas fa-arrow-alt-circle-down ms-1"></i></a></div>
                                 <div class="mx-3"><i
