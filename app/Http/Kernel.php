@@ -52,6 +52,12 @@ class Kernel extends HttpKernel
         'general-login' => [
             \App\Http\Middleware\GeneralLogin::class,
         ],
+        'api-general-login' => [
+            \App\Http\Middleware\GeneralLoginApi::class,
+        ],
+        'api-admin-login' => [
+            \App\Http\Middleware\ApiAdminLogin::class,
+        ],
         'moderator-panel-instructor' => [
             \App\Http\Middleware\GeneralLogin::class,
         ]

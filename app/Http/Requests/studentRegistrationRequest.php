@@ -25,7 +25,7 @@ class studentRegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullName'  => 'required|min:3',
+            'name'  => 'required|min:3',
             'uname'     => 'required|min:5|unique:users',
             'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'cpassword' => 'required|same:password',
