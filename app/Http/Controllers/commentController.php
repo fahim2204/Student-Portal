@@ -36,4 +36,22 @@ class commentController extends Controller
             $req->catId, $req->postId
         ]);
     }
+    public function apiInsertComment(Request $req, $id) {
+        $post = Post::find($id);
+
+        $comment = Comment::insert([
+            'ctext' => $req->ctext,
+            'fr_post_id' => $id,
+            'fr_user_id' => $req->user->id,
+            'created_at' => Carbon::now()
+
+        ]);
+        Notification::insert([
+            'msg' => 'commented on your post',
+            'fr_user_id' => $req->user->id,
+            'fr_notifier_user_id' => $post->fr_user_id,
+            'created_at' => Carbon::now()
+        ]);
+        return response()->json($comment, 201);
+    }
 }

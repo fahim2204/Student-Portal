@@ -50,7 +50,6 @@ Route::get('/profile/{uname}', [UserController::class,'view'])->name('profile.vi
 Route::group(['middleware' => ['general-login']], function () {
     Route::get('/profile/info/edit', [UserController::class,'edit'])->name('profile.edit');
     Route::post('/profile/info/edit', [UserController::class,'update'])->name('profile.edit.verify');
-    //Route::post('/profile/info/edit', [UserController::class,'passupdate'])->name('profile.edit.passverify');
     Route::get('/posts/create', [PostController::class,'createview'])->name('posts.create.view');
     Route::post('/posts/create', [PostController::class,'create'])->name('posts.create.save');
     Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('posts.edit');
@@ -64,6 +63,7 @@ Route::group(['middleware' => ['general-login']], function () {
 
 //------------POST SECTION-------------//
 Route::get('/posts', [PostController::class,'viewall'])->name('posts.view.all');
+
 Route::get('/posts/search/{text}', [PostController::class,'viewsearched'])->name('posts.view.search');
 
 //Route::post('/posts/create/edit', [PostController::class,'edit'])->name('posts.edit.save');
@@ -71,7 +71,7 @@ Route::get('/posts/{subcat}', [PostController::class,'catwiseview'])->name('post
 Route::get('/posts/{subcat}/{id}', [PostController::class,'singleview'])->name('posts.view.single');
 // Route::post('/', [PostController::class,'update'])->name('posts.update');
 
-Route::post('/posts/{subcat}/{id}', [commentController::class,'insertComment'])->name('comment.add');
+
 
 //------------ADMIN SECTION-------------//
 Route::group(['middleware' => ['admin-panel']], function() {
@@ -137,6 +137,7 @@ Route::group(['middleware' => ['admin-panel-moderator']], function() {
     Route::get('/moderator/instructor/request', [moderatorController::class,'instructorRequest'])->name('moderator.instructor.request');
     Route::get('/moderator/instructor/approve/{id}', [moderatorController::class, 'approveInstructor'])->name('moderator.instructor.approve');
     Route::get('/moderator/instructor/decline/{id}', [moderatorController::class, 'declineInstructor'])->name('moderator.instructor.decline');
+    Route::post('/posts/{subcat}/{id}', [commentController::class,'insertComment'])->name('comment.add');
 
 });
 
@@ -150,3 +151,4 @@ Route::get('/instructor/group/create', [InstructorController::class,'groupcreate
 //------------STUDENT SECTION-------------//
 Route::get('/student', [StudentController::class,'index'])->name('student.dashboard');
 Route::get('/student/group/{gid}', [StudentController::class,'groups'])->name('student.groups');
+

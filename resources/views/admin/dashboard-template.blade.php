@@ -30,6 +30,7 @@
     $roles = "";
     $all_users = "";
     $privacy_policy = "";
+    $moderator_request = "";
 
     $posts_submenu = array(
         'all-posts' => "",
@@ -73,6 +74,8 @@
         $roles = "active";
     } else if(strpos(url()->current(), '/admin/privay-policy')) {
         $privacy_policy = "active";
+    } else if(strpos(url()->current(), '/moderator/request')) {
+        $moderator_request = "active";
     }
 ?>
 <body>
@@ -140,7 +143,7 @@
                                 <span>All Users</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ $all_users }}">
+                        <li class="sidebar-item {{ $moderator_request }}">
                             <a href="{{route('admin.moderator.request')}}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>Moderator Requests</span>

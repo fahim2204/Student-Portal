@@ -8,6 +8,13 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     //
+    function apiGetAll()
+    {
+        $categories = category::with('posts')->get()->sortByDesc(function ($item) {
+            return count($item->posts);
+        });
+        return response()->json($categories, 200);
+    }
     function create(Request $req)
     {
         $req->validate([
@@ -20,7 +27,19 @@ class CategoryController extends Controller
 
         $req->session()->flash('success', 'Category name '.$category->name.' created successfully');
 
-        return redirect()->route('moderator.categories.create');
+        return back();
+    }
+    function apiCreate(Request $req)
+    {
+        $req->validate([
+            'name' => 'required|max:30'
+        ]);
+
+        $category = new Category();
+        $category->name = $req->input('name');
+        $category->save();
+
+        return response()->json($category, 201);
     }
     function all()
     {
@@ -39,6 +58,14 @@ class CategoryController extends Controller
         $category->update();
 
         return redirect()->route('moderator.categories');
+    }
+    function apiEdit(Request $req)
+    {
+        $category = Category::where('id', $req->input('id'))->first();
+        $category->name = $req->input('name');
+        $category->update();
+
+        return response()->json($category, 200);
     }
     function searchJSON($keyword)
     {

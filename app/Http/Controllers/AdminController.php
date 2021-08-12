@@ -91,6 +91,11 @@ class AdminController extends Controller
         $users = User::where('type', 'moderator')->where('status', 4)->get();
         return view('admin.moderator-requests', ['users' => $users]);
     }
+    public function apiModeratorRequests()
+    {
+        $users = User::where('type', 'moderator')->where('status', 4)->get();
+        return response()->json($users, 200);
+    }
     public function approveModerator($id)
     {
         $moderator = User::where('id', $id)->first();
@@ -100,16 +105,24 @@ class AdminController extends Controller
 
         return back();
     }
-    public function declineModerator($id)
+    public function apiApproveModerator($id)
     {
         $moderator = User::where('id', $id)->first();
-        $moderator->status = -1;
+        if($moderator === null) return response()->json(false, 404);
+        $moderator->status = 1;
         $moderator->timestamps = false;
         $moderator->update();
 
-        return back();
+        return response()->json($moderator, 200);
     }
-    // public function privacy_policy() {
-    //     return view('admin')
-    // }
+    public function apiDeclineModerator($id)
+    {
+        $moderator = User::where('id', $id)->first();
+        if($moderator === null) return response()->json(false, 404);
+        $moderator->status = 2;
+        $moderator->timestamps = false;
+        $moderator->update();
+
+        return response()->json($moderator, 200);
+    }
 }

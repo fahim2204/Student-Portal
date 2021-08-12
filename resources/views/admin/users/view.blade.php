@@ -1,6 +1,7 @@
 @extends('admin.dashboard-template')
 <?php 
-use App\Http\Controller\PostController; 
+    use App\Http\Controllers\PostController; 
+    
     $user_details = null;
     if($user->type === 'admin') {
         $user_details = $user->admin;

@@ -38,13 +38,6 @@
                 <a class="link-info " href="{{route('login.index')}}">Already Registered?</a>
             </div>
 
-
-            @if (session('error')!= null)
-            <div class="alert alert-warning" role="alert">
-                 {{session('error')}}
-            </div>
-        @endif
-
     </div>
 
 
