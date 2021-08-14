@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import axios from 'axios';
 
 import Registration from './Registration/Registration'
 
@@ -16,8 +16,26 @@ import { Grid, TextField, Paper, Avatar, Button } from '@material-ui/core';
 
 const Login = (props) => {
 
-    const [email,setEmail] = useState("");
+    const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
+
+    const usernamelInputChangeHandler = event => {
+        setUsername(event.target.value);
+    };
+    const passwordInputChangeHandler = event => {
+        setPassword(event.target.value);
+    };
+
+    const formSubmissionHandler = async (event) => {
+        event.preventDefault();
+        console.log(username, password);
+        let result = {username, password}
+        try{
+            await axios.post(`localhost:8000/api/login`, result)
+        } catch(error){
+            console.log(error);
+        }
+    };
 
   var rootStyle= {
     position: 'absolute',
@@ -27,16 +45,13 @@ const Login = (props) => {
     bottom: 0,
     backgroundColor: 'rgb(216, 219, 221)'
   }
-   
+
     // const backGround = { backgroundColor: 'rgb(216, 219, 221)' }
     const paperStyle = {padding:"50px", width: 300, margin: "253px auto" }
     const headerStyle = { margin: '10px' }
     // const avatarStyle = { backgroundColor: '#1bbd7e' }
     const margin = { margin: "10px auto"}
 
-    const loginHandler=()=>{
-        console.warn(email,password);
-    }
 
     return (
         <div style={rootStyle}>
@@ -45,10 +60,10 @@ const Login = (props) => {
         <Paper elevation={10} style={paperStyle}>
             <Grid>
                 <Grid align='center'>
-                    <Avatar />     
+                    <Avatar />
                     <h2 style={headerStyle}>Login</h2>
                 </Grid>
-                <form className="submit">
+                <form className="submit" onSubmit={formSubmissionHandler}>
                     <TextField
                         required
                         id="outlined-required"
@@ -56,7 +71,7 @@ const Login = (props) => {
                         // defaultValue=""
                         variant="outlined"
                         style = {margin}
-                        onChange = {(e)=>setEmail(e.target.value)}
+                        onChange = {usernamelInputChangeHandler}
                     />
                     <br/>
                     <TextField
@@ -67,18 +82,18 @@ const Login = (props) => {
                         // autoComplete="current-password"
                         variant="outlined"
                         style = {margin}
-                        onChange = {(e)=>setPassword(e.target.value)}
+                        onChange = {passwordInputChangeHandler}
                     />
                         <br/><br/>
-                    <Button type='submit' onSubmit={loginHandler} variant='contained' color='primary' size="large">Login</Button>
-                      
+                    <Button type='submit' variant='contained' color='primary' size="large">Login</Button>
+
                 </form>
                 <br/>
-                <Link to="/registration"> New here? Sign Up</Link>  
+                <Link to="/registration"> New here? Sign Up</Link>
 
                 <Switch >
                     <Route exact path="/registration" component={Registration}/>
-                </Switch>  
+                </Switch>
             </Grid>
             </Paper>
         </div>
