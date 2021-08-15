@@ -61,9 +61,9 @@ const Registration = (props) => {
                 <Link to="/login" variant="body2">Already Have an account? Login</Link>
                 <Switch>
                     <Route exact path="/login" component={Login}/>
-                    <Route exact path="/student/Registration" component={StudentRegistration}/>
-                    <Route exact path="/instructor/Registration" component={InstructorRegistration}/>
-                    <Route exact path="/moderator/Registration" component={ModeratorRegistration}/>
+                    <Route path="/student/Registration" component={StudentRegistration}/>
+                    <Route path="/instructor/Registration" component={InstructorRegistration}/>
+                    <Route path="/moderator/Registration" component={ModeratorRegistration}/>
                 </Switch>
             </Grid>
             </Paper>

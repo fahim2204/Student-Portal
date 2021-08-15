@@ -28,7 +28,7 @@ const Home = (props) => {
 
             <Switch>
                 <Route exact path="/login" component={Login}/>
-                <Route exact path="/registration" component={Registration}/>
+                <Route path="/registration" component={Registration}/>
             </Switch>
         </Router>
         </div>

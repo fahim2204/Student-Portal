@@ -1,5 +1,16 @@
 import React from 'react'
 
+import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import PersonIcon from '@material-ui/icons/Person';
+import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
+import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import PhoneIcon from '@material-ui/icons/Phone';
+import ContactMailOutlinedIcon from '@material-ui/icons/ContactMailOutlined';
+import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined';
+import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import { makeStyles } from 'material-ui/core/styles';
+
 
 import Login from '../Login'
 
@@ -10,100 +21,179 @@ import {
     Link
   } from "react-router-dom"
 
-import { Grid, TextField, Paper, Avatar, Button } from '@material-ui/core';
+import { Grid, TextField, Paper, Button } from '@material-ui/core';
+
+
+const useStyles = makeStyles((theme)=>({
+    root: {
+        backgroundColor: 'rgb(216, 219, 221)'
+    }
+}));
 
 const StudentRegistration = (props) => {
 
-  var rootStyle= {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgb(216, 219, 221)'
-  }
+//   var rootStyle= {
+//     // position: 'absolute',
+//     top: '15px',
+//     left: 0,
+//     right: 0,
+//     bottom: 0,
+//     backgroundColor: 'rgb(216, 219, 221)'
+//   }
    
-    const paperStyle = {padding:"50px", width: 300, margin: "253px auto" }
+    // const paperStyle = {padding:"55px", width: 600, margin: "auto"}
     const headerStyle = { margin: '10px' }
     const margin = { margin: "10px auto"}
+    const classes = useStyles();
+
+
+
 
     return (
-        <div style={rootStyle}>
+        <div className={classes.root}>
         <Router >
         <div >
-        <Paper elevation={10} style={paperStyle}>
-            <Grid>
+        {/* <Paper elevation={10} style={paperStyle}> */}
+            <Grid >
                 <Grid align='center'>
-                    <Avatar />     
-                    <h2 style={headerStyle}>StudentRegistration</h2>
+                    <SchoolOutlinedIcon />     
+                    <h2 style={headerStyle}>Student Registration</h2>
                 </Grid>
-                <form className="submit" noValidate autoComplete="off">
+                <br />
+                <form className="submit" >
+                <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
                     <TextField
                         // name="fullName"
                         required
                         // id="outlined-required"
                         label="Full Name"
                         variant="outlined"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><PersonIcon /></InputAdornment>,
+                        }}
                         style = {margin}
                     />
-                    <br/>
+                </Grid>
+                    
+                <Grid item xs={12} sm={6}>
                     <TextField
                         required
                         id="outlined-required"
                         label="Username"
                         variant="outlined"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><b>@</b></InputAdornment>,
+                        }}
                         style = {margin}
                     />
+                </Grid>
+                </Grid>
                     <br/>
+                <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
                     <TextField
                         required
                         id="outlined-password-input"
                         label="Password"
                         type="password"
                         variant="outlined"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><VpnKeyOutlinedIcon /></InputAdornment>,
+                        }}
                         style = {margin}
                     />
-                    <br/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
                     <TextField
                         required
                         id="outlined-password-input"
                         label="Confirm Password"
                         type="password"
                         variant="outlined"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><VpnKeyOutlinedIcon /></InputAdornment>,
+                        }}
                         style = {margin}
                     />
+                    </Grid>
+                </Grid>
                         <br/>
+                <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
                     <TextField
                         // name="fullName"
                         required
                         // id="outlined-required"
                         label="Email"
                         variant="outlined"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><EmailOutlinedIcon /></InputAdornment>,
+                        }}
                         style = {margin}
                     />
-                        <br/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
                     <TextField
                         // name="fullName"
                         required
                         // id="outlined-required"
                         label="Phone No."
                         variant="outlined"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><PhoneIcon /></InputAdornment>,
+                        }}
                         style = {margin}
                     />
+                    </Grid>
+                </Grid>
                         <br/>
+                        <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
                     <TextField
                         // name="fullName"
                         required
                         // id="outlined-required"
                         label="Address"
                         variant="outlined"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><ContactMailOutlinedIcon /></InputAdornment>,
+                        }}
+                        style = {margin}
+                    />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                    
+                    <TextField
+                        // name="fullName"
+                        required
+                        // id="outlined-required"
+                        label="Class"
+                        variant="outlined"
+                        placeholder=" eg. BSc. 3rd Year"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><AccountBalanceOutlinedIcon /></InputAdornment>,
+                        }}
+                        style = {margin}
+                    />
+                    </Grid>
+                </Grid>
+                        <br/>
+                        <TextField
+                        // name="fullName"
+                        required
+                        type="file"
+                        // id="outlined-required"
+                        label="Profile Picture"
+                        variant="outlined"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><ImageOutlinedIcon /></InputAdornment>,
+                        }}
                         style = {margin}
                     />
                         <br/>
-                    
-                        <input type="file" required variant="contained" component="label"/>
+                        {/* <input type="file" required variant="contained" component="label" /> */}
                             {/* Image Upload */}
-                        
                         <br/><br/>
                     <Button type='submit' variant='contained' color='primary' size="large">Register</Button>
                       
@@ -111,10 +201,10 @@ const StudentRegistration = (props) => {
                 <br/>
                 <Link to="/login" variant="body2">Already Have an account? Login</Link>
                 <Switch>
-                    <Route exact path="/login" component={Login}/>
+                    <Route path="/login" component={Login}/>
                 </Switch>
             </Grid>
-            </Paper>
+            {/* </Paper> */}
         </div>
         </Router>
         </div>
@@ -122,75 +212,3 @@ const StudentRegistration = (props) => {
 };
 
 export default StudentRegistration;
-
-// import React from 'react'
-
-// const StudentRegistration = () => {
-//     return (
-//         <div className='form-content-right'>
-//         <form onSubmit="" className='form' noValidate>
-      
-//         <h1>
-//           Get started with us today! Create your account by filling out the
-//           information below.
-//         </h1>
-//         <div className='form-inputs'>
-//           <label className='form-label'>Username</label>
-//           <input
-//             className='form-input'
-//             type='text'
-//             name='username'
-//             placeholder='Enter your username'
-//             // value={values.username}
-//             // onChange={handleChange}
-//           />
-//           {/* {errors.username && <p>{errors.username}</p>} */}
-//         </div>
-//         <div className='form-inputs'>
-//           <label className='form-label'>Email</label>
-//           <input
-//             className='form-input'
-//             type='email'
-//             name='email'
-//             placeholder='Enter your email'
-//             // value={values.email}
-//             // onChange={handleChange}
-//           />
-//           {/* {errors.email && <p>{errors.email}</p>} */}
-//         </div>
-//         <div className='form-inputs'>
-//           <label className='form-label'>Password</label>
-//           <input
-//             className='form-input'
-//             type='password'
-//             name='password'
-//             placeholder='Enter your password'
-//             // value={values.password}
-//             // onChange={handleChange}
-//           />
-//           {/* {errors.password && <p>{errors.password}</p>} */}
-//         </div>
-//         <div className='form-inputs'>
-//           <label className='form-label'>Confirm Password</label>
-//           <input
-//             className='form-input'
-//             type='password'
-//             name='password2'
-//             placeholder='Confirm your password'
-//             // value={values.password2}
-//             // onChange={handleChange}
-//           />
-//           {/* {errors.password2 && <p>{errors.password2}</p>} */}
-//         </div>
-//         <button className='form-input-btn' type='submit'>
-//           Sign up
-//         </button>
-//         <span className='form-input-login'>
-//           Already have an account? Login <a href='#'>here</a>
-//         </span>
-//       </form>
-//     </div>
-//     )
-// }
-
-// export default StudentRegistration
