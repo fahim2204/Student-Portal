@@ -108,7 +108,7 @@ class PostController extends Controller
         return $post;
     }
     public function singleview($cat, $id)
-    {        
+    {
 
         $post = Post::with('category', 'user', 'upvotes', 'downvotes')->where('id', $id)->first();
         $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
@@ -117,7 +117,7 @@ class PostController extends Controller
             Post::where('id',$id)->increment('views','1');
             $post->update();
         }
-        
+
         $upcount = count($post->upvotes);
         $downcount = count($post->downvotes);
         //
@@ -141,7 +141,7 @@ class PostController extends Controller
             ->with('comments', $comments);
     }
     public function apiSingleView($id)
-    {      
+    {
         $post = Post::with('category', 'user', 'upvotes', 'downvotes')->where('id', $id)->first();
         $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
         // //dd($pageWasRefreshed);
@@ -149,7 +149,7 @@ class PostController extends Controller
             Post::where('id',$id)->increment('views','1');
             $post->update();
         }
-        
+
         $upcount = count($post->upvotes);
         $downcount = count($post->downvotes);
 
@@ -165,7 +165,7 @@ class PostController extends Controller
             ]);
         }
         $comments = commentController::allComment($post->id);
-        
+
         $single_post = [
             'post' => $post,
             'upvote' => $upcount,
@@ -208,7 +208,7 @@ class PostController extends Controller
         $post->title = $req->input('title');
         $post->pbody = $req->input('description');
         $post->update();
-        return response()->json($post, 200);   
+        return response()->json($post, 200);
     }
     // public function delete(Request $req)
     // {
@@ -236,15 +236,16 @@ class PostController extends Controller
     public function apiAdminCreate(Request $req)
     {
         $post = new Post();
-        $post->title = $req->input('post-title');
-        $post->pbody = $req->input('post-description');
-        $post->fr_category_id = (int)$req->input('post-category');
+        $post->title = $req->input('title');
+        $post->pbody = $req->input('description');
+        $post->fr_category_id = (int)$req->input('category');
         $post->fr_user_id = $req->user->id;
+        $post->views = 0;
         $imgName = time().'.'.$req->file('featured_image')->getClientOriginalExtension();
         $req->file('featured_image')->move(public_path('uploaded/images/posts'), $imgName);
         $post->image = $imgName;
         $post->save();
-        
+
         return response()->json($post, 201);
     }
     public function delete($id)
@@ -257,8 +258,18 @@ class PostController extends Controller
         $post = Post::where('id', $id)->first();
         if($req->user->id !== $post->fr_user_id) {
             return response()->json("You don't have permission to delete the post");
-        } 
+        }
         $post->delete();
         return response()->json($post, 200);
+    }
+    public function apiAdminDelete($id)
+    {
+      $post = Post::find($id);
+      if($post === null) {
+        return response()->json(null, 404);
+        die();
+      }
+      $post->delete();
+      return response()->json($post, 200);
     }
 }

@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Post;
 
 class CategoryController extends Controller
 {
     //
     function apiGetAll()
     {
-        $categories = category::with('posts')->get()->sortByDesc(function ($item) {
+        $categories = category::all()->sortByDesc(function ($item) {
             return count($item->posts);
-        });
+        })->values();
         return response()->json($categories, 200);
     }
     function create(Request $req)
@@ -50,6 +51,28 @@ class CategoryController extends Controller
         Category::where('id', $id)->delete();
         return redirect()->route('moderator.categories');
 
+    }
+    function apiDelete($id)
+    {
+      $category = Category::find($id);
+      if($category === null) {
+        return response()->json('Category not found', 404);
+      }
+
+      $posts = Post::where('fr_category_id', $id)->get();
+      if(count($posts) > 0) {
+        foreach ($posts as $post) {
+          $post->fr_category_id = 1;
+          $post->save();
+        }
+      }
+
+      $category->delete();
+
+      return response()->json([
+        'category' => $category,
+        'effect_posts' => count($posts)
+      ], 200);
     }
     function edit(Request $req)
     {
