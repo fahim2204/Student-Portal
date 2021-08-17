@@ -16,22 +16,26 @@ import { Grid, TextField, Paper, Avatar, Button } from '@material-ui/core';
 
 const Login = (props) => {
 
-    const [username,setUsername] = useState("");
+    const [uname,setUsername] = useState("");
     const [password,setPassword] = useState("");
 
     const usernamelInputChangeHandler = event => {
         setUsername(event.target.value);
+        // console.log(uname);
     };
     const passwordInputChangeHandler = event => {
         setPassword(event.target.value);
+        // console.log(password)
     };
 
     const formSubmissionHandler = async (event) => {
         event.preventDefault();
-        console.log(username, password);
-        let result = {username, password}
+
+        let result = {uname, password}
+        console.log(result);
         try{
-            await axios.post(`localhost:8000/api/login`, result)
+            const res = await axios.post(`http://127.0.0.1:8000/api/login`, result)
+            console.log(res)
         } catch(error){
             console.log(error);
         }
@@ -66,7 +70,7 @@ const Login = (props) => {
                 <form className="submit" onSubmit={formSubmissionHandler}>
                     <TextField
                         required
-                        id="outlined-required"
+                        // id="outlined-required"
                         label="Username"
                         // defaultValue=""
                         variant="outlined"
@@ -91,9 +95,9 @@ const Login = (props) => {
                 <br/>
                 <Link to="/registration"> New here? Sign Up</Link>
 
-                <Switch >
+                {/* <Switch >
                     <Route exact path="/registration" component={Registration}/>
-                </Switch>
+                </Switch> */}
             </Grid>
             </Paper>
         </div>

@@ -19,17 +19,17 @@ const Home = (props) => {
         <div>
         <Router >
             <h1>Home page to login route</h1>
-            <Link to="/login" style={{ textDecoration: 'none' }}><Button variant='contained' color='primary' size="large">Login</Button></Link>    
-            
-            <Link to="/registration" style={{ textDecoration: 'none' }}><Button variant='contained' color='primary' size="large">Sign up</Button></Link>    
-            
+            <Link to="/login" style={{ textDecoration: 'none' }}><Button variant='contained' color='primary' size="large">Login</Button></Link>
+
+            <Link to="/registration" style={{ textDecoration: 'none' }}><Button variant='contained' color='primary' size="large">Sign up</Button></Link>
 
 
 
-            <Switch>
+
+            {/* <Switch>
                 <Route exact path="/login" component={Login}/>
                 <Route path="/registration" component={Registration}/>
-            </Switch>
+            </Switch> */}
         </Router>
         </div>
     );

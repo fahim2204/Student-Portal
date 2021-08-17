@@ -17,7 +17,7 @@ class GeneralLogin
     public function handle(Request $request, Closure $next)
     {
         if($request->session()->has('uname')) {
-            return $next($request);
+            return $next($request)->header('Access-Control-Allow-Origin', '*');;
         } else {
             return redirect()->route('login.index');
         }

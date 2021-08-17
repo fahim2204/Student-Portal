@@ -9,7 +9,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import ContactMailOutlinedIcon from '@material-ui/icons/ContactMailOutlined';
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
-import { makeStyles } from 'material-ui/core/styles';
+// import { makeStyles } from 'material-ui/core/styles';
 
 
 import Login from '../Login'
@@ -24,39 +24,39 @@ import {
 import { Grid, TextField, Paper, Button } from '@material-ui/core';
 
 
-const useStyles = makeStyles((theme)=>({
-    root: {
-        backgroundColor: 'rgb(216, 219, 221)'
-    }
-}));
+// const useStyles = makeStyles((theme)=>({
+//     root: {
+//         backgroundColor: 'rgb(216, 219, 221)'
+//     }
+// }));
 
 const StudentRegistration = (props) => {
 
-//   var rootStyle= {
-//     // position: 'absolute',
-//     top: '15px',
-//     left: 0,
-//     right: 0,
-//     bottom: 0,
-//     backgroundColor: 'rgb(216, 219, 221)'
-//   }
-   
-    // const paperStyle = {padding:"55px", width: 600, margin: "auto"}
+  var rootStyle= {
+    // position: 'absolute',
+    top: '15px',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgb(216, 219, 221)'
+  }
+
+    const paperStyle = {padding:"55px", width: 600, margin: "auto"}
     const headerStyle = { margin: '10px' }
     const margin = { margin: "10px auto"}
-    const classes = useStyles();
+    // const classes = useStyles();
 
 
 
 
     return (
-        <div className={classes.root}>
+        <div style={rootStyle}>
         <Router >
         <div >
-        {/* <Paper elevation={10} style={paperStyle}> */}
+        <Paper elevation={10} style={paperStyle}>
             <Grid >
                 <Grid align='center'>
-                    <SchoolOutlinedIcon />     
+                    <SchoolOutlinedIcon />
                     <h2 style={headerStyle}>Student Registration</h2>
                 </Grid>
                 <br />
@@ -75,7 +75,7 @@ const StudentRegistration = (props) => {
                         style = {margin}
                     />
                 </Grid>
-                    
+
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required
@@ -163,7 +163,7 @@ const StudentRegistration = (props) => {
                     />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    
+
                     <TextField
                         // name="fullName"
                         required
@@ -196,15 +196,15 @@ const StudentRegistration = (props) => {
                             {/* Image Upload */}
                         <br/><br/>
                     <Button type='submit' variant='contained' color='primary' size="large">Register</Button>
-                      
+
                 </form>
                 <br/>
                 <Link to="/login" variant="body2">Already Have an account? Login</Link>
-                <Switch>
+                {/* <Switch>
                     <Route path="/login" component={Login}/>
-                </Switch>
+                </Switch> */}
             </Grid>
-            {/* </Paper> */}
+            </Paper>
         </div>
         </Router>
         </div>

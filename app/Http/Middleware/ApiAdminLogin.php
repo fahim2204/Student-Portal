@@ -19,6 +19,6 @@ class ApiAdminLogin
         if($request->user->type !== 'admin') {
             return response()->json(['error' => 'Access denied'], 400);
         }
-        return $next($request);
+        return $next($request)->header('Access-Control-Allow-Origin', '*');;
     }
 }
