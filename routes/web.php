@@ -51,6 +51,7 @@ Route::get('/profile/{uname}', [UserController::class,'view'])->name('profile.vi
 Route::group(['middleware' => ['general-login']], function () {
     Route::get('/profile/info/edit', [UserController::class,'edit'])->name('profile.edit');
     Route::post('/profile/info/edit', [UserController::class,'update'])->name('profile.edit.verify');
+    //Route::post('/profile/info/edit', [UserController::class,'passupdate'])->name('profile.edit.passverify');
     Route::get('/posts/create', [PostController::class,'createview'])->name('posts.create.view');
     Route::post('/posts/create', [PostController::class,'create'])->name('posts.create.save');
     Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('posts.edit');

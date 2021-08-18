@@ -37,10 +37,12 @@
                     {{-- <div class="lh-sm text-dark text-wrap">{{$post->pbody}}</div> --}}
                 </div>
                 <div class="col-8 d-flex align-items-center border-top p-1 ">
+
                     <div class="border border-0 bg-info px-2" style="border-radius: 30px;"><a href="{{ route('posts.upvote', ['user_id' => session()->get('id'), 'post_id' => $post->id]) }}"><i
                         class="fas fa-arrow-alt-circle-up me-1"></i>{{ count($post->upvotes) }} <i
                         class="text-muted"></a>| {{ count($post->downvotes) }}<a href="{{ route('posts.downvote', ['user_id' => session()->get('id'), 'post_id' => $post->id]) }}"></i><i
                         class="fas fa-arrow-alt-circle-down ms-1"></i></a></div>
+
                     <div class="mx-3"><i class="fas fa-comment-dots me-1"></i>{{ count($post->comments) }}</div>
                     <div class="me-3"><i class="fas fa-eye me-1"></i>{{ $post->views }}</div>
                 </div>

@@ -78,12 +78,13 @@
                     <div class="row align-items-center g-0 m-2">
                         <div class="col-1 text-center">
                             <!-- Will change this picture dynamically -->
-                            <a class="text-dark" href="{{route('profile.view',session()->get('uname'))}}"><span class="fas fa-user-circle fa-2x"></span></a>
+                            <a class="text-dark" href="{{ route('profile.view', session()->get('uname')) }}"><span
+                                    class="fas fa-user-circle fa-2x"></span></a>
                         </div>
                         <div class="col-9 pe-5">
-                            <a href="{{route('posts.create.view')}}">
-                            <input class="form-control fs-6 my-2 py-3 rounded-3" type="text" name="postBox" id="postBox"
-                                placeholder="What is your question ?"></a>
+                            <a href="{{ route('posts.create.view') }}">
+                                <input class="form-control fs-6 my-2 py-3 rounded-3" type="text" name="postBox"
+                                    id="postBox" placeholder="What is your question ?"></a>
                         </div>
                         <div class="col-2"></div>
                     </div>
@@ -91,9 +92,9 @@
                 </div>
             @endif
             <div class="btn-group mt-4">
-                <a href="{{route('home')}}" class="btn btn-primary active" aria-current="page">Question</a>
-                <a href="{{route('blog')}}" class="btn btn-primary">Blogs</a>
-              </div>
+                <a href="{{ route('home') }}" class="btn btn-primary active" aria-current="page">Question</a>
+                <a href="{{ route('blog') }}" class="btn btn-primary">Blogs</a>
+            </div>
             <h3 class="pb-2 mb-2 mt-3 fst-italic border-bottom">
                 Trending Questions
             </h3>
@@ -122,11 +123,12 @@
                             <div class="ms-3 pe-3 col-12 mb-2">
                                 {{-- <div class="lh-sm text-dark text-wrap">{{$post->pbody}}</div> --}}
                                 {{ \Illuminate\Support\Str::limit($post->pbody, 550, '....') }} <a
-                                href="{{ route('posts.view.single', [$post->category->name, $post->id]) }}"
-                                class='text-primary'>Read More</a>
+                                    href="{{ route('posts.view.single', [$post->category->name, $post->id]) }}"
+                                    class='text-primary'>Read More</a>
                                 {{-- <div class="lh-sm text-dark text-wrap">{{$post->pbody}}</div> --}}
                             </div>
                             <div class="col-6 d-flex align-items-center border-top py-2 mt-3 ">
+
                                 @if (session()->has('id'))
                                 <div class="border border-0 bg-info px-2" style="border-radius: 30px;">
                                     <a href="{{ route('posts.upvote', ['user_id' => session()->get('id'), 'post_id' => $post->id]) }}"><i
@@ -143,6 +145,7 @@
                                 </div>
                                 @endif
                                 
+
                                 <div class="mx-3"><i
                                         class="fas fa-comment-dots me-1"></i>{{ count($post->comments) }}
                                 </div>

@@ -13,6 +13,7 @@ use App\Models\Instructor;
 use App\Models\Admin;
 use App\Models\Qualification;
 use Illuminate\Support\Carbon;
+use Validator;
 
 
 class UserController extends Controller
@@ -26,17 +27,22 @@ class UserController extends Controller
         $tempIns = Instructor::where('fr_user_id', $tempUser->id)
             ->first();
 
-        $qalifications = Qualification::where('fr_instructor_id', $tempIns->id)->get();
-        $posts = PostController::all()->where('fr_user_id', $tempUser->id);
-        // $post = Post::with('comment', 'vote')->where('fr_user_id', $tempUser->id)
-        //                             ->get();
-        $user = User::with($tempUser->type)->where('uname', $uname)->first();
-        //dd($user);
-        return view('profile.view')->with('user', $user)
-            ->with('type', $tempUser->type)
-            ->with('posts', $posts)
-            ->with('slinks', $slinks)
-            ->with('qualifications', $qalifications);
+            $posts = PostController::all()->where('fr_user_id', $tempUser->id);
+            $user = User::with($tempUser->type)->where('uname', $uname)->first();
+            //dd($user);
+            if(session()->get('type')=='instructor'){
+                $qalifications = Qualification::where('fr_instructor_id', $tempIns->id)->get();
+                return view('profile.view')->with('user', $user)
+                    ->with('type', $tempUser->type)
+                    ->with('posts', $posts)
+                    ->with('slinks', $slinks)
+                    ->with('qualifications', $qalifications);
+            }else{
+                return view('profile.view')->with('user', $user)
+                    ->with('type', $tempUser->type)
+                    ->with('posts', $posts)
+                    ->with('slinks', $slinks);
+            }
     }
     public function apiGetAll()
     {
@@ -108,6 +114,7 @@ class UserController extends Controller
             ->with('type', $tempUser->type)
             ->with('slinks', $slinks);
     }
+
     public function apiBan($id)
     {
         $user = User::find($id);
@@ -144,8 +151,16 @@ class UserController extends Controller
 
         // $type = $user->type;
 
-
+    if($req->has('form1')){
         $type = $req->session()->get('type');
+        $req->validate([
+            'name'      => 'required|min:3',
+            'email'     => 'required',
+            'contact'   => 'required|regex:/(01)[0-9]{9}/',
+            'address'   => 'required'
+            ]);
+
+        
         //dd($type);
         if ($type == 'moderator') {
             moderator::where('fr_user_id', $req->session()->get('id'))
@@ -176,20 +191,27 @@ class UserController extends Controller
         } elseif ($type == 'student') {
             student::where('fr_user_id', $req->session()->get('id'))
                 ->update([
-                    'name' => $req->name,
-                    'email' => $req->email,
-                    'address' => $req->address,
+                    'name'       => $req->name,
+                    'email'      => $req->email,
+                    'address'    => $req->address,
                     'updated_at' => Carbon::now(),
-                    'contact' => $req->contact
+                    'contact'    => $req->contact
                 ]);
 
             $req->session()->flash('msg', 'Update Successful');
             return redirect()->route('profile.edit');
             //return view('profile.edit');
         }
+    }
 
-        elseif($req->newpass!=null){
-            if($req->newpasse===$req->confirmpass){
+    elseif($req->has('form2')){
+        $req->validate([
+            'oldpass'       => 'required',
+            'newpass'       => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'confirmpass'   => 'required|same:newpass'
+            ]);
+       if($req->newpass!=null){
+            if($req->newpass===$req->confirmpass){
                     $user = User::where('uname', $req->session()->get('uname'))
 
 
@@ -197,14 +219,14 @@ class UserController extends Controller
                 $password = $user->password;
 
                 if ($req->oldpass == $password) {
-                    user::where('fr_user_id', $req->session()->get('id'))
+                    User::where('uname', $req->session()->get('uname'))
                         ->update([
                             'password' => $req->newpass
                         ]);
                     $req->session()->flash('msg', 'Update Successful');
                     return redirect()->route('profile.edit');
                 } else {
-                    $req->session()->flash('error', 'Unauthorized Access');
+                    $req->session()->flash('error', 'Give Old Password');
                     return redirect()->route('profile.edit');
                 }
             } else {
@@ -215,7 +237,7 @@ class UserController extends Controller
         }
         else{
 
-            $req->session()->flash('error', 'Check Again');
+            $req->session()->flash('error', 'Fill All the Fields');
             return redirect()->route('profile.edit');
         }
     }
@@ -323,4 +345,5 @@ class UserController extends Controller
 
       return response()->json($user_final, 200);
     }
+
 }
