@@ -384,7 +384,7 @@ class UserController extends Controller
                     'contact' => $req->contact
                 ]);
 
-              return response()->json(["msg" => "Update Successful"], 200)
+              return response()->json(["msg" => "Update Successful"], 200);
             //return view('profile.edit');
         } elseif ($type == 'student') {
             student::where('fr_user_id', $req->user->id)
@@ -396,7 +396,7 @@ class UserController extends Controller
                     'contact' => $req->contact
                 ]);
 
-            return response()->json(["msg" => "Update Successful"], 200)
+            return response()->json(["msg" => "Update Successful"], 200);
             //return view('profile.edit');
         }
 
@@ -411,12 +411,12 @@ class UserController extends Controller
                         ->update([
                             'password' => $req->newpass
                         ]);
-                    return response()->json(["msg" => "Update Successful"], 200)
+                    return response()->json(["msg" => "Update Successful"], 200);
                 } else {
-                    return response()->json(["error" => "Unauthorized Access"], 200)
+                    return response()->json(["error" => "Unauthorized Access"], 200);
                 }
             } else {
-                return response()->json(["error" => "Confirm New Password Correctly"], 200)
+                return response()->json(["error" => "Confirm New Password Correctly"], 200);
             }
 
         }
