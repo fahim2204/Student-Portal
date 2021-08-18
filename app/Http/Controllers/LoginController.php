@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use GrahamCampbell\ResultType\Result;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -63,23 +65,49 @@ class LoginController extends Controller
             return redirect()->route('login.index');
         }
 
-        // dd($users);
-        // ->where('password','=',$req->password);
-        // have to add type and status
-        // ->where();
-        // if($user!==null){
-        //     $req->session()->put('uname', $req->uname);
-        //     $req->session()->put('type', $req->type);
-        //     //set session or cookie
-        //     return redirect()->route('home');
-        // }
-        // else{
+    }
+    public function apiVerify(Request $req)
+    {
 
-        //     $req->session()->flash('error', 'Invalid username or password!');
-        //     // return redirect('/login');
-        //     return redirect()->route('login.index');
-        // }
+        $user = User::where('uname', $req->input('uname'))->first();
+        $password = $req->input('password');
+        $error = [];
+        if ($user !== null) {
+            $type = $user->type;
+            $name = User::with($type)->where('uname', $req->input('uname'))->first();
+            if ($user->password === $password) {
+                // if(Hash::check($req->input('password'))){
+                if($user->status === -1) {
+                    $error['error'] = 'Your Moderator account request has been declined by admin';
+                    return $error;
+                }
 
+                if ($user->status === -1) {
+                    $error['error'] = 'Your' . $user->type . 'account request has been declined by admin';
+                    return $error;
+                }
+                else if($user->status === 4) {
+                    $error['msg'] = 'Your ' . $user->type . ' account request pending by moderator';
+                    return $error;
+                }
+                $user->token = Hash::make(Str::random(60));
+                $user->timestamps = false;
+                $user->save();
+                return response()->json([
+                    "token" => $user->token,
+                    "id" => $user->id,
+                    "type" => $user->type
+                ]);
+
+                // }
+            } else {
+                $error['error'] = 'Invalid username or password!';
+                return $error;
+            }
+        } else {
+            $error['error'] = 'Invalid username or password!';
+            return $error;
+        }
 
     }
 }

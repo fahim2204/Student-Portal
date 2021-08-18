@@ -19,7 +19,7 @@ class GeneralLogin
         if($request->session()->has('uname')) {
             return $next($request);
         } else {
-            return back();
+            return redirect()->route('login.index');
         }
 
     }

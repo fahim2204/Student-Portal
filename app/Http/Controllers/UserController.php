@@ -44,9 +44,68 @@ class UserController extends Controller
                     ->with('slinks', $slinks);
             }
     }
+    public function apiGetAll()
+    {
+        $users = User::all();
+        return response()->json($users, 200);
+    }
+    public function apiViewUser($id)
+    {
+        $tempUser = User::where('id', (int)$id)
+            ->first();
+        $slinks = Slink::where('fr_user_id', $tempUser->id)->get();
+
+        $tempIns = Instructor::where('fr_user_id', $tempUser->id)
+            ->first();
+
+        $qualifications = Qualification::where('fr_instructor_id', $tempUser->id)->get();
+        $posts = PostController::all()->where('fr_user_id', $tempUser->id)->values();
+        // $post = Post::with('comment', 'vote')->where('fr_user_id', $tempUser->id                           ->get();
+        $user = User::with($tempUser->type)->where('id', (int)$id)->first();
+        // To prevent different key names for different user types
+        $user->details = $user[$tempUser->type];
+        unset($user[$tempUser->type]);
+        // Sending full url to serve image from api
+        $user->details->image = url('/').'/upload/'.$user->details->image;
+        //dd($user);
+        return response()->json([
+          'user' => $user,
+          'type' => $tempUser->type,
+          'posts' => $posts,
+          'slinks' => $slinks,
+          'qualifications' => $qualifications
+        ]);
+        // return view('profile.view')->with('user', $user)
+        //     ->with('type', $tempUser->type)
+        //     ->with('posts', $posts)
+        //     ->with('slinks', $slinks)
+        //     ->with('qualifications', $qalifications);
+        // $user = User::where('id', (int)$id)->with('posts', 'comments', 'admin', 'instructor', 'moderator', 'student')->first();
+        // return response()->json($user, 200);
+    }
+    public function apiDelete($id)
+    {
+        $user = User::find($id);
+        if($user === null) {
+            return response()->json('User not found', 404);
+        }
+        $userDetails = '';
+
+        if($user->type === 'admin') {
+            $userDetails = Admin::where('fr_user_id', $user->id);
+        } else if ($user->type === 'moderator') {
+            $userDetails = moderator::where('fr_user_id', $user->id);
+        } else if ($user->type === 'instructor') {
+            $userDetails = Instructor::where('fr_user_id', $user->id);
+        } else if ($user->type === 'student') {
+            $userDetails = Student::where('fr_user_id', $user->id);
+        }
+        $userDetails->delete();
+        $user->delete();
+        return response()->json($user, 200);
+    }
     public function edit(Request $req)
     {
-
         $tempUser = User::where('uname', $req->session()->get('uname'))
             ->first();
         $slinks = Slink::where('fr_user_id', $tempUser->id)->get();
@@ -56,7 +115,30 @@ class UserController extends Controller
             ->with('slinks', $slinks);
     }
 
-    public function update(Request $req)
+    public function apiBan($id)
+    {
+        $user = User::find($id);
+        if($user === null) return response()->json('User not found', 404);
+        $user->banned = 1;
+        return response()->json($user, 200);
+    }
+    public function apiUnban($id)
+    {
+        $user = User::find($id);
+        if($user === null) return response()->json('User not found', 404);
+        $user->banned = 0;
+        return response()->json($user, 200);
+    }
+    public function apiToggleBan($id)
+    {
+      $user = User::find($id);
+      if($user === null) return response()->json('User not found', 404);
+      $user->banned = !$user->banned;
+      $user->timestamps = false;
+      $user->save();
+      return response()->json($user, 200);
+    }
+    public function update(editRequest $req)
     {
 
         // $user = User::where('uname', $req->session()->get('uname'))
@@ -159,46 +241,109 @@ class UserController extends Controller
             return redirect()->route('profile.edit');
         }
     }
+    public function changeRole(Request $req)
+    {
+        $user = User::where('id', (int)$req->input('id'))->with($req->input('prev_type'))->first();
+        $user_details = null;
+        $new_user = null;
+        if($req->input('prev_type') === 'admin') {
+            $user_details = $user->admin;
+        } else if($req->input('prev_type') === 'moderator') {
+            $user_details = $user->moderator;
+        }  else if($req->input('prev_type') === 'instructor') {
+            $user_details = $user->instructor;
+        }  else if($req->input('prev_type') === 'student') {
+            $user_details = $user->student;
+        }
+
+        if($req->input('type') === 'admin') {
+            $new_user = new Admin();
+        } else if($req->input('type') === 'moderator') {
+            $new_user = new moderator();
+        }  else if($req->input('type') === 'instructor') {
+            $new_user = new Instructor();
+        }  else if($req->input('type') === 'student') {
+            $new_user = new Student();
+        }
+
+        $new_user->contact = $user_details->contact;
+        $new_user->email = $user_details->email;
+        $new_user->name = $user_details->name;
+        $new_user->image = $user_details->image;
+        $new_user->fr_user_id = $user_details->fr_user_id;
+        $new_user->save();
+        $user_details->delete();
+
+        $user->type = $req->input('type');
+        $user->timestamps = false;
+        $user->update();
+
+        return redirect()->route('admin.users.view', ['id' => $req->input('id')]);
+    }
+    public function apiChangeRole(Request $req)
+    {
+        $user = User::where('id', (int)$req->input('id'))->with($req->prev_type)->first();
+
+        $user_details = null;
+        $new_user = null;
+        if($req->prev_type === 'admin') {
+            $user_details = Admin::where('fr_user_id', $req->id)->first();
+        } else if($req->prev_type === 'moderator') {
+            $user_details = moderator::where('fr_user_id', $req->id)->first();
+        }  else if($req->prev_type === 'instructor') {
+            $user_details = Instructor::where('fr_user_id', $req->id)->first();
+        }  else if($req->prev_type === 'student') {
+            $user_details = Student::where('fr_user_id', $req->id)->first();
+        }
+
+        if($req->type === 'admin') {
+            $new_user = new Admin();
+        } else if($req->type === 'moderator') {
+            $new_user = new moderator();
+        }  else if($req->type === 'instructor') {
+            $new_user = new Instructor();
+        }  else if($req->type === 'student') {
+            $new_user = new Student();
+        }
+
+        $new_user->contact = $user_details->contact;
+        $new_user->email = $user_details->email;
+        $new_user->name = $user_details->name;
+        $new_user->image = $user_details->image;
+        $new_user->fr_user_id = $user_details->fr_user_id;
+        $new_user->save();
+        $user_details->delete();
+
+        $user->type = $req->type;
+        $user->timestamps = false;
+        $user->update();
 
 
+        return response()->json($user, 200);
+    }
+    public function apiSearch($uname) {
+      $users = User::where('uname', 'LIKE', $uname.'%')->get();
+      $user_final = [];
+      foreach ($users as $user) {
+        $user_details = null;
+        $new_user = null;
+        if($user->type === 'admin') {
+            $user_details = Admin::where('fr_user_id', $user->id)->first();
+        } else if($user->type === 'moderator') {
+            $user_details = moderator::where('fr_user_id', $user->id)->first();
+        }  else if($user->type === 'instructor') {
+            $user_details = Instructor::where('fr_user_id', $user->id)->first();
+        }  else if($user->type === 'student') {
+            $user_details = Student::where('fr_user_id', $user->id)->first();
+        }
+        $user_details->image = url('/').'/upload/'.$user_details->image;
+        array_push($user_final, [
+          'user' => $user,
+          'details' => $user_details
+        ]);
+      }
 
-
-    elseif($req->has('delete')){
-
-        
-        $user = User::where('uname', $req->session()->get('uname'))
-                    ->first();
-                $password = $user->password;
-
-                $req->validate([
-                    
-                    'confirmpass'   => 'required'
-                    ]);
-                if ($req->confirmpass === $password) {
-                    //dd($user);
-                    $user->delete();
-                        
-                        $req->session()->flush();
-                        $req->session()->flash('error', 'Sorry to see you go. Register again to start a new journey ;)');
-                        return redirect()->route('registration.index');
-
-                    }
-
-
-
-
+      return response()->json($user_final, 200);
     }
 
-
-
-
-
-
-
-
-    }
-
-
-
-    
 }

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Student;
+use App\Models\Admin;
+use App\Models\Moderator;
 
 class AdminController extends Controller
 {
@@ -45,10 +47,10 @@ class AdminController extends Controller
     }
     public function webinfo(){
         $path = storage_path() . "\json\info.json";
-        $info = json_decode(file_get_contents($path)); 
+        $info = json_decode(file_get_contents($path));
         return view('admin.websiteinfo', ['info' => $info]);
     }
-    
+
     public function updateWebsiteInfo(Request $req) {
         $info = [
             "name" => $req->input('website-name'),
@@ -57,7 +59,7 @@ class AdminController extends Controller
         ];
 
         $path = storage_path() . "/json/info.json";
-        file_put_contents($path, json_encode($info)); 
+        file_put_contents($path, json_encode($info));
 
         return back();
     }
@@ -91,6 +93,11 @@ class AdminController extends Controller
         $users = User::where('type', 'moderator')->where('status', 4)->get();
         return view('admin.moderator-requests', ['users' => $users]);
     }
+    public function apiModeratorRequests()
+    {
+        $users = User::where('type', 'moderator')->where('status', 4)->get();
+        return response()->json($users, 200);
+    }
     public function approveModerator($id)
     {
         $moderator = User::where('id', $id)->first();
@@ -100,16 +107,80 @@ class AdminController extends Controller
 
         return back();
     }
-    public function declineModerator($id)
+    public function apiApproveModerator($id)
     {
         $moderator = User::where('id', $id)->first();
-        $moderator->status = -1;
+        if($moderator === null) return response()->json(false, 404);
+        $moderator->status = 1;
         $moderator->timestamps = false;
         $moderator->update();
 
-        return back();
+        return response()->json($moderator, 200);
     }
-    // public function privacy_policy() {
-    //     return view('admin')
-    // }
+    public function apiDeclineModerator($id)
+    {
+        $moderator = User::where('id', $id)->first();
+        if($moderator === null) return response()->json(false, 404);
+        $moderator->status = 2;
+        $moderator->timestamps = false;
+        $moderator->update();
+
+        return response()->json($moderator, 200);
+    }
+    public function apiDashboardData()
+    {
+      $categories = category::all();
+
+      $students = User::where('type', 'student')->get();
+      $instructors = User::where('type', 'instructor')->get();
+      $admins = User::where('type', 'admin')->get();
+      $moderators = User::where('type', 'moderator')->get();
+
+      $top_posts = Post::with('user', 'upvotes')->get()->sortByDesc(function ($p) {
+        return count($p->upvotes);
+      })->values()->take(3);
+
+      $top_posts_final = [];
+      foreach($top_posts as $index => $post) {
+        if($post->user->type === "admin") {
+          $userDetails = Admin::where('fr_user_id', $post->user->id)->first();
+        } else if($post->user->type === "moderator") {
+          $userDetails = Moderator::where('fr_user_id', $post->user->id)->first();
+        } else if($post->user->type === "instructor") {
+          $userDetails = Instructor::where('fr_user_id', $post->user->id)->first();
+        }else if($post->user->type === "student") {
+          $userDetails = Student::where('fr_user_id', $post->user->id)->first();
+        }
+        array_push($top_posts_final, [
+          'id' => $post->id,
+          'title' => $post->title,
+          'uname' => $post->user->uname,
+          'user_avatar' => url('/').'/upload/'.$userDetails->image
+        ]);
+      }
+      $student_count = count($students);
+      $instructor_count = count($instructors);
+      $admin_count = count($admins);
+      $moderator_count = count($moderators);
+
+      $category_data = [];
+      foreach ($categories as $cat) {
+        array_push($category_data, [
+          'name' => $cat->name,
+          'post_count' => count($cat->posts)
+        ]);
+      }
+
+      $data = [
+        "student_count" => $student_count,
+        "instructor_count" => $instructor_count,
+        "admin_count" => $admin_count,
+        "moderator_count" => $moderator_count,
+        "category_data" => $category_data,
+        "students" => $students,
+        "instructors" => $instructors,
+        "top_posts" => $top_posts_final
+      ];
+      return response()->json($data, 200);
+    }
 }

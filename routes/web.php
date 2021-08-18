@@ -45,6 +45,7 @@ Route::post('/student/registration', [RegistrationController::class,'studentveri
 Route::post('/instructor/registration', [RegistrationController::class,'instructorverify'])->name('instructor.registration.verify');
 Route::post('/moderator/registration', [RegistrationController::class,'moderatorverify'])->name('moderator.registration.verify');
 
+
 //------------PROFILE SECTION-------------//
 Route::get('/profile/{uname}', [UserController::class,'view'])->name('profile.view');
 Route::group(['middleware' => ['general-login']], function () {
@@ -64,6 +65,7 @@ Route::group(['middleware' => ['general-login']], function () {
 
 //------------POST SECTION-------------//
 Route::get('/posts', [PostController::class,'viewall'])->name('posts.view.all');
+
 Route::get('/posts/search/{text}', [PostController::class,'viewsearched'])->name('posts.view.search');
 
 //Route::post('/posts/create/edit', [PostController::class,'edit'])->name('posts.edit.save');
@@ -71,7 +73,7 @@ Route::get('/posts/{subcat}', [PostController::class,'catwiseview'])->name('post
 Route::get('/posts/{subcat}/{id}', [PostController::class,'singleview'])->name('posts.view.single');
 // Route::post('/', [PostController::class,'update'])->name('posts.update');
 
-Route::post('/posts/{subcat}/{id}', [commentController::class,'insertComment'])->name('comment.add');
+
 
 //------------ADMIN SECTION-------------//
 Route::group(['middleware' => ['admin-panel']], function() {
@@ -137,6 +139,7 @@ Route::group(['middleware' => ['admin-panel-moderator']], function() {
     Route::get('/moderator/instructor/request', [moderatorController::class,'instructorRequest'])->name('moderator.instructor.request');
     Route::get('/moderator/instructor/approve/{id}', [moderatorController::class, 'approveInstructor'])->name('moderator.instructor.approve');
     Route::get('/moderator/instructor/decline/{id}', [moderatorController::class, 'declineInstructor'])->name('moderator.instructor.decline');
+    Route::post('/posts/{subcat}/{id}', [commentController::class,'insertComment'])->name('comment.add');
 
 });
 
