@@ -43,7 +43,7 @@ Route::get('/users/search/{uname}', [UserController::class, 'apiSearch']);
 Route::post('/student/registration', [RegistrationController::class, 'apiStudentVerify']);
 Route::post('/instructor/registration', [RegistrationController::class, 'apiInstructorVerify']);
 Route::post('/moderator/registration', [RegistrationController::class, 'apiModeratorVerify']);
-
+Route::get('/profile/{uname}', [UserController::class,'apiView']);
 // Route::get('/admin/dashboard/data', [AdminController::class, 'apiDashboardData']);
 //Route::post('/posts/create', [PostController::class,'apiAdminCreate']);
 
@@ -54,6 +54,7 @@ Route::group(['middleware' => ['api-general-login', 'web']], function() {
     Route::get('/posts/upvote/{post_id}', [VoteController::class, 'apiUpVote'])->name('posts.upvote');
     Route::get('/posts/downvote/{post_id}', [VoteController::class, 'apiDownVote'])->name('posts.downvote');
     Route::post('/posts/comment/{post_id}', [commentController::class, 'apiInsertComment']);
+    Route::post('/profile/info/edit', [UserController::class,'apiUpdate']);
 
     Route::group(['middleware' => ['api-general-login', 'web', 'api-admin-login']], function() {
 

@@ -160,7 +160,7 @@ class UserController extends Controller
             'address'   => 'required'
             ]);
 
-        
+
         //dd($type);
         if ($type == 'moderator') {
             moderator::where('fr_user_id', $req->session()->get('id'))
@@ -320,6 +320,109 @@ class UserController extends Controller
 
 
         return response()->json($user, 200);
+    }
+    public function apiView(Request $req, $uname)
+    {
+        $tempUser = User::where('uname', $uname)
+            ->first();
+        $slinks = Slink::where('fr_user_id', $tempUser->id)->get();
+        $qalifications = [];
+        if($tempUser->type === 'instructor') {
+          $tempIns = Instructor::where('fr_user_id', $tempUser->id)
+              ->first();
+
+          $qalifications = Qualification::where('fr_instructor_id', $tempIns->id)->get();
+        }
+
+        $posts = PostController::all()->where('fr_user_id', $tempUser->id)->values();
+        // $post = Post::with('comment', 'vote')->where('fr_user_id', $tempUser->id)
+        //                             ->get();
+        $user = User::with($tempUser->type)->where('uname', $uname)->first();
+        //dd($user);
+        return response()->json([
+          "user" => $user,
+          "posts" => $posts,
+          "slinks" => $slinks,
+          "qualifications" => $qalifications
+        ], 200);
+
+    }
+    public function apiUpdate(editRequest $req)
+    {
+      $validator = Validator::make($req->all(), [
+          'name'      => 'required|min:3',
+          'email'     => 'required',
+          'contact'   => 'required|regex:/(01)[0-9]{9}/',
+          'address'   => 'required'
+      ]);
+      if ($validator->fails()) {
+          return response()->json($validator->errors()->getMessages(), 200);
+      }
+
+        $type = $req->user->type;
+        //dd($type);
+        if ($type == 'moderator') {
+            moderator::where('fr_user_id', $req->user->id)
+                ->update([
+                    'name' => $req->name,
+                    'email' => $req->email,
+                    'address' => $req->address,
+                    'updated_at' => Carbon::now(),
+                    'contact' => $req->contact
+                ]);
+
+            $req->session()->flash('msg', 'Update Successful');
+            return redirect()->route('profile.edit');
+            //return view('profile.edit');
+        } elseif ($type == 'instructor') {
+            student::where('fr_user_id', $req->user->id)
+                ->update([
+                    'name' => $req->name,
+                    'email' => $req->email,
+                    'address' => $req->address,
+                    'updated_at' => Carbon::now(),
+                    'contact' => $req->contact
+                ]);
+
+              return response()->json(["msg" => "Update Successful"], 200)
+            //return view('profile.edit');
+        } elseif ($type == 'student') {
+            student::where('fr_user_id', $req->user->id)
+                ->update([
+                    'name' => $req->name,
+                    'email' => $req->email,
+                    'address' => $req->address,
+                    'updated_at' => Carbon::now(),
+                    'contact' => $req->contact
+                ]);
+
+            return response()->json(["msg" => "Update Successful"], 200)
+            //return view('profile.edit');
+        }
+
+        elseif($req->newpass!=null){
+            if($req->newpasse===$req->confirmpass){
+                    $user = User::where('uname', $req->user->uname)
+                    ->first();
+                $password = $user->password;
+
+                if ($req->oldpass == $password) {
+                    user::where('fr_user_id', $req->user->id)
+                        ->update([
+                            'password' => $req->newpass
+                        ]);
+                    return response()->json(["msg" => "Update Successful"], 200)
+                } else {
+                    return response()->json(["error" => "Unauthorized Access"], 200)
+                }
+            } else {
+                return response()->json(["error" => "Confirm New Password Correctly"], 200)
+            }
+
+        }
+        else{
+          return response()->json(["error" => "Check Again"], 200);
+        }
     }
     public function apiSearch($uname) {
       $users = User::where('uname', 'LIKE', $uname.'%')->get();
