@@ -13,7 +13,7 @@ use App\Models\Instructor;
 use App\Models\Admin;
 use App\Models\Qualification;
 use Illuminate\Support\Carbon;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
@@ -141,15 +141,6 @@ class UserController extends Controller
     public function update(editRequest $req)
     {
 
-        // $user = User::where('uname', $req->session()->get('uname'))
-        // ->first();
-
-        // $type = $user->type;
-        // $name = User::with($type)->where('uname',$req->input('uname'))->first();
-        // dd($user);
-
-
-        // $type = $user->type;
 
     if($req->has('form1')){
         $type = $req->session()->get('type');
@@ -241,6 +232,9 @@ class UserController extends Controller
             return redirect()->route('profile.edit');
         }
     }
+}
+
+
     public function changeRole(Request $req)
     {
         $user = User::where('id', (int)$req->input('id'))->with($req->input('prev_type'))->first();
