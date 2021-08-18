@@ -236,10 +236,11 @@ class PostController extends Controller
     public function apiAdminCreate(Request $req)
     {
         $post = new Post();
-        $post->title = $req->input('post-title');
-        $post->pbody = $req->input('post-description');
-        $post->fr_category_id = (int)$req->input('post-category');
+        $post->title = $req->input('title');
+        $post->pbody = $req->input('description');
+        $post->fr_category_id = (int)$req->input('category');
         $post->fr_user_id = $req->user->id;
+        $post->views = 0;
         $imgName = time().'.'.$req->file('featured_image')->getClientOriginalExtension();
         $req->file('featured_image')->move(public_path('uploaded/images/posts'), $imgName);
         $post->image = $imgName;
@@ -260,5 +261,15 @@ class PostController extends Controller
         }
         $post->delete();
         return response()->json($post, 200);
+    }
+    public function apiAdminDelete($id)
+    {
+      $post = Post::find($id);
+      if($post === null) {
+        return response()->json(null, 404);
+        die();
+      }
+      $post->delete();
+      return response()->json($post, 200);
     }
 }

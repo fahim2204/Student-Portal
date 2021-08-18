@@ -45,11 +45,13 @@ Route::post('/student/registration', [RegistrationController::class,'studentveri
 Route::post('/instructor/registration', [RegistrationController::class,'instructorverify'])->name('instructor.registration.verify');
 Route::post('/moderator/registration', [RegistrationController::class,'moderatorverify'])->name('moderator.registration.verify');
 
+
 //------------PROFILE SECTION-------------//
 Route::get('/profile/{uname}', [UserController::class,'view'])->name('profile.view');
 Route::group(['middleware' => ['general-login']], function () {
     Route::get('/profile/info/edit', [UserController::class,'edit'])->name('profile.edit');
     Route::post('/profile/info/edit', [UserController::class,'update'])->name('profile.edit.verify');
+    //Route::post('/profile/info/edit', [UserController::class,'passupdate'])->name('profile.edit.passverify');
     Route::get('/posts/create', [PostController::class,'createview'])->name('posts.create.view');
     Route::post('/posts/create', [PostController::class,'create'])->name('posts.create.save');
     Route::get('/posts/{subcat}/{id}/edit', [PostController::class,'edit'])->name('posts.edit');
@@ -151,4 +153,3 @@ Route::get('/instructor/group/create', [InstructorController::class,'groupcreate
 //------------STUDENT SECTION-------------//
 Route::get('/student', [StudentController::class,'index'])->name('student.dashboard');
 Route::get('/student/group/{gid}', [StudentController::class,'groups'])->name('student.groups');
-

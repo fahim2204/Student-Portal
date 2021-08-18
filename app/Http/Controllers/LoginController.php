@@ -95,7 +95,8 @@ class LoginController extends Controller
                 $user->save();
                 return response()->json([
                     "token" => $user->token,
-                    "id" => $user->id
+                    "id" => $user->id,
+                    "type" => $user->type
                 ]);
 
                 // }

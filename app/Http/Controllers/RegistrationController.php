@@ -33,7 +33,7 @@ class RegistrationController extends Controller
     // ---------------Student Registration Validation------------------
     public function studentverify(studentRegistrationRequest $req){
 
-        
+
         $imgName = $req->uname.'.'.$req->image->getClientOriginalExtension();
         user::insert([
             'uname' => $req->uname,
@@ -79,7 +79,7 @@ class RegistrationController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->getMessages(), 400);
+            return response()->json($validator->errors()->getMessages(), 200);
         }
 
         $imgName = time().'.'.$req->image->getClientOriginalExtension();
@@ -161,7 +161,7 @@ class RegistrationController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->getMessages(), 400);
+            return response()->json($validator->errors()->getMessages(), 200);
         }
 
         $imgName = $req->uname.'.'.$req->image->getClientOriginalExtension();
@@ -240,7 +240,7 @@ class RegistrationController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->getMessages(), 400);
+            return response()->json($validator->errors()->getMessages(), 200);
         }
 
         $imgName = $req->uname.'.'.$req->image->getClientOriginalExtension();
