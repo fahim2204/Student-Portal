@@ -60,6 +60,9 @@ class Kernel extends HttpKernel
         ],
         'moderator-panel-instructor' => [
             \App\Http\Middleware\GeneralLogin::class,
+        ],
+        'api-cors'=>[
+            \App\Http\Middleware\Apicors::class,
         ]
     ];
 

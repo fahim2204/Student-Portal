@@ -148,7 +148,6 @@ class RegistrationController extends Controller
     }
     public function apiInstructorVerify(Request $req){
 
-
         $validator = Validator::make($req->all(), [
             'name'  => 'required|min:3',
             'uname'     => 'required|min:5|unique:users',

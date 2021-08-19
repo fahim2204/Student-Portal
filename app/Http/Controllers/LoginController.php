@@ -76,7 +76,6 @@ class LoginController extends Controller
             $type = $user->type;
             $name = User::with($type)->where('uname', $req->input('uname'))->first();
             if ($user->password === $password) {
-                // if(Hash::check($req->input('password'))){
                 if($user->status === -1) {
                     $error['error'] = 'Your Moderator account request has been declined by admin';
                     return $error;
@@ -96,10 +95,10 @@ class LoginController extends Controller
                 return response()->json([
                     "token" => $user->token,
                     "id" => $user->id,
+                    "uname" => $user->uname,
                     "type" => $user->type
                 ]);
 
-                // }
             } else {
                 $error['error'] = 'Invalid username or password!';
                 return $error;
