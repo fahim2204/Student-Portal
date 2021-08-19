@@ -487,6 +487,7 @@ class UserController extends Controller
 
     public function apiOwnProfileDelete(Request $req, $uname)
     {
+        // return $req;
         $userid = User::where('uname', $uname)->first()->id;
         if ($req->deletePassword != null) {
             $user = User::where('uname', $uname)
