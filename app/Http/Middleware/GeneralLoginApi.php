@@ -26,10 +26,7 @@ class GeneralLoginApi
         $user = User::where('id', '=', $user_id)->where('token', '=', $token)->first();
         if($user !== null) {
             $request->user = $user;
-            return $next($request)
-              ->header('Access-Control-Allow-Origin', '*')
-              ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-              ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With, Application');
+            return $next($request);
         } else {
             return response()->json([
                 'error' => 'Authentication failed'
