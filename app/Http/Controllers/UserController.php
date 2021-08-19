@@ -131,92 +131,92 @@ class UserController extends Controller
         $user->save();
         return response()->json($user, 200);
     }
-    public function update(editRequest $req)
-    {
+    // public function update(editRequest $req)
+    // {
 
 
-        if ($req->has('form1')) {
-            $type = $req->session()->get('type');
-            $req->validate([
-                'name'      => 'required|min:3',
-                'email'     => 'required',
-                'contact'   => 'required|regex:/(01)[0-9]{9}/',
-                'address'   => 'required'
-            ]);
+    //     if ($req->has('form1')) {
+    //         $type = $req->session()->get('type');
+    //         $req->validate([
+    //             'name'      => 'required|min:3',
+    //             'email'     => 'required',
+    //             'contact'   => 'required|regex:/(01)[0-9]{9}/',
+    //             'address'   => 'required'
+    //         ]);
 
-            if ($type == 'moderator') {
-                moderator::where('fr_user_id', $req->session()->get('id'))
-                    ->update([
-                        'name' => $req->name,
-                        'email' => $req->email,
-                        'address' => $req->address,
-                        'updated_at' => Carbon::now(),
-                        'contact' => $req->contact
-                    ]);
+    //         if ($type == 'moderator') {
+    //             moderator::where('fr_user_id', $req->session()->get('id'))
+    //                 ->update([
+    //                     'name' => $req->name,
+    //                     'email' => $req->email,
+    //                     'address' => $req->address,
+    //                     'updated_at' => Carbon::now(),
+    //                     'contact' => $req->contact
+    //                 ]);
 
-                $req->session()->flash('msg', 'Update Successful');
-                return redirect()->route('profile.edit');
-            } elseif ($type == 'instructor') {
-                instructor::where('fr_user_id', $req->session()->get('id'))
-                    ->update([
-                        'name' => $req->name,
-                        'email' => $req->email,
-                        'address' => $req->address,
-                        'updated_at' => Carbon::now(),
-                        'contact' => $req->contact
-                    ]);
+    //             $req->session()->flash('msg', 'Update Successful');
+    //             return redirect()->route('profile.edit');
+    //         } elseif ($type == 'instructor') {
+    //             instructor::where('fr_user_id', $req->session()->get('id'))
+    //                 ->update([
+    //                     'name' => $req->name,
+    //                     'email' => $req->email,
+    //                     'address' => $req->address,
+    //                     'updated_at' => Carbon::now(),
+    //                     'contact' => $req->contact
+    //                 ]);
 
-                $req->session()->flash('msg', 'Update Successful');
-                return redirect()->route('profile.edit');
-            } elseif ($type == 'student') {
-                student::where('fr_user_id', $req->session()->get('id'))
-                    ->update([
-                        'name'       => $req->name,
-                        'email'      => $req->email,
-                        'address'    => $req->address,
-                        'updated_at' => Carbon::now(),
-                        'contact'    => $req->contact
-                    ]);
+    //             $req->session()->flash('msg', 'Update Successful');
+    //             return redirect()->route('profile.edit');
+    //         } elseif ($type == 'student') {
+    //             student::where('fr_user_id', $req->session()->get('id'))
+    //                 ->update([
+    //                     'name'       => $req->name,
+    //                     'email'      => $req->email,
+    //                     'address'    => $req->address,
+    //                     'updated_at' => Carbon::now(),
+    //                     'contact'    => $req->contact
+    //                 ]);
 
-                $req->session()->flash('msg', 'Update Successful');
-                return redirect()->route('profile.edit');
-            }
-        } elseif ($req->has('form2')) {
-            $req->validate([
-                'oldpass'       => 'required',
-                'newpass'       => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
-                'confirmpass'   => 'required|same:newpass'
-            ]);
-            if ($req->newpass != null) {
-                if ($req->newpass === $req->confirmpass) {
-                    $user = User::where('uname', $req->session()->get('uname'))
+    //             $req->session()->flash('msg', 'Update Successful');
+    //             return redirect()->route('profile.edit');
+    //         }
+    //     } elseif ($req->has('form2')) {
+    //         $req->validate([
+    //             'oldpass'       => 'required',
+    //             'newpass'       => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+    //             'confirmpass'   => 'required|same:newpass'
+    //         ]);
+    //         if ($req->newpass != null) {
+    //             if ($req->newpass === $req->confirmpass) {
+    //                 $user = User::where('uname', $req->session()->get('uname'))
 
 
-                        ->first();
-                    $password = $user->password;
+    //                     ->first();
+    //                 $password = $user->password;
 
-                    if ($req->oldpass == $password) {
-                        User::where('uname', $req->session()->get('uname'))
-                            ->update([
-                                'password' => $req->newpass
-                            ]);
-                        $req->session()->flash('msg', 'Update Successful');
-                        return redirect()->route('profile.edit');
-                    } else {
-                        $req->session()->flash('error', 'Give Old Password');
-                        return redirect()->route('profile.edit');
-                    }
-                } else {
-                    $req->session()->flash('error', 'Confirm New Password Correctly');
-                    return redirect()->route('profile.edit');
-                }
-            } else {
+    //                 if ($req->oldpass == $password) {
+    //                     User::where('uname', $req->session()->get('uname'))
+    //                         ->update([
+    //                             'password' => $req->newpass
+    //                         ]);
+    //                     $req->session()->flash('msg', 'Update Successful');
+    //                     return redirect()->route('profile.edit');
+    //                 } else {
+    //                     $req->session()->flash('error', 'Give Old Password');
+    //                     return redirect()->route('profile.edit');
+    //                 }
+    //             } else {
+    //                 $req->session()->flash('error', 'Confirm New Password Correctly');
+    //                 return redirect()->route('profile.edit');
+    //             }
+    //         } else {
 
-                $req->session()->flash('error', 'Fill All the Fields');
-                return redirect()->route('profile.edit');
-            }
-        }
-    }
+    //             $req->session()->flash('error', 'Fill All the Fields');
+    //             return redirect()->route('profile.edit');
+    //         }
+    //     }
+    // }
 
 
     public function changeRole(Request $req)
@@ -336,74 +336,74 @@ class UserController extends Controller
             "qualifications" => $qalifications
         ], 200);
     }
-    public function apiUpdate(editRequest $req)
-    {
-        $validator = Validator::make($req->all(), [
-            'name'      => 'required|min:3',
-            'email'     => 'required',
-            'contact'   => 'required|regex:/(01)[0-9]{9}/',
-            'address'   => 'required'
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->getMessages(), 200);
-        }
+    // public function apiUpdate(editRequest $req)
+    // {
+    //     $validator = Validator::make($req->all(), [
+    //         'name'      => 'required|min:3',
+    //         'email'     => 'required',
+    //         'contact'   => 'required|regex:/(01)[0-9]{9}/',
+    //         'address'   => 'required'
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json($validator->errors()->getMessages(), 200);
+    //     }
 
-        $type = $req->user->type;
-        if ($type == 'moderator') {
-            moderator::where('fr_user_id', $req->user->id)
-                ->update([
-                    'name' => $req->name,
-                    'email' => $req->email,
-                    'address' => $req->address,
-                    'updated_at' => Carbon::now(),
-                    'contact' => $req->contact
-                ]);
-            $req->session()->flash('msg', 'Update Successful');
-            return redirect()->route('profile.edit');
-        } elseif ($type == 'instructor') {
-            instructor::where('fr_user_id', $req->user->id)
-                ->update([
-                    'name' => $req->name,
-                    'email' => $req->email,
-                    'address' => $req->address,
-                    'updated_at' => Carbon::now(),
-                    'contact' => $req->contact
-                ]);
+    //     $type = $req->user->type;
+    //     if ($type == 'moderator') {
+    //         moderator::where('fr_user_id', $req->user->id)
+    //             ->update([
+    //                 'name' => $req->name,
+    //                 'email' => $req->email,
+    //                 'address' => $req->address,
+    //                 'updated_at' => Carbon::now(),
+    //                 'contact' => $req->contact
+    //             ]);
+    //         $req->session()->flash('msg', 'Update Successful');
+    //         return redirect()->route('profile.edit');
+    //     } elseif ($type == 'instructor') {
+    //         instructor::where('fr_user_id', $req->user->id)
+    //             ->update([
+    //                 'name' => $req->name,
+    //                 'email' => $req->email,
+    //                 'address' => $req->address,
+    //                 'updated_at' => Carbon::now(),
+    //                 'contact' => $req->contact
+    //             ]);
 
-            return response()->json(["msg" => "Update Successful"], 200);
-        } elseif ($type == 'student') {
-            student::where('fr_user_id', $req->user->id)
-                ->update([
-                    'name' => $req->name,
-                    'email' => $req->email,
-                    'address' => $req->address,
-                    'updated_at' => Carbon::now(),
-                    'contact' => $req->contact
-                ]);
+    //         return response()->json(["msg" => "Update Successful"], 200);
+    //     } elseif ($type == 'student') {
+    //         student::where('fr_user_id', $req->user->id)
+    //             ->update([
+    //                 'name' => $req->name,
+    //                 'email' => $req->email,
+    //                 'address' => $req->address,
+    //                 'updated_at' => Carbon::now(),
+    //                 'contact' => $req->contact
+    //             ]);
 
-            return response()->json(["msg" => "Update Successful"], 200);
-        } elseif ($req->newpass != null) {
-            if ($req->newpasse === $req->confirmpass) {
-                $user = User::where('uname', $req->user->uname)
-                    ->first();
-                $password = $user->password;
+    //         return response()->json(["msg" => "Update Successful"], 200);
+    //     } elseif ($req->newpass != null) {
+    //         if ($req->newpasse === $req->confirmpass) {
+    //             $user = User::where('uname', $req->user->uname)
+    //                 ->first();
+    //             $password = $user->password;
 
-                if ($req->oldpass == $password) {
-                    user::where('fr_user_id', $req->user->id)
-                        ->update([
-                            'password' => $req->newpass
-                        ]);
-                    return response()->json(["msg" => "Update Successful"], 200);
-                } else {
-                    return response()->json(["error" => "Unauthorized Access"], 200);
-                }
-            } else {
-                return response()->json(["error" => "Confirm New Password Correctly"], 200);
-            }
-        } else {
-            return response()->json(["error" => "Check Again"], 200);
-        }
-    }
+    //             if ($req->oldpass == $password) {
+    //                 user::where('fr_user_id', $req->user->id)
+    //                     ->update([
+    //                         'password' => $req->newpass
+    //                     ]);
+    //                 return response()->json(["msg" => "Update Successful"], 200);
+    //             } else {
+    //                 return response()->json(["error" => "Unauthorized Access"], 200);
+    //             }
+    //         } else {
+    //             return response()->json(["error" => "Confirm New Password Correctly"], 200);
+    //         }
+    //     } else {
+    //         return response()->json(["error" => "Check Again"], 200);
+    //     }
+    // }
 
     //--------------For Single profile udate
     public function apiProfileUpdate(Request $req, $uname)

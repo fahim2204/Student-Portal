@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class ApiAdminLogin
+class ApiModeratorLogin
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class ApiAdminLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user->type !== 'admin' && $request->user->type !== 'moderator') {
+        if($request->user->type !== 'moderator') {
             return response()->json(['error' => 'Access denied'], 400);
         }
         return $next($request);
