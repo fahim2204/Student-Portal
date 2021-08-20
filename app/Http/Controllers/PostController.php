@@ -29,6 +29,13 @@ class PostController extends Controller
     {
         $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
             ->orderBy('id', 'desc')->get();
+            ->paginate(5);
+        return response()->json($post);
+    }
+    public function apiViewAllPost()
+    {
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
+            ->orderBy('id', 'desc')->get();
             // ->paginate(5);
         return response()->json($post);
     }
@@ -194,7 +201,6 @@ class PostController extends Controller
             'post' => $post,
             'comments' => $comments
         ];
-
         return $single_post;
     }
 

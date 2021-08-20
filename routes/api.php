@@ -32,10 +32,12 @@ Route::group(['middleware' => ['api-cors', 'web']], function() {
 
     //POSTS
     Route::get('/posts', [PostController::class, 'apiViewAll']);
+    Route::get('/post', [PostController::class, 'apiViewAllPost']);
     Route::post('/create/post', [PostController::class, 'apiCreatePost']);
     Route::get('/posts/search/{text}', [PostController::class,'apiViewSearched']);
     Route::get('/posts/category/{subcat}', [PostController::class,'apiCatwiseView']);
     Route::get('/posts/{id}', [PostController::class,'apiSingleView']);
+    Route::get('/posts/comment/{pid}/{uid}', [CommentController::class,'apiCommentPost']);
     Route::get('/categories', [CategoryController::class,'apiGetAll']);
 
     Route::get('/users/search/{uname}', [UserController::class, 'apiSearch']);
