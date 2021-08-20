@@ -495,8 +495,6 @@ class UserController extends Controller
                 ->first();
             $password = $user->password;
             if ($req->deletePassword == $password) {
-
-
                 if ($usertype == 'moderator') {
                     moderator::where('fr_user_id', $userid)
                         ->delete();

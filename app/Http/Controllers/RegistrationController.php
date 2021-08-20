@@ -69,7 +69,7 @@ class RegistrationController extends Controller
         $validator = Validator::make($req->all(), [
             'name'  => 'required|min:3',
             'uname'     => 'required|min:5|unique:users',
-            'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
             'cpassword' => 'required|same:password',
             'email'     => 'required|unique:students',
             'contact'   => 'required|regex:/(01)[0-9]{9}/',
@@ -151,7 +151,7 @@ class RegistrationController extends Controller
         $validator = Validator::make($req->all(), [
             'name'  => 'required|min:3',
             'uname'     => 'required|min:5|unique:users',
-            'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#@%]).*$/',
             'cpassword' => 'required|same:password',
             'email'     => 'required|unique:instructors',
             'contact'   => 'required|regex:/(01)[0-9]{9}/',
@@ -230,7 +230,7 @@ class RegistrationController extends Controller
         $validator = Validator::make($req->all(), [
             'name'  => 'required|min:3',
             'uname'     => 'required|min:5|unique:users',
-            'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'password'  => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
             'cpassword' => 'required|same:password',
             'email'     => 'required|unique:moderators',
             'contact'   => ['required','regex:/^(?:\+88|01)?(?:\d{11}|\d{13})$/'],

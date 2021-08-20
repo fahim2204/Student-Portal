@@ -27,9 +27,9 @@ class PostController extends Controller
     }
     public function apiViewAll()
     {
-        $post = Post::with('category', 'user', 'upvotes', 'downvotes')
-            ->orderBy('id', 'desc')
-            ->paginate(5);
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
+            ->orderBy('id', 'desc')->get();
+            // ->paginate(5);
         return response()->json($post);
     }
     public function apiCreatePost(Request $req)
