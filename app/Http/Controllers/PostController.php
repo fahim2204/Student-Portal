@@ -190,7 +190,7 @@ class PostController extends Controller
         //         'created_at' => Carbon::now()
         //     ]);
         // }
-        $comments = Comment::with('user')->where('fr_post_id', $id)->get();
+        $comments = Comment::with('user')->where('fr_post_id', $id) ->orderBy('created_at', 'desc')->get();
 
         // $single_post = [
         //     'post' => $post,

@@ -70,6 +70,6 @@ class commentController extends Controller
         //     'fr_notifier_user_id' => $post->fr_user_id,
         //     'created_at' => Carbon::now()
         // ]);
-        return response()->json($comment, 201);
+        return response()->json("Comment Done", 201);
     }
 }
