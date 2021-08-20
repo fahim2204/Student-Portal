@@ -160,34 +160,38 @@ class PostController extends Controller
     }
     public function apiSingleView($id)
     {
-        $post = Post::with('category', 'user', 'upvotes', 'downvotes')->where('id', $id)->first();
-        $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
-        // //dd($pageWasRefreshed);
-        if ($pageWasRefreshed !== true) {
-            Post::where('id', $id)->increment('views', '1');
-            $post->update();
-        }
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')->where('id', $id)->first();
+        // $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+        // // //dd($pageWasRefreshed);
+        // if ($pageWasRefreshed !== true) {
+        //     Post::where('id', $id)->increment('views', '1');
+        //     $post->update();
+        // }
 
-        $upcount = count($post->upvotes);
-        $downcount = count($post->downvotes);
+        // $upcount = count($post->upvotes);
+        // $downcount = count($post->downvotes);
 
-        $post = Post::with('category', 'user')->where('id', $id)->first();
+        // $post = Post::with('category', 'user')->where('id', $id)->first();
 
-        // For creating notification
-        if (session()->get('id') !== null) {
-            Notification::insert([
-                'msg' => 'viewed your post',
-                'fr_user_id' => session()->get('id'),
-                'fr_notifier_user_id' => $post->fr_user_id,
-                'created_at' => Carbon::now()
-            ]);
-        }
-        $comments = commentController::allComment($post->id);
+        // // For creating notification
+        // if (session()->get('id') !== null) {
+        //     Notification::insert([
+        //         'msg' => 'viewed your post',
+        //         'fr_user_id' => session()->get('id'),
+        //         'fr_notifier_user_id' => $post->fr_user_id,
+        //         'created_at' => Carbon::now()
+        //     ]);
+        // }
+        $comments = Comment::with('user')->where('fr_post_id', $id)->get();
 
+        // $single_post = [
+        //     'post' => $post,
+        //     'upvote' => $upcount,
+        //     'downvote' => $downcount,
+        //     'comments' => $comments
+        // ];
         $single_post = [
             'post' => $post,
-            'upvote' => $upcount,
-            'downvote' => $downcount,
             'comments' => $comments
         ];
 
