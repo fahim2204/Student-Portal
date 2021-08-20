@@ -40,6 +40,15 @@ class PostController extends Controller
             // ->paginate(5);
         return response()->json($post);
     }
+    public function apiViewAllPostCat($cat)
+    {
+        $catid = Category::where('name', '=', $cat)->first()->id;
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
+            ->where('fr_category_id', $catid)
+            ->orderBy('id', 'desc')->get();
+            // ->paginate(5);
+        return response()->json($post);
+    }
     public function apiCreatePost(Request $req)
     {
         if ($req->title !== null && $req->category !== null && $req->description !== null) {
@@ -127,10 +136,11 @@ class PostController extends Controller
     }
     public function apiViewSearched($text)
     {
-        $post = Post::with('category', 'user')
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
             ->where('title', 'like', '%' . $text . '%')
             ->orderBy('id', 'desc')
-            ->paginate(5);
+            ->get();
+            //->paginate(5);
         return $post;
     }
     public function singleview($cat, $id)
@@ -169,35 +179,7 @@ class PostController extends Controller
     public function apiSingleView($id)
     {
         $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')->where('id', $id)->first();
-        // $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
-        // // //dd($pageWasRefreshed);
-        // if ($pageWasRefreshed !== true) {
-        //     Post::where('id', $id)->increment('views', '1');
-        //     $post->update();
-        // }
-
-        // $upcount = count($post->upvotes);
-        // $downcount = count($post->downvotes);
-
-        // $post = Post::with('category', 'user')->where('id', $id)->first();
-
-        // // For creating notification
-        // if (session()->get('id') !== null) {
-        //     Notification::insert([
-        //         'msg' => 'viewed your post',
-        //         'fr_user_id' => session()->get('id'),
-        //         'fr_notifier_user_id' => $post->fr_user_id,
-        //         'created_at' => Carbon::now()
-        //     ]);
-        // }
         $comments = Comment::with('user')->where('fr_post_id', $id) ->orderBy('created_at', 'desc')->get();
-
-        // $single_post = [
-        //     'post' => $post,
-        //     'upvote' => $upcount,
-        //     'downvote' => $downcount,
-        //     'comments' => $comments
-        // ];
         $single_post = [
             'post' => $post,
             'comments' => $comments
