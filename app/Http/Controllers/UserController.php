@@ -468,8 +468,8 @@ class UserController extends Controller
                     ->first();
                 $password = $user->password;
 
-
                 if ($req->oldPassword == $password) {
+
                     user::where('id', $userid)
                         ->update([
                             'updated_at' => Carbon::now(),
@@ -489,11 +489,27 @@ class UserController extends Controller
     {
         // return $req;
         $userid = User::where('uname', $uname)->first()->id;
+        $usertype = User::where('uname', $uname)->first()->type;
         if ($req->deletePassword != null) {
             $user = User::where('uname', $uname)
                 ->first();
             $password = $user->password;
             if ($req->deletePassword == $password) {
+
+
+                if ($usertype == 'moderator') {
+                    moderator::where('fr_user_id', $userid)
+                        ->delete();
+                    return response()->json(["msg" => "Update Successful"], 200);
+                } elseif ($usertype == 'instructor') {
+                    instructor::where('fr_user_id', $userid)
+                        ->delete();
+                    return response()->json(["msg" => "Update Successful"], 200);
+                } elseif ($usertype == 'student') {
+                    student::where('fr_user_id', $userid)
+                        ->delete();
+                }
+
                 user::where('id', $userid)
                     ->delete();
                 return response()->json(["msg" => "Deleted Successful"], 200);

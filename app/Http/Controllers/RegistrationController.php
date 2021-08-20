@@ -95,7 +95,7 @@ class RegistrationController extends Controller
         $getUser = user::orderby('id', 'desc')->first();
         $lastId = $getUser['id'];
         $student = student::insert([
-            'name' => $req->fullName,
+            'name' => $req->name,
             'email' => $req->email,
             'address' => $req->address,
             'created_at' => Carbon::now(),
@@ -131,7 +131,7 @@ class RegistrationController extends Controller
         $getUser = user::orderby('id', 'desc')->first();
         $lastId = $getUser['id'];
         instructor::insert([
-            'name' => $req->fullName,
+            'name' => $req->name,
             'email' => $req->email,
             'address' => $req->address,
             'created_at' => Carbon::now(),
@@ -176,7 +176,7 @@ class RegistrationController extends Controller
         $getUser = user::orderby('id', 'desc')->first();
         $lastId = $getUser['id'];
         $instructor = instructor::insert([
-            'name' => $req->fullName,
+            'name' => $req->name,
             'email' => $req->email,
             'address' => $req->address,
             'created_at' => Carbon::now(),

@@ -32,6 +32,7 @@ Route::group(['middleware' => ['api-cors', 'web']], function() {
 
     //POSTS
     Route::get('/posts', [PostController::class, 'apiViewAll']);
+    Route::post('/create/post', [PostController::class, 'apiCreatePost']);
     Route::get('/posts/search/{text}', [PostController::class,'apiViewSearched']);
     Route::get('/posts/category/{subcat}', [PostController::class,'apiCatwiseView']);
     Route::get('/posts/{id}', [PostController::class,'apiSingleView']);

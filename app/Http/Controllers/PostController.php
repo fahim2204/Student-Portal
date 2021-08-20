@@ -24,7 +24,6 @@ class PostController extends Controller
 
 
         return view('posts.all')->with('posts', $post);
-        // return redirect()->route('posts.view.all');
     }
     public function apiViewAll()
     {
@@ -32,8 +31,27 @@ class PostController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(5);
         return response()->json($post);
-        // return redirect()->route('posts.view.all');
     }
+    public function apiCreatePost(Request $req)
+    {
+        if ($req->title !== null && $req->category !== null && $req->description !== null) {
+            Post::insert([
+                'title' => $req->title,
+                'pbody' => $req->description,
+                'fr_user_id' => $req->uid,
+                'fr_category_id' => $req->category,
+                'status' => 1,
+                'views' => 0,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+            return response()->json(["msg" => "Post create succesfull"], 200);
+        } else {
+            return response()->json(["msg" => "Every field need to be fill"], 200);
+        }
+    }
+
+
     public function createview()
     {
         $category = category::orderBy('name', 'asc')->get();
@@ -113,8 +131,8 @@ class PostController extends Controller
         $post = Post::with('category', 'user', 'upvotes', 'downvotes')->where('id', $id)->first();
         $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
         // //dd($pageWasRefreshed);
-        if($pageWasRefreshed !== true) {
-            Post::where('id',$id)->increment('views','1');
+        if ($pageWasRefreshed !== true) {
+            Post::where('id', $id)->increment('views', '1');
             $post->update();
         }
 
@@ -124,7 +142,7 @@ class PostController extends Controller
 
         $post = Post::with('category', 'user')->where('id', $id)->first();
 
-        if(session()->get('id')!==null){
+        if (session()->get('id') !== null) {
             Notification::insert([
                 'msg' => 'viewed your post',
                 'fr_user_id' => session()->get('id'),
@@ -145,8 +163,8 @@ class PostController extends Controller
         $post = Post::with('category', 'user', 'upvotes', 'downvotes')->where('id', $id)->first();
         $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
         // //dd($pageWasRefreshed);
-        if($pageWasRefreshed !== true) {
-            Post::where('id',$id)->increment('views','1');
+        if ($pageWasRefreshed !== true) {
+            Post::where('id', $id)->increment('views', '1');
             $post->update();
         }
 
@@ -156,7 +174,7 @@ class PostController extends Controller
         $post = Post::with('category', 'user')->where('id', $id)->first();
 
         // For creating notification
-        if(session()->get('id')!==null){
+        if (session()->get('id') !== null) {
             Notification::insert([
                 'msg' => 'viewed your post',
                 'fr_user_id' => session()->get('id'),
@@ -202,8 +220,8 @@ class PostController extends Controller
     public function apiUpdate(Request $req)
     {
         $post = Post::where('id', '=', $req->id)->first();
-        if($post === null) return response()->json('Post not found');
-        if($post->fr_user_id !== $req->user->id) return response()->json("You don't have permission to edit this post");
+        if ($post === null) return response()->json('Post not found');
+        if ($post->fr_user_id !== $req->user->id) return response()->json("You don't have permission to edit this post");
 
         $post->title = $req->input('title');
         $post->pbody = $req->input('description');
@@ -226,7 +244,7 @@ class PostController extends Controller
         $post->pbody = $req->input('post-description');
         $post->fr_category_id = (int)$req->input('post-category');
         $post->fr_user_id = (int)$req->user->id;
-        $imgName = time().'.'.$req->file('featured_image')->getClientOriginalExtension();
+        $imgName = time() . '.' . $req->file('featured_image')->getClientOriginalExtension();
         $req->file('featured_image')->move(public_path('uploaded/images/posts'), $imgName);
         $post->image = $imgName;
         $post->save();
@@ -241,7 +259,7 @@ class PostController extends Controller
         $post->fr_category_id = (int)$req->input('category');
         $post->fr_user_id = $req->user->id;
         $post->views = 0;
-        $imgName = time().'.'.$req->file('featured_image')->getClientOriginalExtension();
+        $imgName = time() . '.' . $req->file('featured_image')->getClientOriginalExtension();
         $req->file('featured_image')->move(public_path('uploaded/images/posts'), $imgName);
         $post->image = $imgName;
         $post->save();
@@ -256,7 +274,7 @@ class PostController extends Controller
     public function apiDelete(Request $req, $id)
     {
         $post = Post::where('id', $id)->first();
-        if($req->user->id !== $post->fr_user_id) {
+        if ($req->user->id !== $post->fr_user_id) {
             return response()->json("You don't have permission to delete the post");
         }
         $post->delete();
@@ -264,12 +282,12 @@ class PostController extends Controller
     }
     public function apiAdminDelete($id)
     {
-      $post = Post::find($id);
-      if($post === null) {
-        return response()->json(null, 404);
-        die();
-      }
-      $post->delete();
-      return response()->json($post, 200);
+        $post = Post::find($id);
+        if ($post === null) {
+            return response()->json(null, 404);
+            die();
+        }
+        $post->delete();
+        return response()->json($post, 200);
     }
 }
