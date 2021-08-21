@@ -239,7 +239,11 @@ class PostController extends Controller
             return response()->json("You don't have permission to delete the post");
         } else {
             $comments = Comment::where('fr_post_id', '=', $id);
+            $upvotes = UpVote::where('fr_post_id', '=', $id);
+            $downvotes = DownVote::where('fr_post_id', '=', $id);
             $comments->delete();
+            $upvotes->delete();
+            $downvotes->delete();
             $post->delete();
             return response()->json("Delete Succesfull", 200);
         }
