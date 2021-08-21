@@ -202,14 +202,16 @@ class PostController extends Controller
                 $upvote->fr_user_id = $uid;
                 $upvote->fr_post_id = $pid;
                 $upvote->save();
-                return "upvote done";
-            }else if($isVotedUp === null && $isVotedDown !== null){
+                return response()->json("upvote done");
+            }else if($isVotedDown !== null){
                 DownVote::where('fr_user_id', $uid)->where('fr_post_id', $pid)->delete();
                 $upvote = new UpVote();
                 $upvote->fr_user_id = $uid;
                 $upvote->fr_post_id = $pid;
                 $upvote->save();
-                return "upvote done";
+                return response()->json("upvote done");
+            }else{
+                return response()->json("upvote already added");
             }
         }else{
             if ($isVotedUp === null && $isVotedDown === null) {
@@ -217,14 +219,16 @@ class PostController extends Controller
                 $upvote->fr_user_id = $uid;
                 $upvote->fr_post_id = $pid;
                 $upvote->save();
-                return "dowvote done";
-            }else if($isVotedDown === null && $isVotedUp !== null){
-                DownVote::where('fr_user_id', $uid)->where('fr_post_id', $pid)->delete();
+                return response()->json("Downvote done");
+            }else if($isVotedUp !== null){
+                UpVote::where('fr_user_id', $uid)->where('fr_post_id', $pid)->delete();
                 $upvote = new DownVote();
                 $upvote->fr_user_id = $uid;
                 $upvote->fr_post_id = $pid;
                 $upvote->save();
-                return "dowvote done";
+                return response()->json("Downvote done");
+            }else{
+                return response()->json("downvote already added");
             }
         }
     }
