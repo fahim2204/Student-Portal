@@ -78,8 +78,14 @@ Route::group(['middleware' => ['api-cors', 'web']], function() {
             Route::get('/admin/moderator/request', [AdminController::class,'apiModeratorRequests']);
             Route::get('/admin/moderator/approve/{id}', [AdminController::class, 'apiApproveModerator']);
             Route::get('/admin/moderator/decline/{id}', [AdminController::class, 'apiDeclineModerator']);
+
+            Route::get('/admin/instructor/request', [AdminController::class, 'apiInstructorRequest']);
+            Route::get('/admin/instrcutor/approve/{id}', [AdminController::class, 'apiApproveInstructor']);
+            Route::get('/admin/instrcutor/decline/{id}', [AdminController::class, 'apiDeclineInstructor']);
+
+            Route::get('/admin/website-info', [AdminController::class, 'apiWebsiteInfo']);
+            Route::post('/admin/update/website-info', [AdminController::class, 'apiUpdateWebsiteInfo']);
         });
     });
 
 });
-

@@ -28,4 +28,5 @@ class InstructorController extends Controller
         // ]);
         // return view('instructor.create-post');
     }
+    
 }

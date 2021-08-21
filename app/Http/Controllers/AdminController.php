@@ -50,6 +50,11 @@ class AdminController extends Controller
         $info = json_decode(file_get_contents($path));
         return view('admin.websiteinfo', ['info' => $info]);
     }
+    public function apiWebsiteInfo() {
+      $path = storage_path() . "\json\info.json";
+      $info = json_decode(file_get_contents($path));
+      return response()->json($info, 200);
+    }
 
     public function updateWebsiteInfo(Request $req) {
         $info = [
@@ -62,6 +67,19 @@ class AdminController extends Controller
         file_put_contents($path, json_encode($info));
 
         return back();
+    }
+    public function apiUpdateWebsiteInfo(Request $req) {
+      $info = [
+          "name" => $req->input('name'),
+          "about" => $req->input('about'),
+          "email" => $req->input('email')
+      ];
+
+      $path = storage_path() . "/json/info.json";
+      file_put_contents($path, json_encode($info));
+
+      return response()->json($info, 201);
+
     }
     public function categories(){
         $categories = Category::with('posts')->get();
@@ -98,6 +116,10 @@ class AdminController extends Controller
         $users = User::where('type', 'moderator')->where('status', 4)->get();
         return response()->json($users, 200);
     }
+    public function apiInstructorRequest(Request $req) {
+      $users = User::where('type', 'instructor')->where('status', 4)->get();
+      return response()->json($users, 200);
+    }
     public function approveModerator($id)
     {
         $moderator = User::where('id', $id)->first();
@@ -117,7 +139,27 @@ class AdminController extends Controller
 
         return response()->json($moderator, 200);
     }
+    public function apiApproveInstructor($id)
+    {
+        $moderator = User::where('id', $id)->first();
+        if($moderator === null) return response()->json(false, 404);
+        $moderator->status = 1;
+        $moderator->timestamps = false;
+        $moderator->update();
+
+        return response()->json($moderator, 200);
+    }
     public function apiDeclineModerator($id)
+    {
+        $moderator = User::where('id', $id)->first();
+        if($moderator === null) return response()->json(false, 404);
+        $moderator->status = 2;
+        $moderator->timestamps = false;
+        $moderator->update();
+
+        return response()->json($moderator, 200);
+    }
+    public function apiDeclineInstructor($id)
     {
         $moderator = User::where('id', $id)->first();
         if($moderator === null) return response()->json(false, 404);
@@ -148,7 +190,7 @@ class AdminController extends Controller
           $userDetails = Moderator::where('fr_user_id', $post->user->id)->first();
         } else if($post->user->type === "instructor") {
           $userDetails = Instructor::where('fr_user_id', $post->user->id)->first();
-        }else if($post->user->type === "student") {
+        } else if($post->user->type === "student") {
           $userDetails = Student::where('fr_user_id', $post->user->id)->first();
         }
         array_push($top_posts_final, [

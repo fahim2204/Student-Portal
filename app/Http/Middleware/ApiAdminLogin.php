@@ -16,7 +16,7 @@ class ApiAdminLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user->type !== 'admin') {
+        if($request->user->type !== 'admin' && $request->user->type !== 'moderator') {
             return response()->json(['error' => 'Access denied'], 400);
         }
         return $next($request);
