@@ -38,6 +38,8 @@ Route::group(['middleware' => ['api-cors', 'web']], function() {
     Route::get('/posts/search/{text}', [PostController::class,'apiViewSearched']);
     Route::get('/posts/category/{subcat}', [PostController::class,'apiCatwiseView']);
     Route::get('/posts/{id}', [PostController::class,'apiSingleView']);
+    Route::post('/posts/vote/{status}/{pid}/{uid}', [PostController::class,'apiVote']);
+    Route::delete('/posts/{id}/{uid}', [PostController::class,'apiDeleteSinglePost']);
     Route::post('/posts/comment/{pid}/{uid}', [CommentController::class,'apiCommentPost']);
     Route::get('/categories', [CategoryController::class,'apiGetAll']);
 

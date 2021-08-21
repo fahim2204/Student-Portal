@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Vote;
 use App\Models\Notification;
 use App\Models\Comment;
+use App\Models\DownVote;
+use App\Models\UpVote;
 use Illuminate\Support\Carbon;
 use Illuminate\Pagination\Paginator;
 
@@ -28,25 +30,25 @@ class PostController extends Controller
     public function apiViewAll()
     {
         // return "Hello";
-        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes', 'comments')
             ->orderBy('id', 'desc')
             ->paginate(5);
         return response()->json($post);
     }
     public function apiViewAllPost()
     {
-        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes', 'comments')
             ->orderBy('id', 'desc')->get();
-            // ->paginate(5);
+        // ->paginate(5);
         return response()->json($post);
     }
     public function apiViewAllPostCat($cat)
     {
         $catid = Category::where('name', '=', $cat)->first()->id;
-        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes', 'comments')
             ->where('fr_category_id', $catid)
             ->orderBy('id', 'desc')->get();
-            // ->paginate(5);
+        // ->paginate(5);
         return response()->json($post);
     }
     public function apiCreatePost(Request $req)
@@ -136,11 +138,11 @@ class PostController extends Controller
     }
     public function apiViewSearched($text)
     {
-        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes', 'comments')
             ->where('title', 'like', '%' . $text . '%')
             ->orderBy('id', 'desc')
             ->get();
-            //->paginate(5);
+        //->paginate(5);
         return $post;
     }
     public function singleview($cat, $id)
@@ -178,13 +180,65 @@ class PostController extends Controller
     }
     public function apiSingleView($id)
     {
-        $post = Post::with('category', 'user', 'upvotes', 'downvotes','comments')->where('id', $id)->first();
-        $comments = Comment::with('user')->where('fr_post_id', $id) ->orderBy('created_at', 'desc')->get();
+        $post = Post::with('category', 'user', 'upvotes', 'downvotes', 'comments')->where('id', $id)->first();
+        // $temppost = Post::where()->('id', '=', $id)
+        // $tmpview = $post->views;
+        Post::where('id', $id)->increment('views', '1');
+        $post->update();
+        $comments = Comment::with('user')->where('fr_post_id', $id)->orderBy('created_at', 'desc')->get();
         $single_post = [
             'post' => $post,
             'comments' => $comments
         ];
         return $single_post;
+    }
+    public function apiVote($status, $pid, $uid)
+    {
+        $isVotedUp = UpVote::where('fr_user_id', $uid)->where('fr_post_id', $pid)->first();
+        $isVotedDown = DownVote::where('fr_user_id', $uid)->where('fr_post_id', $pid)->first();
+        if ($status == "upvote") {
+            if ($isVotedUp === null && $isVotedDown === null) {
+                $upvote = new UpVote();
+                $upvote->fr_user_id = $uid;
+                $upvote->fr_post_id = $pid;
+                $upvote->save();
+                return "upvote done";
+            }else if($isVotedUp === null && $isVotedDown !== null){
+                DownVote::where('fr_user_id', $uid)->where('fr_post_id', $pid)->delete();
+                $upvote = new UpVote();
+                $upvote->fr_user_id = $uid;
+                $upvote->fr_post_id = $pid;
+                $upvote->save();
+                return "upvote done";
+            }
+        }else{
+            if ($isVotedUp === null && $isVotedDown === null) {
+                $upvote = new DownVote();
+                $upvote->fr_user_id = $uid;
+                $upvote->fr_post_id = $pid;
+                $upvote->save();
+                return "dowvote done";
+            }else if($isVotedDown === null && $isVotedUp !== null){
+                DownVote::where('fr_user_id', $uid)->where('fr_post_id', $pid)->delete();
+                $upvote = new DownVote();
+                $upvote->fr_user_id = $uid;
+                $upvote->fr_post_id = $pid;
+                $upvote->save();
+                return "dowvote done";
+            }
+        }
+    }
+    public function apiDeleteSinglePost($id, $uid)
+    {
+        $post = Post::where('id', $id)->first();
+        if ($uid != $post->fr_user_id) {
+            return response()->json("You don't have permission to delete the post");
+        } else {
+            $comments = Comment::where('fr_post_id', '=', $id);
+            $comments->delete();
+            $post->delete();
+            return response()->json("Delete Succesfull", 200);
+        }
     }
 
     public static function all()
